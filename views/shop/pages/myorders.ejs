@@ -1,0 +1,149 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+.fixedHeader {position: inherit!important; top:inherit; right: inherit; left: inherit;}
+#staic-page-banner { margin-top: 0px!important; }
+</style>
+<section id="staic-page-banner" class="topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Meine Bestellungen</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+		          <!--left-section-->
+		          	<div class="col-lg-3 col-md-3">
+					   <div class="left">
+					      <div class="mb-3">
+					         <div class="profile-box  inner-gradient-bg br-6 p-15 ">
+					            <h3><span><img src="/images/svg/profile-user-icon.svg"></span><%= userdata.billing.first_name %> <%= userdata.billing.last_name %></h3>
+					         </div>
+					      </div>
+					      <div class="left-main-menu mb-3 p-15">
+						     <ul>
+						        <li>
+						        	<a href="/mein_ubersicht">
+						        		<span><img src="/images/svg/overview.svg"></span>Meine Übersicht
+						        	</a>
+						        </li>
+						        <li>
+						        	<a href="/benutzerdaten">
+						        		<span><img src="/images/svg/personalData.svg"></span>Meine Benutzerdaten
+						        	</a>
+						        </li>
+						        <li class="active">
+						        	<a href="/meine_bestellungen">
+						        		<span><img src="/images/svg/orderList.svg"></span>Meine Bestellungen
+						        	</a>
+								</li>
+								<li>
+						        	<a href="lieferadressen-verwalten">
+						        		<span><img src="/images/svg/bill.svg"></span>Lieferadressen verwalten
+						        	</a>
+						        </li>
+						        <!-- <li>
+						        	<a href="javascript:void(0);">
+						        		<span><img src="/images/svg/bill.svg"></span>Rechnungen
+						        	</a>
+						        </li> -->
+						     </ul>
+						  </div>
+						  <div class="inner-gradient-bg br-6 mb-3 p-15">
+						     <div class="left-support">
+						        <h4><a id="supportPopupOpen" href="javascript:void(0);">
+						        	<span><img src="/images/svg/customer-service.svg"></span>Support</a>
+						        </h4>
+						     </div>
+						  </div>
+					   </div>
+					</div>
+					<div class="col-lg-9 col-md-9">
+						<div class="onepage_checkInfo">
+							<div class="table-responsive">
+								<table class="table table-striped mb-0 order-list-table" cellspacing="0">
+									<thead>
+										<tr>
+											<th width="20%">Datum</th>
+											<th width="20%">Bestellnummer</th>
+											<th width="20%">Status</th>
+											<th width="20%">Gesamt CHF</th>
+											<th style="text-align: center" width="20%">Aktion</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% if(utls.isEmpty(orders)) { %>
+										<% orders.forEach(function(order, el) { %>
+										<tr>
+											<td><%= utls.dateFormat(order.date_created).date %> <%= utls.dateFormat(order.date_created).time %></td>
+											<td>#<%= order.id %></td>
+											<td>
+												<% if(order.status == "pending") { %>
+													<span class="badge badge-success">Zahlung offen</span>
+												<% } %>
+												<% if(order.status == "processing") { %>
+													<span class="badge badge-success">bezahlt</span>
+												<% } %>
+												<% if(order.status == "completed") { %>
+													<span class="badge badge-success">erledigt</span>
+												<% } %>
+												<% if(order.status == "cancelled") { %>
+													<span class="badge badge-success">storniert</span>
+												<% } %>
+												<% if(order.status == "refunded") { %>
+													<span class="badge badge-success">zurückerstattet</span>
+												<% } %>
+											</td>
+											<!-- <td><%= order.currency %> <%= order.total %> für <%= order.line_items.length %> <%= order.line_items.length > 1 ? "Artikel" :"Artikel" %></td> -->
+											<td><%= order.currency %> <%= utls.priceFormat(order.total) %></td>
+											<% if(order.status == "pending") { %>
+												<td align="center"><a class="order-link badge badge-warning" href="/order-pending/<%= order.id %>"><img src="/images/svg/eye1.svg" alt=""> Ansicht</a></td>
+											<% } %>
+											<% if(order.status == "cancelled") { %>
+												<td align="center"><a class="order-link badge badge-warning" href="/order-cancel/<%= order.id %>"><img src="/images/svg/eye1.svg" alt=""> Ansicht</a></td>
+											<% } %>
+											<% if(order.status == "completed" || order.status == "processing") { %>
+												<td align="center"><a class="order-link badge badge-warning" href="/view-order/<%= order.id %>"><img src="/images/svg/eye1.svg" alt=""> Ansicht</a></td>
+											<% } %>
+											<!--note :
+												completed - badge-success
+												Processing - badge-primary
+												Pending - badge-warning
+												cancelled - badge-danger
+											-->
+										</tr>
+										<% }); %>
+										<% } %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div id="SupportPopup" class="slide-form">
+	<div class="form-header">
+  		<h4>Nachricht hinterlassen</h4>
+  		<div id="SupportPopupClose" class="slideFormClose">&times;</div>
+	</div>
+	<div class="form-body supportPopupContent">
+	  <p>Bitte hinterlasse uns deine Nachricht und wir werden dich so rasch wie möglich kontaktieren.</p>
+	  <% include ../modules/supportform %>
+	</div>
+</div>
+<% include ../templates/shop-footer %>

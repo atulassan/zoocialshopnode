@@ -1,0 +1,87 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit !important;
+		top: inherit;
+		right: inherit;
+		left: inherit;
+	}
+
+	#staic-page-banner {
+		margin-top: 0px !important;
+	}
+</style>
+
+<%= console.log(activeUser) %>
+<%= console.log(customer) %>
+
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1>Anmelden</h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Passwort zurücksetzen</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="inner-page-content" class="section-md inner-grey-bg min50vh">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+
+				<div class="email-verification" style="display: none;">
+					<div class="v-icon">
+						<img src="images/svg/checked-white.svg">
+					</div>              
+					<h4>Passwort erfolgreich aktualisiert</h4>
+					<p class="pt-3"><a href="/" class="btn btn-primary registerBtnMt">Fertig</a></p>
+				</div>
+			
+			<% if(activeUser) { %>
+				<!---Show this....reset password after got token by email -->
+				<form class="forgotpassword" name="forgotpassword" id="forgotpassword" method="post" action="#">
+					<h4 class="mb-4">Probleme bei der Anmeldung?</h4>
+					<h6 class="mb-3">Passwort zurücksetzen</h6>
+					<p>Setze dein Passwort hier zurück</p>
+					<div class="row">
+						 <div class="col-md-6 form-group">
+							<label>Neues Passwort</label>
+							<div class="form-icon-base">
+								<input id="pass2" data-valcode="spl_min" valcode-min="6" type="password" class="form-control"  placeholder="" name="password" value="">
+								<span class="form-icon"><img id="pas_visible2" src="/images/svg/eye2.svg" id=""></span>
+							</div>
+						 </div>
+						 <div class="col-md-6 form-group">
+							<label>Neues Passwort bestätigen</label>
+							<div class="form-icon-base">
+								<input id="pass3" title="Kennwort bestätigen" valcode-pss="pass2" data-valcode="!b_pas" type="password" class="form-control"  placeholder="" name="confirm_password" value="">
+								<span class="form-icon"><img id="pas_visible3" src="/images/svg/eye2.svg" id=""></span>
+							</div>
+						 </div>
+						 <div class="col-md-12 form-group text-right">
+							<input type="hidden" name="id" value="<%= customer.id %>" />
+							<input type="hidden" name="email" value="<%= customer.email %>" />
+							<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div>
+							 <button type="submit" name="submit" class="btn btn-primary registerBtnMt">zurücksetzen</button>
+						 </div>
+					</div>
+				</form>
+				<!--end--->
+				<% } else { %>
+					<p>Sorry You are authorized token is not Valid</p>
+				<% } %>	
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

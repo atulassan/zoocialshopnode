@@ -1,0 +1,682 @@
+<% include ../templates/shop-header %>
+<div class="clear-all"></div>
+<!-- <div class="parallax-container">
+	<div class="parallax">
+		<div class = "header-title">
+    		<h1>Zoocial</h1>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+    	</div>
+	  <div class="parallax-window" data-parallax="scroll" data-image-src="images/main-banner.jpg"></div>
+	</div>
+</div> -->
+<div class="banner-slider owl-carousel wl-loaded owl-drag">
+      <div class="item">
+          <img src="images/slider1.jpg" alt="">
+      </div>
+      <div class="item">
+          <img src="images/slider2.jpg" alt="">
+      </div>
+      <div class="item">
+          <img src="images/slider1.jpg" alt="">
+      </div>
+      <div class="item">
+          <img src="images/slider2.jpg" alt="">
+      </div>
+  </div>
+<section id="" class="inner-grey-bg pb-5">
+    <div class="container">
+      <div class="form-row">
+		<div class="col-lg-12 col-md-12 pt-4">
+		   	<div class="row">
+			   	<div class="col-lg-3 col-md-3">
+			   		<div class="leftFilterSticky">
+			   			<h4 class="shopProductTitles">Kategorie <span class="mobFilterClose">&times;</span></h4>
+			   			<hr>
+			   			<ul class="filterList ">
+				            <nav class="nav" role="navigation">
+							    <ul class="nav__list">
+							      	<li>
+							        	<input id="group-1" type="checkbox" hidden />
+							        	<label for="group-1"><span class="fa fa-angle-right"></span> Katzen</label>
+							        	<ul class="group-list">
+								          <li>
+								            <input id="sub-group-1" type="checkbox" hidden />
+								            <label for="sub-group-1"><span class="fa fa-angle-right"></span>Katzenfutter</label>
+								            <ul class="sub-group-list">
+								              <li><a href="#">Katzen-Trockenfutter</a></li>
+								              <li><a href="#">Katzen-Nassfutter</a></li>
+								              <li><a href="#">Katzensnacks</a></li>
+								              <li><a href="#">Nahrungsergänzung</a></li>
+								            </ul>
+								          </li>
+								        </ul>
+							      	</li>
+							      	<li>
+							        	<input id="group-1" type="checkbox" hidden />
+							        	<label for="group-1"><span class="fa fa-angle-right"></span>Hunde</label>
+							        </li>
+							        <li>
+							        	<input id="group-1" type="checkbox" hidden />
+							        	<label for="group-1"><span class="fa fa-angle-right"></span>Zubehör</label>
+							        </li>
+							        <li>
+							        	<input id="group-1" type="checkbox" hidden />
+							        	<label for="group-1"><span class="fa fa-angle-right"></span> Tierarzt ∕ Apotheke </label>
+							        </li>
+							    </ul>
+							</nav>
+				        </ul>
+				        <div class="leftFilterSpace"></div>
+				        <h4 class="shopProductTitles">Preis</h4>
+			   			<hr>
+			   			<ul class="filterList">
+				            <li><a href="">Unter 20 CHF</a></li>
+				            <li><a href="">20 - 100 CHF</a></li>
+				            <li><a href="">Über 100</a></li>
+				        </ul>
+
+				        <div class="leftFilterSpace"></div>
+
+				        <h4 class="shopProductTitles">Marken</h4>
+			   			<hr>
+			   			<ul class="filterList">
+				            <li><a href="">Almo nature</a></li>
+				            <li><a href="">Animonda</a></li>
+				        </ul>
+			   		</div>
+	      		</div>
+	      		<div class="col-lg-9 col-md-9">
+	      			<div class="marketproducts">
+	      				<div class="sortSection">
+		      				<div class="form-row">
+		      					<div class="col-lg-6 col-md-6 col-sm-6 col-7">
+		      						<h6 class="sortierenTitle"><span>Sortieren nach: </span>
+								      	
+								      	<div class="DropTriangle sortieren select-arrow">
+								      		<select>
+												<option value="" selected="selected" >Reihenfolge</option>
+												<option value="">Meistverkauft</option>
+												<option value="">Alphabetisch Z-A</option>
+												<option value="">Preis niedrig bis hoch</option>
+												<option value="">Preis absteigend</option>
+												<option value="">Datum, neu zu alt</option>
+												<option value="">Datum, alt nach neu</option>
+											</select>
+										</div>
+									</h6>
+		      					</div>
+		      					<div class="col-lg-6 col-md-6 col-sm-6 col-5 text-right">
+		      						<h6 class="sortierenTitle">Show 
+								      	<div class="DropTriangle sortieren-show select-arrow">
+								      		<select>
+												<option value="" selected="selected" >9</option>
+												<option value="">18</option>
+												<option value="">27</option>
+												<option value="">36</option>
+												<option value="">45</option>
+												<option value="">54</option>
+												<option value="">63</option>
+												<option value="">72</option>
+											</select>
+											
+										</div>
+										<a class="mobileFiterOpen" href="javascript:;"><img src="images/len.jpg" alt=""></a>
+									</h6>
+		      					</div>
+		      				</div>
+					      	<hr>
+					  	</div>
+					  <!-- <div class="no-jobs">
+				         <img src="home/images/service-dummy.svg" alt="no-image">
+				         <h3>Keine Dienste gefunden</h3>
+				         </div> -->
+				      <div class="row">
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-1.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-2.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-3.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-4.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-5.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-1.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-2.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-3.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-1.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-2.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-3.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-4.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-5.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8 ">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-1.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6  col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+				            <div class="card">
+				               <div class="card-body">
+				                  <div class="product-content">
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip" href="shop-details?prodctID=1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Schnellansicht">
+				                     <i class="fa fa-search"></i>
+				                     </a>
+				                     
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip unfav-product" href="javascript:void(0);" product-id="1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zu Favoriten entfernen">
+				                     <i class="fa fa-star"></i>
+				                     </a>
+				                     
+				                     <a class="btn btn-sm btn-gradient btn-border cus-tooltip add-to-cart" href="javascript:void(0);" product-id="1" product-price="121" product-varient="12" data-toggle="tooltip" data-placement="top" title="" data-original-title="in den Warenkorb legen">
+				                     <i class="fa fa-shopping-cart"></i>
+				                     </a>
+				                  </div>
+				                  <img class="img-fluid" src="images/foods/food-2.jpg" alt="">
+				                  <div class="mprice shop-price-box">
+				                  	<span>CHF 121.00 <i class="strike">CHF12.00</i></span>
+				                  </div>
+				                  <span class="product-new-label inner-gradient-bg">Neu</span>
+				               </div>
+				               <div class="card-footer shop-footer">
+				                  <h3 class="title"><a href="shop-details">Product Name</a></h3>
+				                  <div class="row">
+				                     <div class="col-lg-6 col-md-6 col-8">
+				                        <p>12kg</p>
+				                     </div>
+				                     <div class="col-lg-6 col-md-6 col-4 text-right">
+				                        <p>test</p>
+				                     </div>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				      </div>
+					</div>
+				</div>
+		   </div>
+		</div>
+	   </div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

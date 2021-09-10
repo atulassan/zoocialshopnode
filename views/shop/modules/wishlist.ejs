@@ -1,0 +1,34 @@
+<%
+	//console.log(favproducts);
+%>
+<div class="form-header">
+	<h4>Wunschliste</h4>
+	<div id="favClose" class="slideFormClose">&times;</div>
+</div>
+<div class="form-body form-scrolling">
+	<div class="cartHomeBase">
+		<div class="wishToplist">
+			<% if(parseFloat(mwst_2_5) > 0) { %>
+				<div class="miniCateName">
+					<span>Futter</span>	
+				</div>
+				<% include wishlist-food %>
+			<% } %>
+			<% if(parseFloat(mwst_7_7) > 0) { %>
+				<div class="miniCateName">
+					<span>Zubehör</span>
+				</div>
+				<% include wishlist-nonfood %>
+			<% } %>
+		</div>
+	</div>
+</div>
+<div class="cart-total w-100">
+	<div class="mt-2 cart-form-buttons">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-12">
+				<a href="/wunschliste" class="view-cart-button btn btn-primary">zur Wunschliste</a>
+			</div>
+		</div>
+	</div>
+</div>

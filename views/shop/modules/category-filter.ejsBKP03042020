@@ -1,0 +1,74 @@
+<div class="sortSection">
+  <form id="productfilter" action="/productupdate" method="get" name="productfilter">
+    <div class="form-row">
+      <div class="col-lg-6 col-md-7 col-sm-12 col-12">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-5 col-sm-6 col-5 my-auto">
+            <h6 class="sortierenTitle"><span>Sortieren nach: </span></h6>
+          </div>
+          <div class="col-lg-8 col-md-7 col-sm-6 col-7">
+            <div class="DropTriangle sortieren1 select-arrow sortierenTitle">
+              <select name="s" class="azflt">
+                <option value="date-desc" selected="selected">Absteigende Reihenfolge</option>
+                <option value="date-asc">Aufsteigende Reihenfolge</option>
+                <option value="price-desc">Preis absteigend</option>
+                <option value="price-asc">Preis niedrig bis hoch</option>
+                <option value="popularity">Popularität</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-5 col-sm-12 col-12 ">
+        <div class="form-row">
+          <div class="col-lg-7 col-md-5 col-sm-6 col-5 my-auto text-right">
+            <h6 class="sortierenTitle"><span>Price Filter: </span></h6>
+          </div>
+          <div class="col-lg-5 col-md-7 col-sm-5 col-6">
+            <div class="DropTriangle sortieren select-arrow sortierenTitle">
+              <select name="price" class="priceflt">
+                <option value="">Filterpreis</option>
+                <option value="-20">Unter 20 CHF</option>
+                <option value="20-100">20 - 100 CHF</option>
+                <option value="100+">Über 100 CHF</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-0 col-md-0 col-sm-1 col-1">
+            <a class="mobileFiterOpen" href="javascript:;"><img src="/images/len.jpg" alt=""></a>
+            <input type="hidden" name="page" value="1" class="spage" />
+            <input type="hidden" name="cid" value="<%= utls.isNotEmpty(category_id) ? category_id : 0 %>" />
+            <input type="hidden" name="tag_id" value="0" />
+            <input style="opacity: 0; visibility:hidden; height: 0; overflow: hidden; display: none;" type="submit"
+              name="submit" id="filtersubmit" value="submit" />
+          </div>
+        </div>
+      </div>
+      <!--  <div class="col-lg-2 col-md-4 col-sm-6 col-6 ">
+       <div class="form-row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-5 my-auto text-right">
+           <h6 class="sortierenTitle">Show</h6>
+         </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-7">
+           <div class="DropTriangle sortieren-show select-arrow sortierenTitle">
+             <select name="p" class="noflt">
+               <option value="9" selected="selected">9</option>
+               <option value="18">18</option>
+               <option value="27">27</option>
+               <option value="36">36</option>
+               <option value="45">45</option>
+               <option value="54">54</option>
+               <option value="63">63</option>
+               <option value="72">72</option>
+             </select>
+           </div>
+           <a class="mobileFiterOpen" href="javascript:;"><img src="/images/len.jpg" alt=""></a>
+           <input type="hidden" name="page" value="1" class="spage" />
+            <input style="opacity: 0; visibility:hidden; height: 0; overflow: hidden; display: none;" type="submit" name="submit"
+         id="filtersubmit" value="submit" />
+         </div>
+       </div>
+     </div> -->
+    </div>
+  </form>
+</div>

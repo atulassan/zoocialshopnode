@@ -1,0 +1,42 @@
+<div class="PostReviews">
+	<form name="postreview" action="createReview" id="reviewform" method="post">
+		<h3>Deine Bewertung <span class="PostRating" id="PostRating"></span></h3>
+
+		<!-- <span class="your-choice-was" style="display: inline;">Your rating was <span class="choice"></span></span> -->
+
+		<div class="form-group">
+			<% if(userdata.hasOwnProperty('id')) { %>
+				<input placeholder="Name" type="text" name="reviewer" class="form-control" id="rname" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.first_name: "" %> <%= userdata.hasOwnProperty('billing') ? userdata.billing.last_name: "" %>" required>
+			<% } else { %>
+				<input placeholder="Name" type="text" name="reviewer" class="form-control" id="rname" value="Gast" required />
+			<% } %>
+		</div>
+		<div class="form-group">
+			<% if(userdata.hasOwnProperty('id')) { %>
+				<input placeholder="E-Mail" type="text" name="reviewer_email" class="form-control" id="reviewer_email" value="<%= userdata.hasOwnProperty('email') ? userdata.billing.email: "" %>" required>
+			<% } else { %>
+				<input placeholder="E-Mail" type="text" name="reviewer_email" class="form-control" id="reviewer_email" value="">
+			<% } %>
+		</div>
+		<div class="form-group">
+			<textarea placeholder="Rezension" class="form-control" name="review" id="review" rows="3"></textarea>
+		</div>
+		<div class="form-group mt-3">
+			<p>
+				<span class="mt-2" style="display: inline-block;">Mit "Absenden" des Online-Formulars bin ich mit den <a href="javascript:;" class="mt-2 teilnahmebedingungenBtnToggle orangeTxt">Teilnahmebedingungen</a> einverstanden</span>
+				<span class="pull-right"><button type="submit" class="btn btn-primary inner-gradient-bg review_submit mt-0"><img class="process-loader" style="display: none;" src="/images/Spinner-1s-91px.gif" /> Absenden</button></span>
+				<input type="hidden" class="form-control" name="product_id" value="<%= product.id %>">
+				<input type="hidden" id="review_count" class="form-control" name="rating" value="5">
+			</p>
+		</div>
+	</form>
+	<div class="Teilnahmebedingungen" style="display: none;">
+		<a href="javascript:;" class="close">&times;</a>
+		<h5>Teilnahmebedingungen</h5>
+		<ul class="list">
+			<li>Mit dem Abschicken des Formulars geht deine Produktbewertung in den Eigentum von ZOOCIAL, 4beeees GmbH über. Du gewährst ZOOCIAL eine zeitlich und örtlich unbeschränkte Linzenz zur weiteren Verwendung und Veröffentlichung deiner Bewertung in online-und offline-Medien.</li>
+			<li>Du stimmst zu, dass deine angegebenen Daten zum Zwecke der Veröffentlichung und für evtl. bewertungsbezogene Rückfragen gespeichert werden.</li>
+			<li>ZOOCIAL behält sich einer redaktionelle Prüfung und Bearbeitung vor. Bewertungen, die der Netiquette nicht entsprechen, werden nicht veröffentlicht.</li>
+		</ul>
+	</div>
+</div>

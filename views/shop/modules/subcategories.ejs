@@ -1,0 +1,26 @@
+<% if(utls.isEmpty(subcategories)) { %>
+<div class="subcategories marketproducts">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+      <h4 class="shopProductTitles">Categories</h4>
+      <hr>
+    </div>
+    <% subcategories.forEach(function(subcategory, el) { %>
+     <div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3"> 
+      <div class="card">
+        <a class="product-link" href="/category/<%= subcategory.slug %>/<%= subcategory.id %>"></a>
+        <div class="card-body">
+          <img class="img-fluid" src="<%= subcategory.image.src %>" alt="<%= subcategory.name %>"title="<%= subcategory.name %>">
+        </div>
+        <div class="card-footer shop-footer">
+          <h3 class="title text-center">
+            <a href="/category/<%= subcategory.slug %>/<%= subcategory.id %>"><%= subcategory.name %></a>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<% } %>
+<hr>

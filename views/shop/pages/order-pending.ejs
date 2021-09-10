@@ -1,0 +1,243 @@
+<% include ../templates/shop-header %>
+<% //console.log(orderdetails) %>
+
+<style type="text/css">
+	.fixedHeader {
+		position: inherit!important; 
+		top:inherit; 
+		right: inherit; 
+		left: inherit;
+	 }
+	 #staic-page-banner { margin-top: 0px!important; }
+</style>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Bestellung erhalten</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<% if(status) { %>
+				<div class="main-post-box white-bg br-6 p-15 mb-3 cart-table">
+					<!--PaymentSuccess Message --> 
+					<!-- <p class="orderStatus PaymentSuccess"> <span>Die Zahlung war erfolgreich</span></p> -->
+					<!--PaymentPending Message -->
+					<div class="orderStatus PaymentPending">
+						<div class="row">
+							<div class="col-lg-8 col-md-8">
+								<p> <span>Zahlung wurde abgelehnt</span> Wir konnten leider deine Zahlung nicht abschliessen.
+							</div>
+							<div class="col-lg-4 col-md-4 my-auto text-right">
+								<form id="orderpending" action="#" name="orderpending" id="orderpending" method="post">
+									<!-- <div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div> -->
+									<a href="/meine_bestellungen" class="btn btn-primary back-btn mb-0">zurück</a>
+									<input type="hidden" name="orderid" value="<%= orderdetails.id %>" />
+									<button type="submit" class="btn btn-primary" value="Jetzt zahlen" name="submit"> <img src="/images/loader-white.gif" class="process-loader" style="display: none;">jetzt zahlen</button>
+								</form>		
+							</div>
+						</div>
+					</div>
+
+					<div class="order-list">
+						<ul class="row no-gutters">
+							<li class="col-lg-6 col-md-6">Bestellnummer <span><%= orderdetails.id %></span></li>
+							<li class="col-lg-6 col-md-6">Datum <span><%= utls.dateFormat(orderdetails.date_created).date %> <%= utls.dateFormat(orderdetails.date_created).time %></span></li>
+							<li class="col-lg-6 col-md-6">E-Mail <span><%= orderdetails.billing.email %></span></li>
+							<li class="col-lg-6 col-md-6">GESAMTBETRAG <span>CHF <%= utls.priceFormat(orderdetails.total) %></span></li>
+							<li class="col-lg-12 col-md-12">Zahlungsart <span></span></li>
+						</ul>
+					</div>
+					<h5 class="mb-3">Bestellübersicht</h5>
+
+					<div class="table-responsive">
+						<table class="table table-striped mb-0 order-list-table" cellspacing="0">
+							<thead>
+								<tr>
+									<th width="10%">Artikelnr. </th>
+									<th width="45%">Artikelname</th>
+									<th width="15%" style="text-align: right;">VAR</th>
+									<th width="15%" style="text-align: center;">Menge</th>
+									<th width="15%" style="text-align: center;">MwSt</th>
+									<th width="15%" style="text-align: right;">Betrag</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% if(utls.isEmpty(orderdetails.line_items)) { %>
+								<% orderdetails.line_items.forEach(function(product, el) { %>
+								<tr class="wishlist-item">
+									<td><%= product.sku %></td>
+									<td class="product-name">
+										<!-- <a href="/product/<%= product.slug %>/<%= product.id %>"><%= product.name %></a> -->
+										<%= product.name %>
+									</td>
+									<td class="product-price" align="right">
+										<span class="chf">
+											<% if(product.hasOwnProperty('meta_data')) { %>
+												<% var remiAvail = false;
+												if(product.meta_data.length > 0) {
+													product.meta_data.forEach((meta, el)=> {
+														if(meta.key == "remi") {
+															remiAvail = true;
+															return false;
+														}				
+													}); 
+												} %>
+
+												<% if(remiAvail) { %>
+													Remi	
+												<% } %>	
+											<% } %>
+										</span>
+									</td>
+									<td align="center"><%= product.quantity %></td>
+									<td align="center">
+										<!-- 2.5% -->
+										<% if(product.tax_class == 'mwst-2-5') { %>
+											B	
+										<% } %>
+										<!-- 7.7% -->
+										<% if(product.tax_class == 'mwst-7-7') { %>
+											C
+										<% } %>
+									</td>
+									<td class="product-price" align="right">
+										<!-- <span class="chf">CHF</span> <%= utls.priceFormat(product.subtotal) %> -->
+										<% if(product.hasOwnProperty('meta_data')) { %>
+											<% if(product.meta_data.length > 0) {
+												product.meta_data.forEach((meta, el)=> {
+													if(meta.key == "price") { %>
+														<span class="chf">CHF</span> <%= utls.priceFormat(meta.value) %>
+													<% }				
+												}); 
+											} %>
+										<% } else { %>
+											<%= utls.priceFormat((product.subtotal + product.subtotal_tax)) %>
+										<% } %>
+									</td>
+								</tr>
+								<% }); %>
+								<% } %>
+								<tr>
+									<td colspan="5">
+										<b>Zwischensumme</b>
+									</td>
+									<td align="right">
+										<b><%= orderdetails.shipping_total > 0 ? utls.priceFormat((orderdetails.total - orderdetails.shipping_total)) : utls.priceFormat(orderdetails.total) %></b>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										Versandkosten
+									</td>
+									<td align="center">
+										<% if(mwst_7_7 > 0) { %>
+											C
+										<% } else { %>
+											<% if(mwst_2_5 > 0) { %>
+												B
+											<% } %>	
+										<% } %>
+									</td>
+									<td align="right">
+										<%= utls.priceFormat(orderdetails.shipping_total) %>
+									</td>
+								</tr>
+								<% if(parseFloat(mwst_2_5) > 0) { %>
+								<tr>
+									<td colspan="4">B <span style="padding-left: 10px">MWSt, 2.5%</span></td>
+									<!-- <td width="10%" align="right"><%= utls.priceFormat(total_2_5) %></td> -->
+									<td align="center"><%= utls.priceFormat(vat_plustotal_2_5) %></td>
+									<td align="right"><%= utls.priceFormat(mwst_2_5) %></td>
+								</tr>
+								<% } %>
+								<% if(parseFloat(mwst_7_7) > 0) { %>
+								<tr>
+									<td colspan="4">C <span style="padding-left: 10px">MWSt, 7.7%</span></td>
+									<!-- <td width="10%" align="right"><%= utls.priceFormat(total_7_7) %></td> -->
+									<td align="center"><%= utls.priceFormat(vat_plustotal_7_7) %></td>
+									<td align="right"><%= utls.priceFormat(mwst_7_7) %></td>
+								</tr>
+								<% } %>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5">
+										<b>Total CHF inkl. MwSt.</b>
+									</td>
+									<td align="right">
+										<b><span class="chf">CHF</span> <%= utls.priceFormat(orderdetails.total) %></b>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<div class="order-table-address">
+							<div class="row">
+								<div class="col-lg-6 shipmentdetails">
+									<h6 class="txt-upper mb-3">Rechnungsadresse</h6>
+									<div class="form-group">
+										<% if(orderdetails.billing.company != "") { %>
+											<p><%= orderdetails.billing.company %></p>
+										<% } %>
+										<p><%= orderdetails.billing.first_name %> <%= orderdetails.billing.last_name %></p>
+										<p><%= orderdetails.billing.address_1 %></p>
+										<% if(orderdetails.billing.address_2 != "") { %>
+											<p><%= orderdetails.billing.address_2 %></p>
+										<% } %>
+										<p><%= orderdetails.billing.postcode %> <%= orderdetails.billing.city %></p>
+										<p><%= orderdetails.billing.state %></p>
+										<p>Schweiz</p>
+									</div>
+								</div>
+								<div class="col-lg-6 paymentdetails">
+									<h6 class="txt-upper mb-3">Lieferadresse</h6>
+									<div class="form-group">
+										<% if(orderdetails.shipping.company != "") { %>
+											<p><%= orderdetails.shipping.company %></p>
+										<% } %>
+										<p><%= orderdetails.shipping.first_name %> <%= orderdetails.shipping.last_name %></p>
+										<p><%= orderdetails.shipping.address_1 %></p>
+										<% if(orderdetails.shipping.address_2 != "") { %>
+											<p><%= orderdetails.shipping.address_2 %></p>
+										<% } %>
+										<p><%= orderdetails.shipping.postcode %> <%= orderdetails.shipping.city %></p>
+										<p><%= orderdetails.shipping.state %></p>
+										<p>Schweiz</p>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<!-- <div class="pamentPendingBtn mt-4 text-center">
+					<a href="javascript:;" class="btn btn-primary">Zahlen Sie jetzt</a>
+				</div> -->
+				<form id="orderpending" action="#" name="orderpending" id="orderpending" method="post">
+					<!-- <div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div> -->
+					<p style="text-align: center" class="cart-form-buttons">
+						<input type="hidden" name="orderid" value="<%= orderdetails.id %>" />
+						<button type="submit" class="btn btn-primary" value="Jetzt zahlen" name="submit"><img src="/images/loader-white.gif" class="process-loader" style="display: none;">jetzt zahlen</button>
+						
+						<!-- <button type="submit" class="btn btn-primary cancelBtn" value="Jetzt zahlen" name="submit">stornieren</button> -->
+						<a href="/order-cancel/<%= orderdetails.id %>"  class="btn btn-primary cancelBtn">stornieren</a>
+					</p>
+				</form>
+				<% } else { %>
+					<h1><%= orderdetails.message %></h1>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

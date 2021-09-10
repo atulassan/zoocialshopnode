@@ -1,0 +1,292 @@
+<% include ../templates/shop-header %>
+<section id="" class="inner-grey-bg pb-5 pt-4 topCommonPadding">
+    <div class="container">
+	   <div class="row">
+	      <div class="col-lg-8 col-md-12">
+	         <div class="main-post-box white-bg br-6 p-15 mb-3 cart-table">
+	            <div class="accordion" id="accordionExample">
+	               <div class="card">
+	                  <div class="card-header" id="headingOne">
+	                     <h5 class="mb-0">
+	                        <a href="javascript:;" class=" btn-link completed"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	                        1. Adresse
+	                        </a>
+	                     </h5>
+	                  </div>
+	                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+	                     <div class="card-body">
+	                        <div class="row">
+	                           <div class="col-md-12 mt-3">
+	                              <h5>Lieferadresse</h5>
+	                           </div>
+	                           <div class="col-md-12 mt-3">
+	                              <div class="form-group">
+	                                 <div class="radio form-check-inline" style="padding-left:10px;">
+	                                    <input id="diese"  class="adresse_versenden" type="radio" name="adresse_versenden1" value="option2" checked="checked">
+	                                    <label for="diese">an diese Adresse versenden</label>
+	                                 </div>
+	                              </div>
+	                              <div class="form-group">
+	                                 <div class="radio form-check-inline" style="padding-left:10px;">
+	                                    <input id="andere" class="adresse_versenden"  type="radio" name="adresse_versenden1" value="option1">
+	                                    <label for="andere">an eine andere Adresse versenden</label>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+	                        <div class="top_personal">
+	                           <form class="order_address" name="order_address" id="orderaddress">
+	                              <div class="row">
+	                                 <div class="col-md-12">
+	                                    <h5>Persönliche Daten</h5>
+	                                 </div>
+	                                 <div class="col-md-12 form-group">
+	                                    <label>Firma</label>
+	                                    <input type="text" class="form-control" id="" placeholder="" name="ad_firma" value="" required="">
+	 	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span> Vorname *</label>
+	                                    <input type="text" class="form-control" id="ad_vorname" placeholder="" name="ad_vorname" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Nachname *</label>
+	                                    <input type="text" class="form-control" id="ad_nachname" name="ad_nachname" placeholder="" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <div class="form-group">
+	                                       <label for="email">E-Mail-Adresse </label>
+	                                       <input type="email" name="ad_email"  value="" class="form-control" placeholder="">
+	                                    </div>
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <div class="form-group datePickerPos">
+	                                       <label>Geburtsdatum</label>
+	                                       <input value="" id ="datepicker-13" name="ad_geburstatum"  class="form-control" placeholder="">
+	                                    </div>
+	                                 </div>
+	                                 <hr class="mb-3">
+	                                 <div class="col-md-12 mt-3">
+	                                    <h5>Rechnungsadresse</h5>
+	                                 </div>
+	                                 <div class="col-md-12 mt-3 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Strasse & Hausnummer *</label>
+	                                    <input type="text" class="form-control" id="ad_address" name="ad_address" placeholder="" value=""   required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>PLZ*</label>
+	                                    <input type="text" class="form-control" id="ad_plz" name="ad_plz" placeholder="" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Ort *</label>
+	                                    <input type="text" class="form-control" id="ad_ort" name="ad_ort" placeholder="" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-12 form-group">
+	                                    <label>Land</label>
+	                                    <input type="text" class="form-control" id="ad_land" name="ad_land" value="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Telefon</label>
+	                                    <input type="text" class="form-control" id="ad_telefon" name="ad_telefon" value="" placeholder="" required="">
+	                                    <input type="text" class="form-control" id="ad_telefon" name="ad_telefon" value="" placeholder="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Fax</label>								                
+	                                    <input type="text" class="form-control" value="" id="ad_fax" name="ad_fax"  placeholder="" required="">
+	                                    <input type="text" class="form-control" value="" id="ad_fax" name="ad_fax"  placeholder="" required="">
+	                                 </div>
+	                              </div>
+	                           </form>
+	                           <div class="row">
+	                              <div class="col-md-12 mt-3">
+	                                 <button class="btn btn-primary btn-md address_submit">einreichen</button>
+	                                 <button id="enable_next" class="btn btn-primary pull-right btn-md enable_next">weiter zur Versandart</button>
+	                              </div>
+	                           </div>
+	                        </div>
+	                        <div class="lieferad" style="display: none;">
+	                           <form class="order_address1" name="order_address1" id="orderaddress1">
+	                              <div class="row">
+	                                 <div class="col-md-12">
+	                                    <h5>Persönliche Daten</h5>
+	                                 </div>
+
+	                                 <div class="col-md-12 form-group">
+	                                    <label>Firma</label>
+	                                    <input type="text" class="form-control" id="" placeholder="" name="ad_firma" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Vorname *</label>
+	                                    <input type="text" class="form-control" id="ad_vorname1" name="ad_vorname1" placeholder="" value="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Nachname *</label>
+	                                    <input type="text" class="form-control" id="ad_nachname1" name="ad_nachname1" placeholder="" value="" required="">
+	                                 </div>
+	                              </div>
+	                              <div class="row">
+	                                 <div class="col-md-6 form-group">
+	                                    <div class="form-group">
+	                                       <label for="email">E-Mail-Adresse </label>
+	                                       <input type="email" name="ad_email"  value="" class="form-control" placeholder="">
+	                                    </div>
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <div class="form-group datePickerPos">
+	                                       <label>Geburtsdatum</label>
+	                                       <input value="" id ="datepicker-13" name="ad_geburstatum"  class="form-control" placeholder="">
+	                                    </div>
+	                                 </div>
+	                                 <div class="col-md-12 mt-3 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Strasse & Hausnummer *</label>
+	                                    <input type="text" class="form-control" id="ad_address1" name="ad_address1" placeholder="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>PLZ*</label>
+	                                    <input type="text" class="form-control" id="ad_plz1" name="ad_plz1" placeholder="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label><span class="errorMsg" style="display:none;">Feld ist erforderlich</span>Ort *</label>
+	                                    <input type="text" class="form-control" id="ad_ort1" name="ad_ort1" placeholder="" required="">
+	                                 </div>
+	                                 <div class="col-md-12 form-group">
+	                                    <label>Land</label>
+	                                    <input type="text" class="form-control" id="ad_land1" name="ad_land1" value="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Telefon</label>
+	                                    <input type="text" class="form-control" id="ad_telefon" name="ad_telefon"  placeholder="" required="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Fax</label>
+	                                    <input type="text" name="ad_fax" class="form-control" id="ad_fax" placeholder="" required="">
+	                                 </div>
+	                              </div>
+	                              <div class="row">
+	                                 <div class="col-md-12 mt-3">
+	                                    <div class="form-check form-check-inline">
+	                                       <input class="form-check-input" type="radio" name="PersönlicheDaten" id="Herr" value="3">
+	                                       <label for="Herr" class="form-check-label">Auftraggeber auf Lieferschein anzeigen</label>
+	                                    </div>
+	                                    <p>Vorname und Name der Rechnungsadresse werden auf den Lieferschein gedruckt. Du kannst dem Empfanger aufdiese Weise mitteilen,von wem das Geschenk stammt. Auf dem Lieferschein werden KEINE Preise angezeigt</p>
+	                                 </div>
+	                              </div>
+	                           </form>
+	                           <div class="row">
+	                              <div class="col-md-12 mt-3">
+	                                 <button class="btn btn-primary btn-md address_submit1">einreichen</button>
+	                                 <button id="enable_next1" class="btn btn-primary pull-right btn-md enable_next1">weiter zur Versandart</button>
+	                              </div>
+	                           </div>
+	                        </div>
+	                     </div>
+	                  </div>
+	               </div>
+	               <div class="card">
+	                  <div class="card-header" id="headingTwo">
+	                     <h5 class="mb-0">
+	                        <a href="javascript:;" id="headingtwo" class=" btn-link" data-toggle="collapse" aria-expanded="true" aria-controls="collapseTwo">
+	                        2. Versand
+	                        </a>
+	                     </h5>
+	                  </div>
+	                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+	                     <div class="card-body">
+	                        <form class="shipping" name="shipping" id="shipping">
+	                           <div class="row">
+	                              <div class="col-md-12 mt-3 mb-3">
+	                                 <div class="radio form-check-inline" style="padding-left:0px;">
+	                                    <input class="form-check-input" id="smethod" type="radio" value="post" name="smethod" checked><label for="smethod">Post</label>
+	                                 </div>
+	                                 <div class="radio form-check-inline" style="padding-left:0px;">
+	                                    <input class="form-check-input" id="smethodDhl" type="radio" value="dhl" name="smethod">	<label for="smethodDhl">DHL</label>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </form>
+	                        <button class="btn btn-primary btn-md shipping_method">einreichen</button>
+	                        <button id="enable_next2" class="btn btn-primary pull-right btn-md enable_next2" type="submit">weiter zur Versandart</button>
+	                     </div>
+	                  </div>
+	               </div>
+	               <div class="card">
+	                  <div class="card-header" id="headingThree">
+	                     <h5 class="mb-0">
+	                        <a href="javascript:;" id="headingthree" class=" btn-link" data-toggle="collapse"  aria-expanded="true" aria-controls="collapseThree">
+	                        3. Zahlung
+	                        </a>
+	                     </h5>
+	                  </div>
+	                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+	                     <div class="col-md-12 mt-3 mb-3">
+	                        <h6>Wähle deine bevorzugte Zahlungsart</h6>
+	                     </div>
+	                     <div class="card-body payment-type">
+	                        <form class="payment-type" id="paymenttype" name="payment-type">
+	                           <div class="form-group">
+	                              <div class="radio form-check-inline" style="padding-left:10px;">
+	                                 <input class="form-check-input" id="cash"  type="radio" value="cashondelivery" name="payment_type" checked>
+	                                 <label for="cash" style="margin-top: -5px">Nachnahme</label>
+	                              </div>
+	                           </div>
+	                        </form>
+	                     </div>
+	                     <button class="btn btn-primary btn-md payment_type" >einreichen</button>
+	                     <button id="enable_next3" class="btn btn-primary pull-right btn-md enable_next3" tot-price="" type="submit">Eine Bestellung aufgeben</button>
+	                  </div>
+	               </div>
+	               <div class="card">
+	                  <div class="card-header" id="headingFour">
+	                     <h5 class="mb-0">
+	                        <a href="javascript:;" id="headingfour" class=" btn-link" data-toggle="collapse" aria-expanded="true" aria-controls="collapseFour">
+	                        4. Bestätigung
+	                        </a>
+	                     </h5>
+	                  </div>
+	                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+	                     <div class="card-body success-msg">
+	                        <img src="/images/svg/checked-green.svg" alt="">
+	                        <h3>Ihre Bestellung wurde erfolgreich aufgegeben</h3>
+	                     </div>
+	                  </div>
+	               </div>
+	            </div>
+	         </div>
+	      </div>
+	      <div class="col-lg-4 col-md-12">
+	         <div class="right">
+	            <div class="main-post-box white-bg br-6 mb-3">
+	               <h4 class="d-flex justify-content-between align-items-center mb-3">
+	                  <p class="text-muted">Bestellübersicht</p>
+	                  <span class="badge badge-secondary badge-pill">1</span>
+	               </h4>
+	               <div class="cart-detail cart-total bg-light same-height">
+	                  <p class="mb-3">
+	                     <span>Zwischensumme</span>                   
+	                     <span>CHF 20.00</span>
+	                  </p>
+	                  <p class="mb-3 ">
+	                     <span>Rabatt</span>
+	                     <span>CHF 30.00</span>
+	                  </p>
+	                  <hr>
+	                  <p class="mb-3 total-price">
+	                     <span>Gesamt</span>
+	                     <span>CHF 20.00</span>
+	                  </p>
+	                  <hr>
+	               </div>
+	            </div>
+	         </div>
+	      </div>
+	   </div>
+	</div>
+</section>.
+
+   <!-- <div class="card-body success-msg empty-cart white-bg mt-0 pb-4" style="min-height: 82%">
+      <img src="home/images/svg/empty-shopping-cart.svg" alt="">
+      <div class="mt-3 mb-3">
+         <h3>In diesem Warenkorb befinden sich keine Produkte. <br> Um mit dem Einkaufen fortzufahren, klicken Sie hier</h3>
+      </div>
+      <a href="shop" class="btn btn-primary btn-md btn-gradient">Jetzt einkaufen</a>
+   </div> -->
+<% include ../templates/shop-footer %>

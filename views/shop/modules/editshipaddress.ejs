@@ -1,0 +1,121 @@
+<%
+	var chstates = utls.swissStates();
+	var countries =  utls.shippingCountries();
+	
+%>
+
+<% shipaddresses.forEach((meta, idx) => { %>
+	<div class="displayShippingAddress">
+		<div class="addNewAddressEdit" style="display: none;">
+			<form action="/editshipaddress" method="post" id="editshipaddress" class="editshipaddress">
+				<div class="row" id="opc-shipping">
+					<!-- <div class="col-md-12 form-group">
+						<label>Bezeichnung <span class="redStar">*</span></label>
+						<input type="text" class="form-control" name="" value="">
+					</div> -->
+					<div class="col-md-6 form-group">
+						<label>Vorname <span class="redStar">*</span></label>
+						<input type="text" class="form-control" name="first_name" value="<%= meta.first_name %>">
+					</div>
+					<div class="col-md-6 col-sm-6 form-group">
+						<label>Nachname <span class="redStar">*</span></label>
+						<input type="text" title="Nachname" class="form-control" name="last_name" value="<%= meta.last_name %>">
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-6  form-group">
+						<label>Firma</label>
+						<input type="text" class="form-control" value="<%= meta.company %>" id="" name="company" placeholder="">
+					</div>
+					<div class="col-md-12 form-group">
+						<label>Adresse <span class="redStar">*</span> <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+						<input type="text" class="form-control" id="shipping_address" name="address_1" placeholder="Strasse Nr., PLZ und Ort" value="<%= meta.address_1 %>" />
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Adresszusatz </label>
+						<span><input title="Adresse 2" data-valcode="" type="text" name="address_2" value="<%= meta.address_2 %>" class="form-control"></span>
+					</div>
+					<div class="col-md-6 form-group">
+						<label>PLZ <span class="redStar">*</span></label>
+						<input type="text" class="form-control greyInput" id="shipping_postcode" name="postcode" placeholder="" value="<%= meta.postcode %>" />
+					</div>
+					<div class="col-md-6 col-sm-6 form-group">
+						<label>Ort <span class="redStar">*</span></label>
+						<input type="text" class="form-control greyInput" id="shipping_city" name="city" placeholder="" value="<%= meta.city %>" />
+					</div>
+					<div class="col-lg-6 col-sm-6 form-group">
+						<label>Kanton <span class="redStar">*</span></label>
+						<select title="kanton" type="text" name="stateshort" class="form-control kanton-shipping greyInput">
+							<% if(utls.isNotEmpty(chstates)) { %>
+								<% Object.keys(chstates).forEach((key, index) => { %>
+									<option value="<%= key %>" <%= key == meta.state ? 'selected' : '' %> ><%= chstates[key] %></option>
+								<% }); %>
+							<% } %>
+						</select>
+						<!-- <input title="Kanton" type="text" name="state" value="<%= utls.getState(meta.state) %>" id="shipping_state" placeholder="" class="form-control" readonly="">
+						<input title="Kanton" type="hidden" name="stateshort" value="<%= meta.state %>" id="shipping_stateshort" placeholder="" class="form-control">-->
+					</div>
+					<div class="col-md-6 col-sm-6 form-group">
+						<label>Land <span class="redStar">*</span></label>
+						<% if(utls.isNotEmpty(countries)) { %>
+							<select title="" type="text" name="countryshort" class="form-control land-shipping greyInput">
+								<% Object.keys(countries).forEach((key, index) => { %>
+									<option value="<%= key %>" <%= key == meta.country ? 'selected' : '' %>><%= countries[key]  %></option>
+								<% }); %>
+							</select>
+						<% } %>
+						<!-- <input type="text" class="form-control" id="shipping_country" name="country" value="<%= utls.getCountry(meta.country) %>" placeholder="" readonly="">
+						<input type="hidden" class="form-control" id="shipping_countryshort" name="countryshort" value="<%= meta.country %>" placeholder="" readonly=""> -->
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Telefon </label>
+						<span><input title="phone" data-valcode="" type="text" name="phone" value="<%= meta.phone %>" class="form-control"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Mobile </label>
+						<span><input title="mobile" data-valcode="" type="text" name="mobile" value="<%= meta.mobile %>" class="form-control"></span>
+					</div>
+					<div class="col-md-6 form-group">
+                      <p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder</p>
+                  	</div>
+					<div class="col-md-12 form-group">
+						<p><input type="hidden" class="form-control" id="itemkey" name="itemkey" value="<%= meta.id %>" placeholder="" />
+						<input type="hidden" class="form-control" id="active" name="active" value="<%= meta.active %>" placeholder="" />
+						<button type="submit" class="btn btn-primary" name="submit"><img src="/images/loader-white.gif" class="process-loader" style="display: none;" />speichern</button>
+						<a href="javascript:;" class="btn btn-primary editAddressCancel">abbrechen</a></p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- <span class="tag">Zuhause</span> -->
+		<div class="addedShipAddress">
+			<div class="editAddress"><a class="" href="javascript:;"><img src="/images/svg/dotmenu.svg"></a>
+				<div class="my-acc dropdown-menu box-shadow">
+					<ul>
+						<li><a class="editAddressTrigger" href="javascript:;">bearbeiten</a></li>
+						<% if(parseInt(meta.active) == "0") { %>
+							<li><a href="javascript:void(0);" class="removeshipaddress" data-key="<%= meta.id %>">löschen</a></li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+			<p>
+				<% if(meta.company != "") { %>
+					<%= meta.company %>, 
+				<% } %>
+				<%= meta.first_name %> <%= meta.last_name %>, <%= meta.address_1 %>,
+				<% if(meta.address_2 != "" && meta.address_2 != null && meta.address_2 != undefined) { %>
+					<%= meta.address_2 %>, 
+				<% } %>
+				<% if(meta.city != "" && meta.city != null && meta.city != undefined) { %>
+					<%= meta.postcode %> <%= meta.city %>,
+				<% } else {%>
+					<%= meta.postcode %>,
+				<% } %>
+				<% if(meta.country != "" && meta.country != null && meta.country != undefined) { %>
+					<%= utls.getCountry(meta.country) %> 
+				<% } %>
+			</p>
+				<!--<%= meta.postcode %> <%= meta.city %>, <%= utls.getCountry(meta.country) %></p>-->
+			</p>
+		</div>
+	</div>
+<% }); %>

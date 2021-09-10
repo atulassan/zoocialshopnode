@@ -1,0 +1,223 @@
+<div class="filterFixed">
+  <div class="mFilterBtns">
+    <div class="btn-group">
+      <a class="mobileFiterOpen" href="javascript:;"><img src="/images/svg/menu-bar.svg" alt=""></a>
+      <a  class="mobileTopFilter" data-toggle="collapse" href="#show-filter" aria-expanded="true">
+        Filter <i class="fa fa-filter" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <form id="filters" name="filters" method="post">
+  <div class="collapse navbar-collapse" id="show-filter">
+    <ul class="newFilter">
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Lebensphase <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase1" class="attr_lebensphase filterToggleOpen">
+                  <input type="text" class="form-control" placeholder="suche" id="myInput1">
+                    <% if(lebensphaseData != null && lebensphaseData.length > 0) { %>
+                      <ul>
+                          <% lebensphaseData.forEach(function(lebensphase, el) { %>
+                              <li>
+                                <div class="form-check">
+                                  <input type="checkbox" name="lebensphase" data-label="<%= lebensphase.name.replace(/&amp;/g, "&") %>|<%= lebensphase.id %>" class="form-check-input filter-lebensphase" value="<%= lebensphase.id %>" id="<%= lebensphase.id %>">
+                                  <label class="form-check-label" for="<%= lebensphase.id %>"><%= lebensphase.name.replace(/&amp;/g, "&") %></label>
+                                </div>
+                              </li>
+                            
+                          <% }); %>
+                      </ul>
+                    <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Grösse <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase2" class="attr_lebensphase filterToggleOpen">
+                  <input type="text" class="form-control" placeholder="suche" id="myInput2">
+                  <% if(grosseData != null && grosseData.length > 0) { %>
+                    <ul>
+                        <% grosseData.forEach(function(grosse, el) { %>
+                            <li>
+                              <div class="form-check">
+                                <input type="checkbox" name="grosse" data-label="<%= grosse.name.replace(/&amp;/g, "&") %>|<%= grosse.id %>" class="form-check-input filter-lebensphase" value="<%= grosse.id %>" id="<%= grosse.id %>">
+                                <label class="form-check-label" for="<%= grosse.id %>"><%= grosse.name.replace(/&amp;/g, "&") %></label>
+                              </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                  <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Bedürfnisse <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase4" class="attr_lebensphase filterToggleOpen">
+                    <input type="text" class="form-control" placeholder="suche" id="myInput4">
+                    <% if(bedurfnisseData != null && bedurfnisseData.length > 0) { %>
+                      <ul>
+                          <% bedurfnisseData.forEach(function(bedurfnisse, el) { %>
+                              <li>
+                                <div class="form-check">
+                                  <input type="checkbox" name="bedurfnisse" data-label="<%= bedurfnisse.name.replace(/&amp;/g, "&") %>|<%= bedurfnisse.id %>" class="form-check-input filter-lebensphase" value="<%= bedurfnisse.id %>" id="<%= bedurfnisse.id %>">
+                                  <label class="form-check-label" for="<%= bedurfnisse.id %>"><%= bedurfnisse.name.replace(/&amp;/g, "&") %></label>
+                                </div>
+                              </li>
+                          <% }); %>
+                      </ul>
+                    <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Geschmack<i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase5" class="attr_lebensphase filterToggleOpen">
+                    <input type="text" class="form-control" placeholder="suche" id="myInput5">
+                    <% if(geschmackData != null && geschmackData.length > 0) { %>
+                      <ul>
+                          <% geschmackData.forEach(function(geschmack, el) { %>
+                            <% if(parseInt(geschmack.count) > 0) { %>
+                              <li>
+                                <div class="form-check">
+                                  <input type="checkbox" name="geschmack" data-label="<%= geschmack.name.replace(/&amp;/g, "&") %>|<%= geschmack.id %>" class="form-check-input filter-lebensphase" value="<%= geschmack.id %>" id="<%= geschmack.id %>">
+                                  <label class="form-check-label" for="<%= geschmack.id %>"><%= geschmack.name.replace(/&amp;/g, "&") %></label>
+                                </div>
+                              </li>
+                            <% } %>
+                          <% }); %>
+                      </ul>
+                    <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Krankheit <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase6" class="attr_lebensphase filterToggleOpen">
+                  <input type="text" class="form-control" placeholder="suche" id="myInput6">
+                  <% if(krankheitData != null && krankheitData.length > 0) { %>
+                    <ul>
+                        <% krankheitData.forEach(function(krankheit, el) { %>
+                            <li>
+                              <div class="form-check">
+                                <input type="checkbox" name="krankheit" data-label="<%= krankheit.name.replace(/&amp;/g, "&") %>|<%= krankheit.id %>" class="form-check-input filter-lebensphase" value="<%= krankheit.id %>" id="<%= krankheit.id %>">
+                                <label class="form-check-label" for="<%= krankheit.id %>"><%= krankheit.name.replace(/&amp;/g, "&") %></label>
+                              </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                  <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Spezial <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase7" class="attr_lebensphase filterToggleOpen">
+                  <input type="text" class="form-control" placeholder="suche" id="myInput7">
+                  <% if(spezialData != null && spezialData.length > 0) { %>
+                    <ul>
+                        <% spezialData.forEach(function(spezial, el) { %>
+                            <li>
+                              <div class="form-check">
+                                <input type="checkbox" name="spezial" data-label="<%= spezial.name.replace(/&amp;/g, "&") %>|<%= spezial.id %>" class="form-check-input filter-lebensphase" value="<%= spezial.id %>" id="<%= spezial.id %>">
+                                <label class="form-check-label" for="<%= spezial.id %>"><%= spezial.name.replace(/&amp;/g, "&") %></label>
+                              </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                  <% } %>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label class="amshopby_label">Marke <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase8" class="attr_lebensphase filterToggleOpen">
+                  <input type="text" class="form-control" placeholder="suche" id="myInput8">
+                    <ul>
+                      <% if(tags != null && tags.length > 0) { %>
+                        <% tags.forEach(function(tag, el) { %>
+                          <% if(parseInt(tag.count) > 0) { %>
+                            <li>
+                              <div class="form-check">
+                                <input type="checkbox" name="brand" data-label="<%= tag.name.replace(/&amp;/g, "&") %>|<%= tag.id %>" class="form-check-input filter-lebensphase" value="<%= tag.id %>" id="<%= tag.id %>">
+                                <label class="form-check-label" for="<%= tag.id %>"><%= tag.name.replace(/&amp;/g, "&") %></label>
+                              </div>
+                            </li>
+                          <% } %>
+                        <% }); %>
+                      <% } %>
+                    </ul>
+                    <button type="button" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+          <li>
+            <div class="block-content Filter-toggle-content">
+                <div class="FilterToggle">
+                    <label  class="amshopby_label">Futterart <i class="fa fa-angle-down"></i></label>
+                    <span class="special_border"></span>
+                </div>
+                <div id="attr_lebensphase9" class="attr_lebensphase filterToggleOpen">
+                    <input type="text" class="form-control" placeholder="suche" id="myInput9">
+                    <% if(futterartData != null && futterartData.length > 0) { %>
+                      <ul>
+                          <% futterartData.forEach(function(futterart, el) { %>
+                              <li>
+                                <div class="form-check">
+                                  <input type="checkbox" name="futterart" data-label="<%= futterart.name.replace(/&amp;/g, "&") %>|<%= futterart.id %>" class="form-check-input filter-lebensphase" value="<%= futterart.id %>" id="<%= futterart.id %>">
+                                  <label class="form-check-label" for="<%= futterart.id %>"><%= futterart.name.replace(/&amp;/g, "&") %></label>
+                                </div>
+                              </li>
+                          <% }); %>
+                      </ul>
+                    <% } %>
+                    <button type="button" id="trigfilterbtn" class="schliessen">Schliessen</button>
+                </div>
+            </div>
+          </li>
+    </ul>
+  </div>
+  </form>
+
+  <% if(urlFilters.length > 0) { %>
+  <div class="filter-applied">
+    <% urlFilters.forEach(function(data, el) { %>
+      <span class="c-f-item"><%= data.name %><a href="javascript:void(0)" data-id="<%= data.id %>" class="o-i-close-applied-filter"><i class="fa fa-times"></i></a></span>
+    <% }); %>
+    <a id="clearfilters" href="javascript:void(0)" class="inner-gradient-bg f-clear">löschen</a>
+  </div>
+  <% } else { %>
+    <div class="filter-applied"></div>
+  <% } %>
+</div>

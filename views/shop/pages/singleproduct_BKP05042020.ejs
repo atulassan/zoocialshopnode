@@ -1,0 +1,162 @@
+<% include ../templates/shop-header %>
+<%
+var lk = utls.isNotEmpty(product_rating) ? parseInt(product_rating.value.trim()): 0,
+	dlk = utls.isNotEmpty(product_rating_count) ? parseInt(product_rating_count.value.trim()): 0,
+	dcm = 5 - lk;
+%>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1><%= product.name %></h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page"><%= product.name %></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12 text-right">
+				<a class="btn btn-primary back-btn" href="javascript:;">Back</a>
+			</div>
+			<div class="col-lg-12 col-md-12">
+				<div class="main-post-box white-bg br-6 p-15 mb-3">
+					<div class="row">
+						<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+							<div id="product-detail" class="eagle-gallery">
+								<div class="owl-carousel">
+									<% if(utls.isEmpty(product.images)) { %>
+									<% product.images.forEach(function(image, el) { %>
+									<img src="<%= image.src %>" data-medium-img="<%= image.src %>"
+										data-big-img="<%= image.src %>" alt="">
+									<% }); %>
+									<% } %>
+								</div>
+							</div>
+						</div>
+						<% if(product.type == 'simple') { %>
+						<% include ../modules/simple_product %>
+						<% } %>
+						<% if(product.type == 'variable') { %>
+						<% include ../modules/variable_product %>
+						<% } %>
+					</div>
+					<div class="">
+						<div class="short-desc">
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="Artikelbeschreibung-tab" data-toggle="tab"
+										href="#Artikelbeschreibung" role="tab" aria-controls="Artikelbeschreibung"
+										aria-selected="true">Artikelbeschreibung</a>
+								</li>
+								<% if(utls.isNotEmpty(inhaltstsstoffe) || inhaltstsstoffe.length > 0) { %>
+								<li class="nav-item">
+									<a class="nav-link" id="Inhaltstsstoffe-tab" data-toggle="tab"
+										href="#Inhaltstsstoffe" role="tab" aria-controls="Inhaltstsstoffe"
+										aria-selected="false">Inhaltstsstoffe</a>
+								</li>
+								<% } %>
+								<% if(utls.isNotEmpty(zusammensetzung) || zusammensetzung.length > 0) { %>
+								<li class="nav-item">
+									<a class="nav-link" id="Zusammensetzung-tab" data-toggle="tab"
+										href="#Zusammensetzung" role="tab" aria-controls="Zusammensetzung"
+										aria-selected="false">Zusammensetzung</a>
+								</li>
+								<% } %>
+								<!--<% if(utls.isNotEmpty(tabs) && tabs.length > 0) { %>
+								<% tabs.forEach(customtab => { %>
+								<li class="nav-item">
+									<a class="nav-link" id="<%= customtab.id %>-tab" data-toggle="tab"
+										href="#<%= customtab.id %>" role="tab" aria-controls="<%= customtab.id %>"
+										aria-selected="false"><%= customtab.title %></a>
+								</li>
+								<% }) %>
+								<% } %>-->
+								<li class="nav-item">
+									<a class="nav-link" id="Kundenmeinungen-tab" data-toggle="tab"
+										href="#Kundenmeinungen" role="tab" aria-controls="Kundenmeinungen"
+										aria-selected="false">Kundenmeinungen</a>
+								</li>
+							</ul>
+
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="Artikelbeschreibung" role="tabpanel"
+									aria-labelledby="Artikelbeschreibung-tab">
+									<%- product.description %>
+									<a href="javascript:void(0)" class="futter btn btn-primary">Fütterungsempfehlung</a>
+									<div class="futtersection">
+										<% if((utls.isNotEmpty(futter_content) || futter_content.length > 0) && futter_content.value.length > 5) { %>
+										<div class="futtercontent">
+											<%- futter_content.value %>
+										</div>
+										<% } %>
+										<% if((utls.isNotEmpty(futter_image_url) || futter_image_url.length > 0) && futter_image_url.value.length > 5) { %>
+										<div class="futterimage">
+											<img class="img-fluid" src="https://ipet.ch/<%= futter_image_url.value %>"
+												alt="futter" />
+										</div>
+										<% } %>
+									</div>
+								</div>
+								<% if(utls.isNotEmpty(inhaltstsstoffe) || inhaltstsstoffe.length > 0) { %>
+								<div class="tab-pane fade" id="Inhaltstsstoffe" role="tabpanel"
+									aria-labelledby="Inhaltstsstoffe-tab">
+									<%- inhaltstsstoffe.value %>
+								</div>
+								<% } %>
+								<% if(utls.isNotEmpty(zusammensetzung) || zusammensetzung.length > 0) { %>
+								<div class="tab-pane fade" id="Zusammensetzung" role="tabpanel"
+									aria-labelledby="Zusammensetzung-tab">
+									<%- zusammensetzung.value %>
+								</div>
+								<% } %>
+								<!--<% if(utls.isNotEmpty(tabs) && tabs.length > 0) { %>
+								<% tabs.forEach(customtab => { %>
+								<div class="tab-pane fade" id="<%= customtab.id %>" role="tabpanel"
+									aria-labelledby="<%= customtab.id %>-tab">
+									<%- customtab.content %>
+								</div>
+								<% }) %>
+								<% } %>-->
+								<div class="tab-pane fade" id="Kundenmeinungen" role="tabpanel"
+									aria-labelledby="Kundenmeinungen-tab">
+									<% if(utls.isEmpty(reviews)) { %>
+									<ul class="customer-reviews">
+										<% reviews.forEach(function(review, el) { %>
+										<li>
+											<h5><%= review.reviewer %></h5>
+											<h6>
+												<span class="product_comments__date"><%= review.date_created %></span>
+												<span class="customerReviewRate shoprating">
+													<div id="productRating" class="rating positive"
+														value="<%= review.rating %>">
+														<%= review.rating %></div>
+													<div id="JRating" class="rating negative" style="width: 100%">
+													</div>
+												</span>
+											</h6>
+											<%- review.review %>
+										</li>
+										<% }); %>
+									</ul>
+									<% } %>
+									<% include ../modules/reviewform %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+<% include ../templates/shop-footer %>

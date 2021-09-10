@@ -1,0 +1,185 @@
+<% include ../templates/shop-header %>
+<%
+	var chstates = utls.swissStates();
+	var countries =  utls.shippingCountries();
+%>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit !important;
+		top: inherit;
+		right: inherit;
+		left: inherit;
+	}
+
+	#staic-page-banner {
+		margin-top: 0px !important;
+	}
+</style>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1>Benutzerkonto anlegen</h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Registrieren</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="inner-page-content" class="section-md inner-grey-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-6" id="opc-billing">
+				<form id="registerform" class="register-form" name="register-form" action="#" method="post">
+					<div class="row">
+						<div class="col-lg-12">
+							<h6 class="txt-upper mb-3">Persönliche Informationen</h6>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Vorname <span class="redStar">*</span></label>
+							<span><input title="Vorname" data-valcode="!b" type="text" name="first_name" value="" class="form-control"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Nachname <span class="redStar">*</span></label>
+							<span><input title="Nachname" data-valcode="!b" type="text" name="last_name" value="" class="form-control"></span>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label>Firma </label>
+							<span><input title="Firma" type="text" data-valcode="" name="company" value="" class="form-control"></span>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label>Adresse <span class="redStar">*</span> <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+							<span><input title="Adresse 1" data-valcode="!b" type="text" name="address_1" id="billing_address" value="" class="form-control fetchaddress" placeholder="Strasse Nr., PLZ und Ort"></span>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label>Adresszusatz </label>
+							<span><input title="Adresse 2" data-valcode="" type="text" name="address_2" value=""  class="form-control"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>PLZ <span class="redStar">*</span></label>
+							<span><input title="PLZ" id="billing_postcode" data-valcode="!b" type="text" name="postcode" value=""
+									class="form-control greyInput"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Ort <span class="redStar">*</span></label>
+							<span><input title="Ort" id="billing_city" data-valcode="!b" type="text" name="city" value="" class="form-control greyInput"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Kanton <span class="redStar">*</span></label>
+							<span>
+								<select title="kanton" type="text" name="billing_stateshort" class="form-control kanton-billing greyInput">
+									<% if(utls.isNotEmpty(chstates)) { %>
+										<% Object.keys(chstates).forEach((key, index) => { %>
+										<option value="<%= key %>"><%= chstates[key] %></option>
+										<% }); %>
+									<% } %>
+								</select>
+								<!-- <input title="Ort" id="billing_state" data-valcode="!b" type="text" name="state" value="" class="form-control greyInput"> 
+									<input title="Ort" id="billing_stateshort" type="hidden" name="billing_stateshort" value="JU" class="form-control greyInput">-->
+							</span>
+						</div>
+
+						<div class="col-lg-6 form-group">
+							<label>Land <span class="redStar">*</span></label>
+							<span>
+								<select title="" type="text" name="billing_countryshort" class="form-control land-billing greyInput">
+									<% if(utls.isNotEmpty(countries)) { %>
+										<% Object.keys(countries).forEach((key, index) => { %>
+										<option value="<%= key %>"><%= countries[key] %></option>
+										<% }); %>
+									<% } %>
+								</select>
+								<!-- <input title="land" id="billing_country" type="text" data-valcode="!b" name="country" value="" class="form-control greyInput"> 
+								<input title="land" id="billing_countryshort" type="hidden" name="billing_countryshort" value="CH" class="form-control greyInput">-->
+							</span>
+
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Telefon </label>
+							<span><input title="Telefon" data-valcode="" type="text" name="phone" value="" class="form-control"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Mobile </label>
+							<span><input title="Telefon" data-valcode="" type="text" name="mobile" value="" class="form-control"></span>
+						</div>
+
+						<div class="col-lg-12 form-group">
+							<label>E-Mail <span class="redStar">*</span></label>
+							<span><input title="E-Mail-Adresse" data-valcode="e" type="email" name="email" value="" class="form-control"></span>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Passwort <span class="redStar">*</span></label>
+							<div class="form-icon-base">
+								<span><input title="Password" id="password" data-valcode="spl_min" valcode-min="6" type="password" name="password" value="" class="form-control "></span>
+								<span class="form-icon"><img id="pas_visible5" src="/images/svg/eye2.svg" id=""></span>
+							</div>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>Passwort bestätigen <span class="redStar">*</span></label>
+							<div class="form-icon-base">
+								<span><input id="pass6" title="Passwort bestätigen" valcode-pss="password" data-valcode="!b_pas"  type="password" name="confirm_password" value="" class="form-control"></span>
+								<span class="form-icon"><img id="pas_visible6" src="/images/svg/eye2.svg" id=""></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12 form-group pt-3">
+							<div class="" style="padding-left:0px; margin-left: 0px;">
+
+								<!-- <input type="hidden" name="shipaddress" value="1" />
+								<input id="mochte" class="" title="" type="checkbox" name="terms" value="1" style="margin-right: 5px; position: relative; top: 1px;" />
+								<label class="form-check-label" for="möchte">Indem du auf "Konto erstellen" klickst, stimmst du unseren <a href="https://zoocialshop.ch/agb" target="_blank" style="color: #fcaf26;">allgemeinen Geschäftsbedingungen</a> zu. <span class="redStar">*</span></label> -->
+								<div class="form-check" style="padding-left:0px; margin-left: 0px;">
+									<input type="hidden" name="shipaddress" value="1" />
+							   		<label class="form-check-label" for="möchte">
+							   			<input id="mochte" class="" title="" type="checkbox" name="terms" value="1" style="margin-right: 5px; position: relative; top: 1px;" /> Indem du auf "Konto erstellen" klickst, stimmst du unseren <a href="https://zoocialshop.ch/agb" target="_blank" style="color: #fcaf26;">allgemeinen Geschäftsbedingungen</a> zu. <span class="redStar">*</span>
+							   		</label>
+							    </div>
+							</div>
+						</div>
+						<div class="col-md-6 form-group">
+                            <p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder</p>
+                        </div>
+						<div class="col-lg-12 form-group">
+							<input type="submit" value="Konto erstellen" class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+				<div class="chstates" style="display: none;">
+					<% if(utls.isNotEmpty(chstates)) { %>
+						<% Object.keys(chstates).forEach((key, index) => { %>
+						<option value="<%= key %>"><%= chstates[key] %></option>
+						<% }); %>
+					<% } %>			
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 ">
+				<h6 class="txt-upper mb-3">VORTEILE EINER REGISTRIERUNG</h6>
+				<ul class="list">
+					<li>Schneller Bestellvorgang</li>
+					<li>Sie haben einfachen Zugriff auf Ihre letzten Bestellungen</li>
+					<li>Sie können Ihre letzten Bestellungen mit einem Klick wiederholen</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="registerSuccessPopup" style="display: none;">
+	<div class="email-verification">
+		<div class="v-icon">
+			<img src="images/svg/checked-white.svg">
+		</div> 
+		<h4 class="pt-3 pb-3">Dein Konto wurde erfolgreich erstellt!</h4>
+		<a href="/login" class="btn btn-primary registerBtnMt">Jetzt anmelden</a>			 
+	</div>
+</div>
+<% include ../templates/shop-footer %>

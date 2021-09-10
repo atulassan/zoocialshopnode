@@ -1,0 +1,67 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit !important;
+		top: inherit;
+		right: inherit;
+		left: inherit;
+	}
+	#staic-page-banner {
+		margin-top: 0px !important;
+	}
+</style>
+
+<%= console.log(activeUser) %>
+<%= console.log(customer) %>
+
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1>Anmelden</h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Passwort vergessen</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="inner-page-content" class="section-md inner-grey-bg min50vh">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="email-verification" style="display: none;">
+					<h4>E-Mail zum Zurücksetzen des Passwortes gesendet.</h4>
+					<div class="v-icon">
+						<img src="images/svg/checked-white.svg">
+					</div>              
+					<p>Eine E-Mail wurde an deine E-Mail-Adresse <span class="fpsupdate">s*****@g*****.com</span> gesendet. Folge den Anweisung in der E-Mail, um dein Passwort zurückzusetzen. </p>
+					<p>Falls du keine E-Mail in deinem Postfach findest, prüfe bitte auch in deinen Spam- oder Junk-Ordner.</p>
+					<a href="/" class="btn btn-primary registerBtnMt">Fertig</a>			 
+				</div>
+				<div class="pass-verification">
+					<h4>Probleme bei der Anmeldung?</h4>
+					<form id="tokengenrate" name="tokengenrate" class="tokengenrate" action="#" method="post">
+						<p>Hier kannst du dein vergessenes Passwort zurücksetzen.</p>
+						<div class="form-group">
+							<label>Gib deine E-Mail Adresse ein <span class="redStar">*</span></label>
+							<span><input type="email" title="E-Mail-Adresse" data-valcode="e" name="email" value="" placeholder="E-Mail" class="form-control"></span>
+						</div>
+						<div class="form-group">
+							<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div>
+							<input type="submit" id="authsubmit" name="submit" value="Passwort zurücksetzen" class="btn btn-primary registerBtnMt">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

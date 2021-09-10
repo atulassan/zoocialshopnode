@@ -1,0 +1,101 @@
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th width="5%">Artikelnr. </th>
+				<th width="20%">Artikelname</th>
+				<th width="15%" style="text-align: center;">VAR</th>
+				<th width="15%" style="text-align: right;">Preis</th>
+				<th width="15%" style="text-align: center;">Menge</th>
+				<th width="15%" style="text-align: center;">MwSt</th>
+				<th width="15%" style="text-align: right;">Summe</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if(utls.isEmpty(cart.cartproducts)) { %>
+				<% cart.cartproducts.forEach(function(cartproduct, el) { %>
+					<tr>
+						<td><%= cartproduct.sku %></td>
+						<td>
+							<% if(cartproduct.tags.length > 0) { %>
+								<%= cartproduct.tags[0].name.replace(/&amp;/g, "&") %><br>
+							<% } %>
+							<span><%= cartproduct.name %></span><br>
+							<% if(cartproduct.hasOwnProperty('disp_weight')) { %>
+								<span><%= cartproduct.disp_weight %></span>
+							<% } else { %>
+								<span><%= cartproduct.weight %> kg</span>
+							<% } %>
+						</td>
+						<td align="center">
+							<% if(cartproduct.shipping_class == 'remi') { %>
+								Remi	
+							<% } %>
+						</td>
+						<td align="right">CHF <%= utls.priceFormat(cartproduct.price) %></td>
+						<td align="center"><%= cartproduct.quantity %></td>
+						<td align="center">
+							<!-- 2.5% -->
+							<% if(cartproduct.tax_class == 'mwst-2-5') { %>
+								B	
+							<% } %>
+							<!-- 7.7% -->
+							<% if(cartproduct.tax_class == 'mwst-7-7') { %>
+								C
+							<% } %>
+						</td>
+						<td align="right">CHF&nbsp;&nbsp;<%= utls.priceFormat(cartproduct.subtotal) %></td>
+					</tr>
+				<% }); %>
+			<% } %>
+			<tr>
+				<td colspan="6">Zwischensumme</td>
+				<td align="right">CHF&nbsp;&nbsp;<%= utls.priceFormat(cart.noDiscountTotal) %></td>
+			</tr>
+			<tr>
+				<td colspan="5">Versand & Bearbeitung (Priority - Versand)</td>
+				<td align="center">
+					<% if(cart.mwst_7_7 > 0) { %>
+						C
+					<% } else { %>
+						<% if(cart.mwst_2_5 > 0) { %>
+							B
+						<% } %>	
+					<% } %>
+				</td>
+				<td align="right">CHF&nbsp;&nbsp;<%= utls.priceFormat(cart.shipping_cost) %></td>
+			</tr>
+			<tr>
+				<td colspan="6">B MwSt. 2.5%</td>
+				<td align="right">CHF&nbsp;&nbsp;<%= utls.priceFormat(cart.mwst_2_5) %></td>
+			</tr>
+			<tr>
+				<td colspan="6">C MwSt. 7.7%</td>
+				<td align="right">CHF&nbsp;&nbsp;<%= utls.priceFormat(cart.mwst_7_7) %></td>
+			</tr>
+			<% if(Object.keys(cart.coupon).length > 0) { %>
+				<tr>
+					<td colspan="6">
+						<% if(cart.coupon.discount_type == 'percent') { %>
+							<span>Rabatt <%= parseInt(cart.coupon.amount) %>% - <%= cart.coupon.code %></span>
+						<% } else { %>
+							<span>Gutschein - <%= cart.coupon.code %></span>
+						<% } %>
+					</td>
+					<td align="right">CHF&nbsp;&nbsp;- 
+						<% if(cart.coupon.discount_type == 'percent') { %>
+							<span><%= utls.priceFormat(((cart.noDiscountTotal / 100) * parseInt(cart.coupon.amount))) %></span>
+						<% } else { %>
+							<span><%= utls.priceFormat(cart.coupon.amount) %></span>
+						<% } %>
+					</td>
+				</tr>
+			<% } %>	
+			<tr>
+				<td colspan="6" class="oneGrandTotal">Gesamtsumme</td> 
+				<td align="right" class="oneGrandTotal">CHF&nbsp;&nbsp;<%= utls.priceFormat(cart.finaltotal) %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

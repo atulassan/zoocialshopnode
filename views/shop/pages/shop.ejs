@@ -1,0 +1,137 @@
+<% include ../templates/shop-shop %>
+<% //console.log(getMessages()); %>
+<section id="" class="inner-grey-bg pb-5 topCommonPadding">
+	<div class="container">
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12 pt-4">
+				<div class="row">
+					<div class="col-lg-3 col-md-3">
+						<div class="leftFilterStickyBase">
+							<div class="leftFilterSticky">
+								<% include ../modules/categories-menu %>
+								<!--<div class="leftFilterSpace"></div>
+								<h4 class="shopProductTitles">Preis</h4>
+								<hr>
+								<ul class="filterList">
+									<li><a href="">Unter 20 CHF</a></li>
+									<li><a href="">20 - 100 CHF</a></li>
+									<li><a href="">Über 100</a></li>
+								</ul>-->
+								<div class="leftFilterSpace"></div>
+								<% include ../modules/tags %>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-9 col-md-9">
+						<div class="marketproducts">
+							<div class="shopoverlay" style="display:none;">
+								<div class="gif"></div>
+							</div>
+							<!-- product filter  Start -->
+							<% include ../modules/product-filter %>
+							<!-- Product filter  End -->
+							<!-- product listing Start -->
+							<div class="row shop_products">
+								<% if(utls.isEmpty(products)) { %>
+								<% products.forEach(function(product, el) { %>
+								<% include ../modules/product %>
+								<% }); %>
+								<% } else { %>
+								<h3>Kommt bald...</h3>
+								<% } %>
+							</div>
+							<p style="display:none;">
+								<button id="loadmore" data-page="1" type="button" class="btn btn-secondary btn-md">Load
+									More</button>
+							</p>
+							<div class="pageloader" data-visible="1" style="text-align:center; display:none;">
+								<img width="100" src="/images/animated-dog-image-0175.gif" alt="">
+							</div>
+							<!-- Product listing End -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	/*jQuery(function ($) {
+
+		//product Filter
+		jQuery(document).on('change', '.azflt, .priceflt, .noflt, .pageflt', function () {
+			jQuery('.shopoverlay').show();
+			jQuery('.spage').val(1);
+			jQuery('.pageloader').attr('data-visible', 1);
+			jQuery('#filtersubmit').trigger('click');
+		});
+
+		//Product Submit filter
+		jQuery(document).on('submit', 'form#productfilter', function (e) {
+			e.preventDefault();
+			var formdata = jQuery(this).serialize();
+			var page = parseInt(jQuery('.spage').val());
+			const url = '/productupdate';
+			jQuery.get(url, formdata, function (res) {
+				console.log(typeof (res));
+				jQuery('.pageloader').hide();
+				jQuery('.shopoverlay').hide();
+				if (res.hasOwnProperty('status') && typeof (res) == 'object') {
+					console.log('test success');
+					jQuery('.pageloader').attr('data-visible', 0);
+				} else {
+					if (page > 1) {
+						console.log('Many');
+						jQuery('.shop_products').append(res).hide().fadeIn(1000);
+					} else {
+						console.log('One');
+						jQuery('.shop_products').empty().append(res).hide().fadeIn(1000);
+					}
+				}
+				lazyload();
+			});
+			jQuery("#loadmore").removeAttr('disabled');
+			return false;
+		});
+
+		jQuery(document).on('click', '#loadmore', function (e) {
+			e.preventDefault();
+			var page = parseInt(jQuery('.spage').val());
+			page++;
+			jQuery('.spage').val(page);
+			jQuery(this).val(page).attr('disabled', 'disabled');
+			setTimeout(function () {
+				jQuery('#filtersubmit').trigger('click');
+			}, 500);
+			console.log(page);
+		});
+
+		jQuery(window).scroll(function () {
+			var winScrlTop = parseInt(jQuery(window).scrollTop());
+			var cnt = jQuery('.shop_products');
+			var isLoadEnable = parseInt(jQuery('.pageloader').attr('data-visible'));
+			var getFinalHeight = parseInt(cnt.height() / 2 + cnt.offset().top);
+			console.log("scroll Top: " + winScrlTop);
+			console.log("Shop Height: " + parseInt(cnt.height()));
+			console.log("Final Height: " + getFinalHeight);
+
+			if (parseInt(winScrlTop) >= getFinalHeight) {
+				console.log('end Reached');
+				var page = parseInt(jQuery('.spage').val());
+				page++;
+				jQuery('.spage').val(page);
+				//jQuery(this).val(page).attr('disabled', 'disabled');
+				if (page > 1 && isLoadEnable) {
+					console.log(isLoadEnable);
+					jQuery('.pageloader').show();
+					jQuery('#filtersubmit').trigger('click');
+				}
+				console.log(page);
+			}
+
+		});
+	});*/
+</script>
+
+<% include ../templates/shop-footer %>

@@ -1,0 +1,48 @@
+<%
+//console.log(utls.imageOptimize(product.images[0].src, "o"));
+//console.log(product.images[0].src);
+%>
+<div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+  <div class="card">
+    <div class="card-body">
+      <a class="fav-product addfavourite" href="javascript:void(0);" product-id="<%= product.id %>">
+        <i class="fa fa-heart"></i>
+      </a>
+      <% if (product.type== 'simple') { %>
+      <a class="newAddtoCart addtocart" href="javascript:void(0);" product-id="<%= product.id %>"
+        product-price="<%= product.price %>" product-qty="1">
+        <i class="fa fa-shopping-cart"></i>
+      </a>
+      <% } %>
+      <% if (utls.isEmpty(product.images[0].src)) { %>
+      <a class="product-link" href="/product/<%= product.slug %>/<%= product.id %>">
+        <img class="lazyload img-fluid" src="/images/8kpb.gif"
+          data-src="<%= utls.imageOptimize(product.images[0].src, "o") %>" alt=""></a>
+      <% } else { %>
+      <img class="img-fluid" src="/images/noimage.jpg" alt="">
+      <% } %>
+
+      <span class="product-new-label inner-gradient-bg">Neu</span>
+    </div>
+    <div class="card-footer shop-footer">
+      <% if (product.tags.length > 0) { %>
+      <% product.tags.forEach((tag, el) => { %>
+      <p class="listBrand"><a href="/brand/<%= tag.slug %>/<%= tag.id %>"><%= tag.name %></a></p>
+      <% }); %>
+      <% } %>
+      <h3 class="title"><a href="/product/<%= product.slug %>/<%= product.id %>"><%= product.name %></a></h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="mprice shop-price-box">
+            <span>CHF <%= utls.priceFormat(product.price) %>
+              <% if (product.type == 'simple' && parseFloat(product.regular_price) > parseFloat(product.price)) { %>
+              <i class="strike">CHF
+                <%= utls.priceFormat(product.regular_price) %></i>
+              <% } %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<% if(utls.isEmpty(listSubCategories)) { %>
+
+<span class="mobFilterClose">&times;</span>
+<div class="jquery-accordion-menu">
+  <ul>
+    <% listSubCategories.forEach(function(category, el) { %>
+    <% var parentid = active == category.id ? "active" : "parent" %>
+    <li id="<%= category.id %>" data-pid="<%= category.id %>" class="<%= parentid %>" style="display:none;">
+      <a href="/category/<%= category.slug %>/<%= category.id %>" style="display:none;"></i><%= category.name %></a>
+      <% if(utls.isEmpty(category.children) && category.children.length > 0 ) { %>
+      <ul class="submenu">
+        <% category.children.forEach(function(childlevel1, el) { %>
+          <% var childid = active == childlevel1.id ? "active" : "child" %>
+        <li class="<%= childid %>" id="<%= childlevel1.id %>" data-pid="<%= category.id %>">
+          <a href="/category/<%= childlevel1.slug %>/<%= childlevel1.id %>"><%= childlevel1.name %></a>
+          <% if(utls.isEmpty(childlevel1.children) && childlevel1.children.length > 0 ) { %>
+          <% //console.log(childlevel1.children); %>
+          <ul class="submenu">
+            <% childlevel1.children.forEach(function(childlevel2, el) { %>
+              <% if(childlevel2.name.toLowerCase() == "remi" && parseInt(childlevel2.count) > 0) { %>
+                <% var subcatid = active == childlevel2.id ? "active" : "subcat" %>
+                <li class="<%= subcatid %>" id="<%= childlevel2.id %>" data-pid="<%= category.id %>"><a href="/category/<%= childlevel2.slug %>/<%= childlevel2.id %>"><%= childlevel2.name.replace("&amp;", "&") %></a></li>
+                <% } %>
+                <% }); %>
+                
+              <% childlevel1.children.forEach(function(childlevel2, el) { %>
+                <% if(childlevel2.name.toLowerCase() != "remi" && parseInt(childlevel2.count) > 0) { %>
+                <% var subcatid = active == childlevel2.id ? "active" : "subcat" %>
+                  <li class="<%= subcatid %>" id="<%= childlevel2.id %>" data-pid="<%= category.id %>"><a href="/category/<%= childlevel2.slug %>/<%= childlevel2.id %>"><%= childlevel2.name.replace("&amp;", "&") %></a></li>
+                  <% } %>
+                  <% }); %>
+          </ul>
+          <% } %>
+        </li>
+        <% }); %>
+      </ul>
+      <% } %>
+    </li>
+    <% }); %>
+  </ul>
+</div>
+<% } %>

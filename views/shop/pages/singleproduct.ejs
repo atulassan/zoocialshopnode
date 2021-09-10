@@ -1,0 +1,278 @@
+<% include ../templates/shop-header %>
+<%
+
+var blen = 0;
+var clen = 0;
+product.breadcrumb.forEach((bread, idx)=> {
+	if(!idx) {
+		blen = bread.length;
+		clen = idx;
+	}
+	if(bread.length > blen) {
+		clen = idx;
+	}	
+});
+
+//console.log(product.reviews);
+//console.log(product);
+//var lk = product_rating.hasOwnProperty('value') ? parseInt(product_rating.value.trim()): 0,
+//dlk = product_rating_count.hasOwnProperty('value') ? parseInt(product_rating_count.value.trim()): 0,
+//dcm = 5 - lk;
+%>
+
+<% if(product.reviews.length > 0) { %>	
+	<%
+		var rts = 0;
+		product.reviews.forEach(function(review, el) {
+			rts += parseInt(review.rating);
+		});
+		var avrgRating = Math.round(rts/parseInt(product.reviews.length));
+		//console.log(avrgRating);
+	%>
+<% } %>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1><%= product.name %></h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<% product.breadcrumb[clen].forEach((crumb, idx)=> { %>
+								<% let slugn = crumb.name.replace(" / ", "-"); %>
+								<li class="breadcrumb-item"><a href="/category/<%= slugn %>/<%= crumb.id %>"><%= crumb.name.replace(/&amp;/g, "&") %></a></li>			
+							<% }); %>
+							<!-- <li class="breadcrumb-item"><a href="/category/<%= product.categories[0].slug %>/<%= product.categories[0].id %>"><%= product.categories[0].name %></a></li>-->
+							<li class="breadcrumb-item active" aria-current="page"><%= product.name.replace(/&amp;/g, "&") %></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12 text-right">
+				<a  class="btn btn-primary back-btn addfavourite"  href="javascript:void(0);" product-id="<%= product.id %>" data-toggle="tooltip" data-placement="top" data-original-title="zu Favoriten hinzufügen" ><i class="fa fa-heart"></i></a>
+				<!-- <a href="/category/<%= product.categories[0].slug %>/<%= product.categories[0].id %>"  class="btn btn-primary back-btn" href="javascript:;">zurück</a> -->
+				<a href="javascript:void(0)"  class="btn btn-primary back-btn" onClick="history.go(-1); return false;">zurück</a>
+			</div>
+			<div class="col-lg-12 col-md-12">
+				<div class="main-post-box white-bg br-6 p-15 mb-3">
+					<div class="row">
+						<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+							<div id="product-detail" class="eagle-gallery">
+								<!-- <div class="remiTag"><span>Remi</span></div> -->
+								<% if(product.shipping_class == "remi") { %>
+									<div class="ribbon ribbon-top-left"><span>Remi</span></div>
+								<% } %>
+								<div class="owl-carousel">
+									<% if(product.images.length > 0) { %>
+									<% product.images.forEach(function(image, el) { %>
+									<img src="<%= image.src %>" data-medium-img="<%= image.src %>"
+										data-big-img="<%= image.src %>" alt="">
+									<% }); %>
+									<% } %>
+								</div>
+							</div>
+						</div>
+						<% if(product.type == 'simple') { %>
+						<% include ../modules/simple_product %>
+						<% } %>
+						<% if(product.type == 'variable') { %>
+						<% include ../modules/variable_product %>
+						<% } %>
+					</div>
+					<div class="">
+						<div class="short-desc">
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="Artikelbeschreibung-tab" data-toggle="tab"
+										href="#Artikelbeschreibung" role="tab" aria-controls="Artikelbeschreibung"
+										aria-selected="true">
+										<% if(categorycode != null && categorycode.value == '50') { %>
+											Artikelbeschreibung
+										<% } else { %>
+											Artikelbeschreibung
+										<% } %>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="Inhaltstsstoffe-tab" data-toggle="tab"
+										href="#Inhaltstsstoffe" role="tab" aria-controls="Inhaltstsstoffe"
+										aria-selected="false">
+											<% if(categorycode != null && categorycode.value == '50') { %>
+												Nutzen
+											<% } else { %>
+												Inhaltsstoffe
+											<% } %>
+									</a>
+								</li>
+								<% if(categorycode != null && categorycode.value == '52') { %>
+									<li class="nav-item">
+										<a class="nav-link" id="Zusammensetzung-tab" data-toggle="tab"
+											href="#Zusammensetzung" role="tab" aria-controls="Zusammensetzung"
+											aria-selected="false">Zusammensetzung</a>
+									</li>
+								<% } %>
+								<!--<% if(utls.isNotEmpty(tabs) && tabs.length > 0) { %>
+								<% tabs.forEach(customtab => { %>
+								<li class="nav-item">
+									<a class="nav-link" id="<%= customtab.id %>-tab" data-toggle="tab"
+										href="#<%= customtab.id %>" role="tab" aria-controls="<%= customtab.id %>"
+										aria-selected="false"><%= customtab.title %></a>
+								</li>
+								<% }) %>
+								<% } %>-->
+								<li class="nav-item">
+									<a class="nav-link" id="Kundenmeinungen-tab" data-toggle="tab"
+										href="#Kundenmeinungen" role="tab" aria-controls="Kundenmeinungen"
+										aria-selected="false">Kundenmeinungen</a>
+								</li>
+							</ul>
+							
+										
+
+							<!--For Category 50 
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="Artikelbeschreibung-tab" data-toggle="tab"
+										href="#Artikelbeschreibung" role="tab" aria-controls="Artikelbeschreibung"
+										aria-selected="true">Artikelbeschreibung</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="Nutzen-tab" data-toggle="tab"
+										href="#Nutzen" role="tab" aria-controls="Nutzen"
+										aria-selected="false">Nutzen</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="Kundenmeinungen-tab" data-toggle="tab"
+										href="#Kundenmeinungen" role="tab" aria-controls="Kundenmeinungen"
+										aria-selected="false">Kundenmeinungen</a> 
+								</li>
+							</ul>
+							-->
+
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="Artikelbeschreibung" role="tabpanel"
+									aria-labelledby="Artikelbeschreibung-tab">
+									<% if(description != null && description.value != "" && Object.keys(description).length > 0) { %>
+										<% if(Object.keys(JSON.parse(description.value)).length > 0) { %>
+											<%= JSON.parse(description.value).D %>
+										<% } %>
+									<% } %>
+									<% if(futter_content != null && futter_content.value != "") { %>
+										<a href="javascript:void(0)" class="tabBtnToggle futter btn btn-primary">
+											<% if(categorycode != null && categorycode.value == '50') { %>
+												Anwendung
+											<% } else { %>
+												Fütterungsempfehlung
+											<% } %>
+											<i class="fa fa-angle-down"></i></a>
+										<div class="futtersection mt-3" style="display: none;">
+											<% if(futter_content.hasOwnProperty('value') && futter_content.value.length > 5) { %>
+											<div class="futtercontent">
+												<% if(Object.keys(JSON.parse(futter_content.value)).length > 0) { %>
+													<%= JSON.parse(futter_content.value).D %>
+												<% } %>
+											</div>
+											<% } %>
+											<% if(futter_image_url.hasOwnProperty('value') && futter_image_url.value.length > 5) { %>
+											<div class="futterimage">
+												<img class="img-fluid" src="https://ipet.ch/<%= futter_image_url.value %>"
+													alt="futter" />
+											</div>
+											<% } %>
+										</div>
+									<% } %>
+									<!-- For 50 catagory
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, id asperiores debitis vel enim fugit repudiandae quam deleniti veritatis officia excepturi illum? Vel eius minima rem doloribus pariatur dolorum, veritatis voluptatibus voluptatem commodi cum laudantium molestias excepturi deleniti, quis accusamus possimus nemo necessitatibus id libero neque corporis est incidunt. Eum perspiciatis tenetur eius officiis ullam assumenda. Facere itaque possimus laboriosam officiis facilis accusamus in quae saepe distinctio nostrum odit quis maxime a assumenda eveniet, eos nihil est ex vitae quo minima ducimus, minus suscipit. Placeat sequi porro est tenetur autem magnam ullam sint dicta nesciunt dolores ipsum, fugit commodi earum!</p>
+
+										<a href="javascript:void(0)" class="tabBtnToggle futter btn btn-primary">Anwendung <i class="fa fa-angle-down"></i></a>
+										<div class="futtersection mt-3" style="display: none;">
+											<div class="futtercontent">
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+											</div>
+										</div>
+									-->
+								</div>
+								<% if(inhaltstsstoffe != null && inhaltstsstoffe.value != "") { %>
+								<div class="tab-pane fade" id="Inhaltstsstoffe" role="tabpanel"
+									aria-labelledby="Inhaltstsstoffe-tab">
+									<% if(Object.keys(JSON.parse(inhaltstsstoffe.value)).length > 0) { %>
+										<%= JSON.parse(inhaltstsstoffe.value).D %>
+									<% } %>
+								</div>
+								<% } else { %>
+									<div class="tab-pane fade" id="Inhaltstsstoffe" role="tabpanel"
+									aria-labelledby="Inhaltstsstoffe-tab"> </div>
+								<% } %>
+								<% if(zusammensetzung != null && zusammensetzung.value != "" && categorycode != null && categorycode.value == '52') { %>
+								<div class="tab-pane fade" id="Zusammensetzung" role="tabpanel"
+									aria-labelledby="Zusammensetzung-tab">
+									<% if(Object.keys(JSON.parse(zusammensetzung.value)).length > 0) { %>
+										<%= JSON.parse(zusammensetzung.value).D %>
+									<% } %>
+								</div>
+								<% } %>
+								<!--<% if(utls.isNotEmpty(tabs) && tabs.length > 0) { %>
+								<% tabs.forEach(customtab => { %>
+								<div class="tab-pane fade" id="<%= customtab.id %>" role="tabpanel"
+									aria-labelledby="<%= customtab.id %>-tab">
+									<%- customtab.content %>
+								</div>
+								<% }) %>
+								<% } %>-->
+
+								<!-- Nutzen content comes here
+								<div class="tab-pane fade" id="Nutzen" role="tabpanel"
+									aria-labelledby="Nutzen-tab">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, id asperiores debitis vel enim fugit repudiandae quam deleniti veritatis officia excepturi illum? Vel eius minima rem doloribus pariatur dolorum, veritatis voluptatibus voluptatem commodi cum laudantium molestias excepturi deleniti, quis accusamus possimus nemo necessitatibus id libero neque corporis est incidunt. Eum perspiciatis tenetur eius officiis ullam assumenda. Facere itaque possimus laboriosam officiis facilis accusamus in quae saepe distinctio nostrum odit quis maxime a assumenda eveniet, eos nihil est ex vitae quo minima ducimus, minus suscipit. Placeat sequi porro est tenetur autem magnam ullam sint dicta nesciunt dolores ipsum, fugit commodi earum!</p>
+								</div> -->
+
+								<div class="tab-pane fade" id="Kundenmeinungen" role="tabpanel"
+									aria-labelledby="Kundenmeinungen-tab">
+									<% if(product.reviews.length > 0) { %>
+									<ul class="customer-reviews">
+										<% product.reviews.forEach(function(review, el) { %>
+										<li>
+											<h5><%= review.reviewer %></h5>
+											<h6>
+												<span class="product_comments__date"><%= utls.dateFormatm(review.date_created).date %></span>
+												<span class="customerReviewRate shoprating">
+													<div class="DisplyRating">
+														<% for(var i=1; i<=5; i++) { %>
+															<i class="fa fa-star<%= review.rating >= i ? '' : '-o' %>"></i>
+														<% } %>
+													  <!-- <i class="fa fa-star-o"></i>
+													  <i class="fa fa-star-o"></i>
+													  <i class="fa fa-star-o"></i>
+													  <i class="fa fa-star-o"></i> -->
+													</div>
+													<!-- <div id="productRating" class="rating positive"
+														value="<%= review.rating %>"><%= review.rating %>
+													</div>
+													<div id="JRating" class="rating negative" style="width: 100%"></div> -->
+
+												</span>
+											</h6>
+											<%- review.review %>
+										</li>
+										<% }); %>
+									</ul>
+									<% } %>
+									<% include ../modules/reviewform %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+<% include ../templates/shop-footer %>

@@ -1,0 +1,96 @@
+<div class="form-header">
+	<h4>Warenkorb</h4>
+	<div id="cartPopupClose" class="slideFormClose">&times;</div>
+</div>
+<% //console.log(typeof(cartproducts)) %> 
+<% //console.log(cartproducts.length) %> 
+<% if(utls.isNotEmpty(cartproducts) && cartproducts.length > 0) { %>
+<div class="form-body form-scrolling">
+	<!-- <div class="noProductCart">
+		 <img class="img-fluid" src="images/svg/shopping-cart.svg" alt="">
+		 <h3>There are no products in your cart! </h3>
+	   </div> -->
+	<div class="cartHomeBase">
+		<div class="cartToplist">
+			<ul>
+				<% cartproducts.forEach(function(cartproduct, el) { %>
+				<li class="mb-4 remove_cartitem">
+					<div class="form-row">
+						<div class="col-md-3 col-sm-3 col-3">
+
+							<div class="slideCartimage">
+								<% if (utls.isEmpty(cartproduct.images[0].src)) { %>
+								<a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+									<img src="<%= utls.imageOptimize(cartproduct.images[0].src, "t") %>">
+								</a>
+								<% } %>
+								<!--<div product-type="<%= cartproduct.type %>"
+									product-variation_id="<%= cartproduct.hasOwnProperty('variation_id') ? parseInt(cartproduct.variation_id) : 0  %>"
+									product-id="<%= cartproduct.id %>" class="remove remove_cart">
+									&times;
+								</div>-->
+							</div>
+
+						</div>
+						<div class="col-md-9 col-sm-9 col-9">
+							<div class="pl-2">
+								<h4><a href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+										<%= cartproduct.name %>
+										<% if (cartproduct.type == "variable") { %>
+										<%= cartproduct.attributes[0].option %>
+										<% } %>
+									</a></h4>
+								<div class="d-flex flex-row flex-items-middle">
+									<div class="cartProductCount">
+										<span class="text-center"><%= cartproduct.quantity %></span>
+									</div>
+									<div class="p-2">
+										<div class="cartMultiple">&times;</div>
+									</div>
+									<div class="p-2">
+										<div class="cart-item-price" value="<%= cartproduct.subtotal %>">
+											<span class="amount">
+												<span>CHF <%= utls.priceFormat(cartproduct.price) %></span>
+												<br />
+												<% if(utls.priceFormat(cartproduct.price) !== utls.priceFormat(cartproduct.regular_price)) { %>
+												<span style="text-decoration:line-through;color: #d25050;">
+													CHF <%= utls.priceFormat(cartproduct.regular_price) %>
+												</span>
+												<% } %>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<% }); %>
+
+			</ul>
+		</div>
+		<hr>
+		<div class="cart-total">
+			<div class="row flex-items-middle no-gutters">
+				<div class="col-md-6 col-sm-6 col-6 flex-items-center">
+					<h3 class="cart-subtotal-title">Zwischensumme</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-6 flex-items-center">
+					<h2 class="cart-subtotal">
+						<span>CHF </span>
+						<%= utls.priceFormat(carttotal) %>
+					</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="mt-4 cart-form-buttons">
+			<a href="/cart" class="view-cart-button btn btn-block btn-primary text-uppercase">Warenkorb ansehen</a>
+			<a href="/checkout" class="view-cart-button btn btn-block btn-primary text-uppercase">zur Kasse</a>
+		</div>
+	</div>
+
+</div>
+<% } else { %>
+<h3>Keine Favoriten hinzugefügt</h3>
+<% } %>

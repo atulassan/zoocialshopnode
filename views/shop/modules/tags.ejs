@@ -1,0 +1,11 @@
+<% //console.log(categories); %>
+
+<% if(utls.isEmpty(tags)) { %>
+<h4 class="shopProductTitles">Marken</h4>
+<hr>
+<ul class="filterList">
+  <% tags.forEach(function(tag, el) { %>
+  <li><a href="/brand/<%= tag.slug %>/<%= tag.id %>"><%= tag.name %></a></li>
+  <% }); %>
+</ul>
+<% } %>

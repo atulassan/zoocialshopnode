@@ -1,0 +1,74 @@
+
+							<% if(utls.isEmpty(products)) { %>
+								<div class="table-responsive">
+									<table class="table mb-0" cellspacing="0">
+										<thead>
+											<tr>
+												<th width="10%" class="product-thumbnail">Artikelbild</th>
+												<th width="15%" class="product-instock">Artikelnr.</th>
+												<th width="35%" class="product-name">Artikelname</th>
+												<th width="15%" class="product-price">Preis</th>
+												<th width="10%" class="product-price">Menge</th>
+												<th width="10%" align="center" ></th>
+												<th width="15%" align="center"></th>
+											</tr>
+										</thead>
+										<tbody>
+
+											
+											<% products.forEach(function(product, el) { %>
+											<tr class="wishlist-item">
+												<td class=" product-image">
+													<%
+														var imgText = product.images[0].src.replace("/scaled/g", "");
+													%>
+													<a class="product-thumbnail" href="/product/<%= product.slug %>/<%= product.id %>">
+														<img src="<%= utls.imageOptimize(product.images[0].src, "t") %>">
+													</a>
+												</td>
+												<td class="product-stock">
+													<span class="chf"><%= product.sku %></span>
+												</td>
+												<td class="product-name">
+													<a href="/product/<%= product.slug %>/<%= product.id %>"><%= product.name %></a>
+												</td>
+												<td class="product-price">
+													<span class="chf">CHF</span> <%= utls.priceFormat(product.price) %>
+												</td>
+												<td class="product-quantity add-tocart-grouped">
+													<div class="cart-grouped">
+														<select id="quantity" product-qty="1" class="cartqty quantity shopqty" product-id="<%= product.id %>" variation-id="" per-kilo="" kilo-gram="" name="quantity">	
+															<% for(var i=1; i<=40; i++) { %>
+																<option value="<%= i %>">
+																	<%= i %>
+																</option>
+															<% } %>
+															<option value="0">frei wählbar</option>
+														</select>
+													</div>
+												</td>
+												<td align="center">
+												<a product-qty="1" data-toggle="modal" data-target="#addtocart-add-confirm"
+														variation-id="" product-id="<%= product.id %>"
+														class="btn inner-gradient-bg addtocart favitem" href="javascript:;"><i
+														class="fa fa-shopping-cart "></i></a>
+												</td>
+												<td class="product-remove">
+													<a href="javascript:;" class="remove_wish"
+													product-id="<%= product.id %>" title="Remove this item">&times;</a>
+												</td>
+											</tr>
+											<% }); %>
+											
+
+
+										</tbody>
+									</table>
+								</div>
+							<% } else { %>
+							<div class="noProductListing">
+								<img src="/images/noProductList.jpg" alt="">
+								<h3>kein Eintrag vorhanden</h3>
+							</div>
+							<% } %>
+							

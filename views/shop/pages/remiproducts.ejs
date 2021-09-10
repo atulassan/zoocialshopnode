@@ -1,0 +1,84 @@
+<% include ../templates/shop-header %>
+<div class="clear-all"></div>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		
+		<!-- Breadcrumbs  start -->
+			<div class="inner-page-banner-content">
+				<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<% if(breadcrumb != null) { %>
+							<li class="breadcrumb-item"><%= breadcrumb %></li>
+						<% } %>
+						<li class="breadcrumb-item">REMI</li>
+					</ol>
+					</nav>
+				</div>
+				</div>
+			</div>
+		  <!-- Breadcrumbs End -->
+	</div>
+</section>
+
+<section id="" class="inner-grey-bg pb-5 pt-0">
+	<div class="container">
+		<% include ../modules/top-filter %>
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+					<div class="col-lg-3 col-md-3">
+						<div class="leftFilterStickyBase">
+							<div class="leftFilterSticky">
+								<% if(active == 5001) { %>
+									<% include ../modules/categories-menu %>
+								<% } else { %>
+									<% include ../modules/categories-menun %>
+								<% } %>
+								<div class="leftFilterSpace"></div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-lg-9 col-md-9">
+						<div class="marketproducts">
+							<!-- product filter  Start -->
+							<% include ../modules/remi-filter %>
+							<!-- Product filter  End -->
+							
+							<!-- product listing Start -->
+							<div class="shopoverlay" style="display:none;">
+								<div class="gif"></div>
+							</div>
+							<div class="row shop_products">
+								<% if(utls.isEmpty(products)) { %>
+								<% products.forEach(function(product, el) { %>
+									<% include ../modules/product %>
+								<% }); %>
+								<% } else { %>
+								<div class="col-lg-12">
+									<div class="noProductListing">
+										<img src="/images/noProductList.jpg" alt="">
+										<h3>kein Produkt gefunden....</h3>
+									</div>
+								</div>
+								<% } %>
+							</div>
+							<p style="display:none;">
+								<button id="loadmore" data-page="1" type="button" class="btn btn-secondary btn-md">Load
+								More</button>
+							</p>
+							<div class="pageloader" data-visible="1" data-load="1" style="text-align:center; display:none;">
+								<img width="100" src="/images/animated-dog-image-0175.gif" alt="">
+							</div>
+							<!-- Product listing End -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

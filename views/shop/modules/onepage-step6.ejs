@@ -1,0 +1,63 @@
+<div class="card" id="opc-review">
+	<div class="card-header">
+	   <h5 class="mb-0">
+		  <a class="btn-link">
+		  <span>6</span>Bestellübersicht
+		  </a>
+	   </h5>
+	</div>
+   <div class="card-body" style="display: none;">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="updateInfo">
+				<% include onepage-cart %>
+			</div>
+		</div>
+		<!-- <div class="col-md-6">
+			<div class="gutscheincode"> Gutscheincode <a href="javascript:;"><i class="fa fa-plus"></i></a></div>
+			<div class="GutscheincodeOpen" style="display: none;">
+				<div class="form-group">
+					<form id="coupon" name="coupon" action="coupon" method="post">
+						<p>Bitte geben Sie einen gultigen ein: </p>
+						<p><input type="text" title="" name="" value="" class="form-control"></p>
+						<p><a href="javascript:;" class="btn btn-secondary but">Anweden</a></p>
+					</form>
+				</div>
+			</div>
+		</div> -->
+	 </div>	
+	 <div class="row">
+	 	<div class="col-md-12">
+			<form id="coupon" action="/coupon">
+				<div class="cart-coupon">
+					<div class="input-group">
+					<% if(Object.keys(coupon).length > 0) { %>
+						<input name="coupon" type="text" class="form-control coupontxt" style="font-size:18px" value="<%= coupon.code %>" placeholder="Gutscheincode" disabled>
+					<% } else { %>
+						<input name="coupon" type="text" class="form-control coupontxt" placeholder="Gutscheincode">
+					<% } %>
+					<div class="input-group-append">
+						<% if(Object.keys(coupon).length > 0) { %>
+							<button class="input-group-text" type="button" id="removeCoupon">Gutschein löschen</button>
+						<% } else { %>	
+							<button class="input-group-text" type="submit" id="couponcode">Gutschein anwenden</button>
+						<% } %>
+					</div>
+					</div>
+				</div>
+				<input type="hidden" class="couponredirect" name="redirect" value="checkout" />
+			</form>
+			<div class="form-group">
+				<div class="checkbox" style="padding-left:0px; margin-left: 4px;">
+					<input id="mochte"  class="" type="checkbox" name="terms" value="1">
+					<label for="mochte">Mit deiner Bestellung akzeptierst du unsere <a href="https://zoocialshop.ch/agb" target="_blank" style="color: #fcaf26;">allgemeinen Geschäftsbedingungen</a></label>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 mt-3">
+			<a href="javascript:void(0);" id="backstep5" class="btn btn-primary pull-left btn-md">zurück</a>
+			<a href="javascript:void(0);" id="onepageorder" class="btn btn-primary pull-right btn-md"><img src="/images/loader-white.gif" class="process-loader" style="display: none;">jetzt kaufen</a>
+		</div>
+	 </div>
+   </div>
+ </div>

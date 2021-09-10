@@ -1,0 +1,132 @@
+<% if(utls.isEmpty(cartproducts)) { %>
+<div class="col-lg-12 col-md-12">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="main-post-box white-bg br-6 p-15 mb-3 cart-table">
+				<h2>Warenkorb</h2>
+				<div class="table-responsive">
+					<form id="cartform" action="/cart">
+						<table class="table mb-0" cellspacing="0">
+							<thead>
+								<tr>
+									<th width="10%" class="product-thumbnail">Mein Warenkorb</th>
+									<th width="20%" class="product-price">Surname</th>
+									<th width="20%" class="product-price">Gewicht</th>
+									<th width="20%" class="product-price">Preis</th>
+									<th align="center" width="15%" class="product-quantity">Menge</th>
+									<th align="right" width="20%" class="product-subtotal">Gesamt</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<% cartproducts.forEach(function(cartproduct, el) { %>
+								<tr class="remove_cartitem">
+									<td class=" product-image">
+										<a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+											<!-- <img src="<%= utls.imageOptimize(cartproduct.images[0].src, "t") %>"> -->
+											<% var fname = path.parse(cartproduct.images[0].src); %>
+											<img src="<%= fname.dir+"/"+fname.name+"-100x100"+fname.ext %>">
+										</a>
+									</td>
+									<td class="product-name">
+										<a href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+											<%= cartproduct.name %> <%= cartproduct.type == "variable" ? cartproduct.attributes[0].option : "" %>
+										</a>
+									</td>
+									<td class=" product-kilo">
+										<% if (cartproduct.type == "variable") { %>
+											<%= cartproduct.attributes[0].option %> 
+										<% } else { %>
+											<%= cartproduct.weight ? cartproduct.weight+ "kg" : null  %>
+										<% } %>
+									</td>
+									<td class="product-price">
+										<span>CHF <%= utls.priceFormat(cartproduct.price) %></span>
+										<br />
+										<% if(utls.priceFormat(cartproduct.price) !== utls.priceFormat(cartproduct.regular_price)) { %>
+											<span style="text-decoration:line-through;color: #d25050;">
+												CHF <%= utls.priceFormat(cartproduct.regular_price) %>
+											</span>
+										<% } %>
+									</td>
+									<td class="product-quantity add-tocart-grouped">
+										<select product-qty="<%= cartproduct.quantity %>" class="cartqty"
+											product-id="<%= cartproduct.id %>" var-id="" per-kilo="" kilo-gram=""
+											class="quantity" name="quantity">
+											<% for(var i=1; i<=40; i++) { %>
+											<option value="<%= i %>" 
+											<%= i == cartproduct.quantity ? 'selected' : '' %>>
+												<%= i %>
+											</option>
+											<% } %>
+										</select>
+									</td>
+									<td align="left" class="product-subtotal">
+										<span class="amount">
+											<span>CHF <%= utls.priceFormat(cartproduct.subtotal) %></span>
+										</span>
+									</td>
+									<td class="product-remove">
+										<a href="javascript:;" class="remove_cart" product-type="<%= cartproduct.type %>" product-variation_id="<%= cartproduct.hasOwnProperty('variation_id') ? parseInt(cartproduct.variation_id) : 0  %>" product-id="<%= cartproduct.id %>"
+											title="Remove this item">&times;</a>
+									</td>
+								</tr>
+								<% }); %>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td align="right" colspan="5" class="product-grdtotal">Zwischensumme
+									</td>
+									<td align="right" colspan="2" class="product-grdtotal">
+										<span>CHF </span><%= utls.priceFormat(carttotal).toString() %>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<table class="table table-border-none">
+							<thead>
+								<tr>
+									<td colspan="2">
+										<a href="/shop" class="btn btn-md btn-primary">Weiter Einkaufen</a>
+									</td>
+									<td align="right" colspan="4">
+										<button class="updatecart btn btn-primary btn-md" type="submit"
+											value="update cart" name="updatecart" disabled>
+											<span class="btnldr"><img
+													src="/images/spinner.gif" /></span>UpdateCart</button>
+										<a href="/checkout" class="btn btn-primary btn-md">Zur Kasse</a>
+									</td>
+								</tr>
+							</thead>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 offset-lg-6 col-md-12 col-sm-12 col-12">
+			<div class="main-post-box white-bg pb-3">
+				<div class="cart-detail cart-total bg-light p-2 same-height cart-table">
+					<h2>Warenkorb</h2>
+					<p class="mb-3">
+						<span>Zwischensumme</span>
+						<span>CHF <%= utls.priceFormat(carttotal).toString() %></span>
+					</p>
+					<hr>
+					<p class="total-price">
+						<span>Gesamt</span>
+						<span>CHF <%= utls.priceFormat(carttotal).toString() %></span>
+					</p>
+					<hr>
+				</div>
+				<a href="checkout" class="btn btn-primary btn-md btn-block btn-cart">Zur Kasse</a>
+				<a href="shop" class="btn btn-primary btn-md btn-block btn-cart">
+					<i class="fa fa-angle-left"></i> Weiter einkaufen
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<% } else { %>
+<h3>Keine Favoriten hinzugefügt ...</h3>
+<% } %>

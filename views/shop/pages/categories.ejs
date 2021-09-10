@@ -1,0 +1,59 @@
+.<% include ../templates/shop-header %>
+<div class="clear-all"></div>
+<section id="" class="inner-grey-bg pb-5 topCommonPadding">
+	<div class="container">
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12 pt-4">
+				<div class="row">
+					<div class="col-lg-3 col-md-3">
+						<div class="leftFilterStickyBase">
+							<div class="leftFilterSticky">
+								<% include ../modules/categories-menu %>
+								<div class="leftFilterSpace"></div>
+								<% include ../modules/tags %>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-9 col-md-9">
+						<div class="marketproducts">
+							<!-- Category listing Starts -->
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+									<h4 class="shopProductTitles">Categories</h4>
+									<hr>
+								</div>
+								<% if(utls.isEmpty(categories)) { %>
+								<% categories.forEach(function(category, el) { %>
+								<% console.log(category) %>
+								<div class="col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+									<div class="card">
+										<a class="product-link" href="/categories/<%= category.id %>"></a>
+										<div class="card-body">
+											<% if (utls.isNotEmpty(category.image) && category.image.hasOwnProperty('src') ) { %>
+												<a href="/category/<%= category.slug %>/<%= category.id %>"><img class="lazyload img-fluid" src="/images/8kpb.gif"
+												data-src="<%= utls.imageOptimize(category.image.src, "o") %>"
+												alt="<%= category.name %>" title="<%= category.name %>"></a>
+											<% } else { %>
+												<a href="/category/<%= category.slug %>/<%= category.id %>"><img class="img-fluid" src="/images/noimage.jpg" alt=""></a>
+											<% } %>
+										</div>
+										<div class="card-footer shop-footer">
+											<h3 class="title text-center"><a href="/categories/<%= category.id %>"><%= category.name %></a></h3>
+										</div>
+									</div>
+								</div>
+
+								<% }); %>
+								<% } else { %>
+								<h3>Kommt bald...</h3>
+								<% } %>
+							</div>
+							<!-- Category listing End -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

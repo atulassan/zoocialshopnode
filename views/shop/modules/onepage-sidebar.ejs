@@ -1,0 +1,64 @@
+<div class="main-post-box white-bg br-6 mb-3 onepage_checkInfo">
+	<h4>Dein Bestellfortschritt</h4>
+	<div class="usrbilling_info">
+		<p>Rechnungsadresse</p>
+		<% if(userdata.hasOwnProperty('id')) { %>
+			<div class="cart-info-box">
+				<p>
+					<% if(userdata.billing.company != "") { %>
+						<%= userdata.billing.company %><br>
+					<% } %>
+					<%= userdata.billing.first_name %> <%= userdata.billing.last_name %><br>
+					<%= userdata.billing.address_1 %><br>
+					<% if(userdata.billing.address_2 != "") { %>
+						<%= userdata.billing.address_2 %><br>
+					<% } %>
+			   		<%= userdata.billing.postcode %> <%= userdata.billing.city %><br>
+			   		<%= utls.getCountry(userdata.billing.country) %>
+				</p>
+		   </div>
+		<% } else { %>
+			<div class="cart-info-box" style="display: none;"></div>
+		<% } %>
+	</div>
+
+	<div class="usrshipping_info">
+		<p>Lieferadresse</p>
+		<% if(userdata.hasOwnProperty('id')) { %>
+			<div class="cart-info-box">
+				<p>
+					<% if(userdata.shipping.company != "") { %>
+						<%= userdata.shipping.company %><br>
+					<% } %>
+					<%= userdata.shipping.first_name %> <%= userdata.shipping.last_name %><br>
+					<%= userdata.shipping.address_1 %><br>
+					<% if(userdata.shipping.address_2 != "") { %>
+						<%= userdata.shipping.address_2 %><br>
+					<% } %>
+			   		<%= userdata.shipping.postcode %> <%= userdata.shipping.city %><br>
+			   		<%= utls.getCountry(userdata.shipping.country) %>
+				</p>
+		   </div>
+			<% } else { %>
+				<div class="cart-info-box" style="display: none;"></div>
+			<% } %>	
+	</div>
+
+	<div class="shipping_info"> 
+		<p>Versandinformationen</p>
+		<div class="cart-info-box" style="display: none;">
+			 <p>lorem test<br>
+				 lorem test<br>
+				 lorem test<br>
+				 lorem test<br>
+			 </p>
+		</div>
+	</div>
+
+	<div class="payment_info">
+		<p>Zahlungsart</p>
+		<div class="cart-info-box" style="display: none;">
+			 <p>Kreditkarte</p>
+		</div>
+	</div>
+ </div>

@@ -1,0 +1,47 @@
+<% include ../templates/shop-header %>
+<section id="staic-page-banner" class="topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Wunschliste</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="form-row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-12 min50vh">
+						<div class="main-post-box white-bg br-6 p-15 mb-3 cart-table">
+							<h2>Wunschliste</h2>
+							<div id="wishlistupdate">
+								<% include ../modules/wishlistupdate %>
+							</div>
+							<div class="row mt-3">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-6">
+									<a href="/" class="btn btn-primary btn-cart">weiter einkaufen</a>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+									<a href="/cart" class="btn btn-primary btn-cart">zum Warenkorb</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<% include ../templates/shop-footer %>

@@ -1,0 +1,379 @@
+<% include ../templates/shop-header %>
+<%
+var chstates = utls.swissStates();
+var countries =  utls.shippingCountries();
+var months = utls.swissMonths();
+
+console.log(months);
+
+var today = new Date();
+var currentYear = today.getFullYear();
+%>
+<style type="text/css">
+.fixedHeader {position: inherit!important; top:inherit; right: inherit; left: inherit;}
+#staic-page-banner { margin-top: 0px!important; }
+</style>
+<section id="staic-page-banner" class="topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Meine Benutzerdaten</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+		          <!--left-section-->
+		          	<div class="col-lg-3 col-md-4">
+					   <div class="left">
+					      <div class="mb-3">
+					         <div class="profile-box  inner-gradient-bg br-6 p-15 ">
+					            <h3><span><img src="/images/svg/profile-user-icon.svg"></span><span class="meine_fname"><%= userdata.billing.first_name %></span> <span class="meine_lname"><%= userdata.billing.last_name %></span></h3>
+					         </div>
+					      </div>
+					      <div class="left-main-menu mb-3 p-15">
+						     <ul>
+						        <li>
+						        	<a href="/mein_ubersicht">
+						        		<span><img src="/images/svg/overview.svg"></span>Meine Übersicht
+						        	</a>
+						        </li>
+						        <li class="active">
+						        	<a href="/benutzerdaten">
+						        		<span><img src="/images/svg/personalData.svg"></span>Meine Benutzerdaten
+						        	</a>
+						        </li>
+						        <li>
+						        	<a href="/meine_bestellungen">
+						        		<span><img src="/images/svg/orderList.svg"></span>Meine Bestellungen
+						        	</a>
+								</li>
+								<li>
+						        	<a href="lieferadressen-verwalten">
+						        		<span><img src="/images/svg/bill.svg"></span>Lieferadressen verwalten
+						        	</a>
+						        </li>
+						        <!-- <li>
+						        	<a href="javascript:void(0);">
+						        		<span><img src="/images/svg/bill.svg"></span>Rechnungen
+						        	</a>
+						        </li> -->
+						     </ul>
+						  </div>
+						  <div class="inner-gradient-bg br-6 mb-3 p-15">
+						     <div class="left-support">
+						        <h4><a id="supportPopupOpen" href="javascript:void(0);">
+						        	<span><img src="/images/svg/customer-service.svg"></span>Support</a>
+						        </h4>
+						     </div>
+						  </div>
+					   </div>
+					</div>
+					<div class="col-lg-9 col-md-8">
+						<div class="onepage_checkInfo">
+							<form class="myaccountupdate" method="post" name="myaccountupdate" id="myaccountupdate">
+	                           <div class="row" id="opc-billing">
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>Vorname <span class="redStar">*</span></label>
+	                                <input type="text" data-valcode="!b" class="form-control" id="" name="first_name" value="<%= userdata.billing.first_name %>">
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>Nachname <span class="redStar">*</span></label>
+	                                <input type="text" title="Nachname" data-valcode="!b" class="form-control" id="" name="last_name" value="<%= userdata.billing.last_name %>">
+	                             </div>
+	                             <div class="col-lg-6 col-sm-12">
+	                                <label>Geburtsdatum</label>
+	                                <div class="form-group">
+	                                	<input type="text" class="form-control" id="geburtsdatum" name="geburtsdatum" placeholder="" value="<%= userdata.dob%>"/>
+	                                </div>
+	                                <!--
+	                                <div class="form-row">
+	                             		<div class="col-md-4 col-sm-4 form-group">
+	                             			<select class="form-control" autocomplete="off" name="bdate">
+												<option value="">Tag</option>
+												<% if(birth_date.length > 0 && birth_date[0] != "") { %>
+													<% for(var i=1; i<=31; i++) { %>
+														<% let iv = i < 10 ? '0'+i : i; %>
+														<!-<option value="<%= i %>" <%= birth_date[0] == i ? "selected" : ""%>><%= i %></option>->
+														<option value="<%= iv %>" <%= birth_date[0] == iv ? "selected" : ""%>><%= iv %></option>
+													<% } %>
+												<% } else { %>
+													<% for(var i=1; i<=31; i++) { %>
+														<% let iv = i < 10 ? '0'+i : i; %>
+													<!-<option value="<%= i %>"><%= i %></option>->
+														<option value="<%= iv %>"><%= iv %></option>
+													<% } %>
+												<% } %>	
+											</select>
+	                             		</div>
+	                             		<div class="col-md-4 col-sm-4 form-group">
+											<select class="form-control" autocomplete="none" name="bmonth">
+												<option value="">Monat</option>
+												<% if(birth_date.length > 0 && birth_date[1] != "") { %>
+												<% Object.keys(months).forEach((key, index) => { %>
+													<option value="<%= key %>" <%= key == birth_date[1] ? 'selected' : '' %>>
+														<%= months[key]  %>
+													</option>
+												<% }); %>
+												<% } else { %>
+													<% Object.keys(months).forEach((key, index) => { %>
+														<option value="<%= key %>">
+															<%= months[key]  %>
+														</option>
+													<% }); %>
+												<% } %>	
+											</select>
+	                             		</div>
+	                             		<div class="col-md-4 col-sm-4 form-group">
+		                             		<select class="form-control" autocomplete="none" name="byear">
+												<option value="">Jahr</option>
+												<% if(birth_date.length > 0 && birth_date[2] != "") { %>
+													<% for(var i=currentYear; i>=1930; i--) { %>
+														<option value="<%= i %>" <%= birth_date[2] == i ? "selected" : ""%>><%= i %></option>
+													<% } %>
+												<% } else { %>
+													<% for(var i=currentYear; i>=1930; i--) { %>
+														<option value="<%= i %>"><%= i %></option>
+													<% } %>
+												<% } %>
+											</select>
+										</div>
+	                             	</div>-->
+	                             </div>
+		                         <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                         			<label>Geschlecht</label>
+                         			<select class="form-control" id="gender" name="gender" title="Geschlecht" autocomplete="none">
+										<option value="" selected="selected"></option>
+										<option value="1" <%= gender != "" && gender == "1" ? "selected" : "" %>>Männlich</option>
+										<option value="2" <%= gender != "" && gender == "2" ? "selected" : "" %>>Weiblich</option>
+									</select>
+                         		 </div>
+								 <div class="col-lg-12 col-md-6 col-sm-6 form-group">
+	                                <label>Firma</label>
+	                                <input type="text" class="form-control" id="" name="company" placeholder="" value="<%= userdata.billing.company %>" />
+	                             </div>
+	                             
+	                             
+	                             <div class="col-md-12 form-group">
+	                                <label>Adresse <span class="redStar">*</span> 
+	                                	<!-- <a href="#" data-toggle="popover" data-placement="top" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a> -->
+	                                	<a  href="#" data-toggle="popover" title="" data-content="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt">
+	                                		<i class="fa fa-info-circle" aria-hidden="true"></i></a>
+	                                </label>
+	                                <input type="text" class="form-control" id="billing_address" name="address_1" placeholder="Strasse Nr., PLZ und Ort" value="<%= userdata.billing.address_1 %>">
+	                             </div>
+	                             <div class="col-lg-12 form-group">
+										<label>Adresszusatz </label>
+										<span><input title="Adresse 2" data-valcode="" type="text" name="address_2" value="<%= userdata.billing.address_2 %>" class="form-control"></span>
+								 </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>PLZ <span class="redStar">*</span></label>
+	                                <input type="text" class="form-control greyInput" id="billing_postcode" name="postcode" placeholder="" value="<%= userdata.billing.postcode %>" >
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>Ort <span class="redStar">*</span></label>
+	                                <input type="text" class="form-control greyInput" id="billing_city" name="city" placeholder="" value="<%= userdata.billing.city %>" >
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+									<label>Kanton <span class="redStar">*</span></label>
+									<select title="kanton" type="text" name="billing_stateshort" class="form-control kanton-billing greyInput">
+										<% if(utls.isNotEmpty(chstates)) { %>
+											<% Object.keys(chstates).forEach((key, index) => { %>
+												<% if(userdata.hasOwnProperty('billing')) { %>
+													<option value="<%= key %>" <%= key == userdata.billing.state ? 'selected' : '' %>><%= chstates[key]  %></option>
+												<% } else { %>
+													<option value="<%= key %>"><%= chstates[key] %></option>
+												<% } %>
+											<% }); %>
+										<% } %>
+									</select>
+									<!-- <input type="text" class="form-control greyInput" id="billing_state" name="state" value="<%= utls.getState(userdata.billing.state) %>">
+									<input type="hidden" class="form-control" id="billing_stateshort" name="stateshort" value="<%= userdata.billing.state %>" >-->
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+									<label>Land <span class="redStar">*</span></label>
+									<% if(utls.isNotEmpty(countries)) { %>
+										<select title="" type="text" name="billing_countryshort" class="form-control land-billing greyInput">
+											<% Object.keys(countries).forEach((key, index) => { %>
+												<% if(userdata.hasOwnProperty('billing')) { %>
+													<option value="<%= key %>" <%= key == userdata.billing.country ? 'selected' : '' %>><%= countries[key]  %></option>
+												<% } else { %>
+													<option value="<%= key %>"><%= countries[key] %></option>
+												<% } %>
+											<% }); %>
+										</select>
+									<% } %>
+									<!-- <input type="text" class="form-control greyInput" id="billing_country" name="country" value="<%= utls.getCountry(userdata.billing.country) %>" >
+									<input type="hidden" class="form-control" id="billing_countryshort" name="countryshort" value="<%= userdata.billing.country %>" >-->
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>Telefon</label>
+	                                <input type="text" class="form-control" id="" name="phone" value="<%= userdata.billing.phone %>" />
+	                             </div>
+	                             <div class="col-md-6 col-sm-6 form-group">
+	                                <label>Mobile</label>
+	                                <input type="text" class="form-control" value="<%= userdata.billing.mobile %>" id="" name="mobile"  placeholder="">
+	                             </div>
+	                             <div class="col-md-12 form-group">
+	                                <label for="email">E-Mail <span class="redStar">*</span></label>
+	                                <input class="form-control" type="email" name="email" value="<%= userdata.billing.email %>"  placeholder="" readonly>
+	                             </div>
+
+	                              <div class="col-md-6 form-group">
+		                              <p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder</p>
+		                          </div>
+	                              <!-- <div class="col-md-12">
+  		                              <div class="form-group">
+  		                                 <div class="radio" style="padding-left:0px;">
+  		                                    <input class="AnAdresse" type="radio" name="dieseAdresse" id="andiese" value="option1" checked="">
+  		                                    <label for="andiese">An diese Adresse verschicken</label>
+  		                                 </div>
+  		                                 <div class="radio" style="padding-left:0px;">
+  		                                    <input class="AnAdresse" type="radio" name="dieseAdresse" id="andere" value="option2">
+  		                                    <label for="andere">An andere Adresse verschicken</label>
+  		                                 </div>
+  		                              </div>
+  								   </div> -->
+								   
+		                       </div>
+
+		                       <div class="row Lieferadresse" id="opc-shipping" style="display: none;">
+			                       	<div class="col-md-12">
+			                       		<h5>Lieferadresse</h5>
+			                       	</div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Vorname <span class="redStar">*</span></label>
+	                                    <input type="text" class="form-control" name="b2_first_name" value="<%= userdata.shipping.first_name %>">
+	                                 </div>
+	                                 <div class="col-md-6 col-sm-6 form-group">
+	                                    <label>Nachname <span class="redStar">*</span></label>
+	                                    <input type="text" title="Nachname" class="form-control" name="b2_last_name" value="<%= userdata.shipping.last_name %>">
+									 </div>
+									 
+	                                <!-- <div class="col-lg-12 col-md-12 form-group">
+	                                	<label>Geburtsdatum</label>
+										<div class="form-row">
+												<div class="col-md-4 col-sm-4 form-group">
+													<select class="form-control" autocomplete="off">
+														<option value="">Tag</option>
+														<% for(var i=1; i<=31; i++) { %>
+															<option value="<%= i %>"><%= i %></option>
+														<% } %>	
+													</select>
+												</div>
+												<div class="col-md-4 col-sm-4 form-group">
+													<select class="form-control" autocomplete="none">
+														<option value="">Monat</option>
+														<option value="01">Januar</option>
+														<option value="02">Februar</option>
+														<option value="03">März</option>
+														<option value="04">April</option>
+														<option value="05">Mai</option>
+														<option value="06">Juni</option>
+														<option value="07">Juli</option>
+														<option value="08">August</option>
+														<option value="09">September</option>
+														<option value="10">Oktober</option>
+														<option value="11">November</option>
+														<option value="12">Dezember</option>
+													</select>
+												</div>
+												<div class="col-md-4 col-sm-4 form-group">
+													<select class="form-control" autocomplete="none">
+														<option value="">Jahr</option>
+														<% for(var i=1930; i<=2020; i++) { %>
+															<option value="<%= i %>"><%= i %></option>
+														<% } %>
+													</select>
+												</div>
+											</div>
+										</div> -->
+									 
+	                                 <div class="col-lg-12 col-md-12 col-sm-6  form-group">
+	                                    <label>Firma</label>
+	                                    <input type="text" class="form-control" value="<%= userdata.shipping.company %>" id="" name="b2_company" placeholder="">
+	                                 </div>
+	                                 <div class="col-md-12 form-group">
+	                                    <label>Adresse <span class="redStar">*</span> <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+	                                    <input type="text" class="form-control" id="shipping_address" name="b2_address_1" placeholder="Strasse Nr., PLZ und Ort" value="<%= userdata.shipping.address_1 %>" />
+	                                 </div>
+	                                <div class="col-lg-12 form-group">
+										<label>Adresszusatz </label>
+										<span><input title="Adresse 2" data-valcode="" type="text" name="b2_address_2" value="<%= userdata.shipping.address_2 %>" class="form-control"></span>
+									</div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>PLZ </label>
+	                                    <input type="text" class="form-control" id="shipping_postcode" name="b2_postcode" placeholder="" value="<%= userdata.shipping.postcode %>" readonly="">
+	                                 </div>
+	                                 <div class="col-md-6 col-sm-6 form-group">
+	                                    <label>Ort</label>
+	                                    <input type="text" class="form-control" id="shipping_city" name="b2_city" placeholder="" value="<%= userdata.shipping.city %>" readonly="">
+	                                 </div>
+	                                 <div class="col-lg-6 col-sm-6 form-group">
+										<label>Kanton</label>
+										<input title="Kanton" type="text" name="b2_state" value="<%= utls.getState(userdata.shipping.state) %>" id="shipping_state" placeholder="" class="form-control" readonly="">
+										<input title="Kanton" type="hidden" name="b2_stateshort" value="<%= userdata.shipping.state %>" id="shipping_stateshort" placeholder="" class="form-control">
+									</div>
+	                                 <div class="col-md-6 col-sm-6 form-group">
+	                                    <label>Land</label>
+										<input type="text" class="form-control" id="shipping_country" name="b2_country" value="<%= utls.getCountry(userdata.shipping.country) %>" placeholder="" readonly="">
+										<input type="hidden" class="form-control" id="shipping_countryshort" name="b2_countryshort" value="<%= userdata.shipping.country %>" placeholder="" readonly="">
+	                                 </div>
+	                                <!--  <div class="col-md-6 form-group">
+	                                    <label>Telefon</label>
+	                                    <input type="text" class="form-control" id="" name="b2_telephone" value="<%= userdata.shipping.phone %>" placeholder="">
+	                                 </div>
+	                                 <div class="col-md-6 form-group">
+	                                    <label>Mobile</label>								                
+	                                    <input type="text" class="form-control" value="<%= userdata.shipping.mobile %>" id="" name="b2_mobile"  placeholder="">
+	                                 </div> -->
+	                                 <div class="col-md-6 form-group">
+			                              <p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder</p>
+									 </div>
+								   </div>
+								   <div class="row">
+										<div class="col-md-12 form-group">
+											<!-- <div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div> -->
+											<p style="text-align:center">
+												<button type="submit" class="btn btn-primary" name="submit" /><img src="/images/loader-white.gif" class="process-loader" style="display: none;" />aktualisieren</button>
+											</p>
+										</div>
+								   </div>
+	                        </form>
+	                    </div>
+					</div>
+		          <!--left-end-->
+		       </div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="chstates" style="display: none;">
+	<% if(utls.isNotEmpty(chstates)) { %>
+		<% Object.keys(chstates).forEach((key, index) => { %>
+		<option value="<%= key %>"><%= chstates[key] %></option>
+		<% }); %>
+	<% } %>			
+</div>
+<div id="SupportPopup" class="slide-form">
+	<div class="form-header">
+  		<h4>Nachricht hinterlassen</h4>
+  		<div id="SupportPopupClose" class="slideFormClose">&times;</div>
+	</div>
+	<div class="form-body supportPopupContent">
+	  <p>Bitte hinterlasse uns deine Nachricht und wir werden dich so rasch wie möglich kontaktieren.</p>
+	  <% include ../modules/supportform %>
+	</div>
+</div>
+<% include ../templates/shop-footer %>

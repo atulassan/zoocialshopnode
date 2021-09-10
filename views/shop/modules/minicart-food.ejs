@@ -1,0 +1,86 @@
+<ul>
+				<% cartproducts.forEach(function(cartproduct, el) { %>
+					<% console.log(cartproduct.tags) %>
+					<% if(cartproduct.tax_class ==  "mwst-2-5") { %>
+						<li class="mb-1 remove_cartitem">
+							<div class="mcart-spc">
+								<div class="col-md-12">
+									<a href="javascript:;" class="minicart_remove_cart remove_cart" product-type="<%= cartproduct.type %>" 
+										product-variation_id="<%= cartproduct.hasOwnProperty('variation_id') ? parseInt(cartproduct.variation_id) : 0  %>" product-id="<%= cartproduct.id %>"
+										title="Remove this item"></a>
+									<div class="mcart-prd">
+										<div class="form-row">
+											<div class="col-md-2 col-sm-2 col-2">
+		
+									<div class="slideCartimage">
+										<% if (cartproduct.images.length > 0) { %>
+											<a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<img src="<%= utls.imageOptimize(cartproduct.images[0].src, "t") %>">
+											</a>
+											<!-- <a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<img src="<%= cartproduct.images[0].src %>">
+											</a> -->
+										<% } %>
+										<!--<div product-type="<%= cartproduct.type %>"
+											product-variation_id="<%= cartproduct.hasOwnProperty('variation_id') ? parseInt(cartproduct.variation_id) : 0  %>"
+											product-id="<%= cartproduct.id %>" class="remove remove_cart">
+											&times;
+										</div>-->
+									</div>
+		
+								</div>
+								<div class="col-md-10 col-sm-10 col-10">
+									<div class="pl-2">
+										<% if(cartproduct.tags.length > 0) { %>
+											<div class="miniBrandText">
+												<%= cartproduct.tags[0].name.replace(/&amp;/g, "&") %>
+											</div>
+										<% } %>
+										<h4><a href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<%= cartproduct.name %>
+												<% if (cartproduct.type == "variable") { %>
+												<%= cartproduct.attributes[0].option %>
+												<% } %>
+											</a></h4>
+										<div class="d-flex flex-row flex-items-middle">
+											<div class="cartProductCount">
+												<div class="cart-grouped">
+													<% if(cartproduct.quantity <= 20) { %>
+													<select product-qty="<%= cartproduct.quantity %>" class="cartqty" product-id="<%= cartproduct.id %>" 
+														variation-id="<%= cartproduct.variation_id %>" per-kilo="" kilo-gram="" name="quantity">
+															<% for(var i=1; i<=20; i++) { %>
+																<option value="<%= i %>" <%= i == cartproduct.quantity ? 'selected' : '' %>><%= i %></option>
+															<% } %>
+															<option value="0">frei wählbar</option>
+													</select>
+													<% } else { %>
+														<input type="number" class="cartqty" product-id="<%= cartproduct.id %>" variation-id="<%= cartproduct.variation_id %>" value="<%= cartproduct.quantity %>" name="quantity">
+													<% } %>
+												</div>
+											</div>
+											<div class="p-2">
+												<div class="cartMultiple">&times;</div>
+											</div>
+											<div class="p-2">
+												<div class="cart-item-price" value="<%= cartproduct.subtotal %>">
+													<span class="amount">
+														<span>CHF <%= utls.priceFormat(cartproduct.price) %></span>
+														<% if(utls.priceFormat(cartproduct.price) !== utls.priceFormat(cartproduct.regular_price)) { %>
+														<span style="text-decoration:line-through;color: #d25050;">
+															CHF <%= utls.priceFormat(cartproduct.regular_price) %>
+														</span>
+														<% } %>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+						</li>
+					<% } %>
+				<% }); %>
+</ul>

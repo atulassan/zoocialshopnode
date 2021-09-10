@@ -1,0 +1,55 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit!important; 
+		top:inherit; 
+		right: inherit; 
+		left: inherit;
+	 }
+	 .topCommonPadding { margin-top: 0px!important; }
+</style>
+<%
+	var chstates = utls.swissStates();
+	var countries =  utls.shippingCountries();
+%>
+<section id="" class="inner-grey-bg pb-5 pt-4 topCommonPadding">
+    <div class="container">
+	   <div class="row">
+	      <div class="col-lg-9 col-md-12">
+	      	<!-- <div class="step-info">
+	      					<h2>Zur Kasse</h2>
+	      				</div> -->
+	        <div class="onepage_checkInfo">
+	            <div class="accordion" id="accordionExample">
+					<!-- Step1 -->
+					<% if(userdata.role != "customer") { %>
+						<% include ../modules/onepage-step1 %>
+					<% } %>
+					<div class="registeropen" style="display:<%= !userdata.hasOwnProperty('role') ? 'none' : 'block' %>">
+						<!-- Step2 and Step3 -->   
+						<% include ../modules/onepage-step2n3 %>
+						<!-- Step4 VERSANDINFORMATIONEN -->
+						<% include ../modules/onepage-step4 %>
+						<!-- Step5 ZAHLUNGSART -->
+						<% include ../modules/onepage-step5 %>
+						<!-- Step6 BESTELLÜBERSICHT -->
+						<% include ../modules/onepage-step6 %>
+					</div>
+	            </div>
+	        </div>
+	      </div>
+	      <div class="col-lg-3 col-md-12"> 
+				<% include ../modules/onepage-sidebar %>
+	      </div>
+	   </div>
+	</div>
+	<div class="chstates" style="display: none;">
+		<% if(utls.isNotEmpty(chstates)) { %>
+			<% Object.keys(chstates).forEach((key, index) => { %>
+			<option value="<%= key %>"><%= chstates[key] %></option>
+			<% }); %>
+		<% } %>			
+	</div>
+</section>
+<% include ../templates/shop-footer %>
+<!--CSS-->

@@ -1,0 +1,32 @@
+<div class="card" id="opc-shipping_method">
+	<div class="card-header">
+	   <h5 class="mb-0">
+		  <a class="btn-link">
+		  <span>4</span>VERSANDINFORMATIONEN
+		  </a>
+	   </h5>
+	</div>
+   <div class="card-body" style="display: none;">
+	 <form class="" name="" id="">
+		<div class="row">
+		   <div class="col-md-6 form-group">
+			  <h5>Priority <span class="priorityPopover" data-toggle="popover" title="Versandkosten" data-content="Ab einem Bestellwert von CHF 100.- liefern wir deine Bestellung versandkostenfrei an die von dir gewünschte Adresse in der Schweiz und Liechtenstein.
+				Liegt der Bestellwert unter CHF 100.- erheben wir eine Pauschale für Porto und Verpackung von CHF 7.50 pro Bestellung, unabhängig von der Anzahl der Pakete oder Grösse und Gewicht der Sendung. Beinhaltet deine Bestellung mindestens ein «Remi» Produkt wird dir das Porto geschenkt.
+				Sollte aus technischen oder logistischen Gründen ein Versand in mehreren Etappen erfolgen, berechnen wir die Versandkostenbeteiligung natürlich nur einmal."><i class="fa fa-info-circle"></i>
+				</span></h5> 
+				
+			  <!-- <p class="shipcalc_info">Versand  CHF <%= parseFloat(cart.carttotal) < 100 ? '7.50' : '0.00' %></p> -->
+			  <p class="shipcalc_info">Versand  CHF <%= utls.priceFormat(cart.shipping_cost) %></p>
+		   </div>
+		 </div>
+	 </form>
+	 <div class="row">
+		<div class="col-md-12 mt-3">
+				<!-- <button id="" class="btn btn-primary btn-md ">Zurück</button>
+					<button id="" class="btn btn-primary pull-right btn-md OpenZahlungsart">Fortsetzen</button> -->
+				<a href="javascript:void(0);" id="backstep3" class="btn btn-primary pull-left btn-md shiptrackgo">zurück</a>
+				<a href="javascript:void(0);" id="gostep5" data-shipcalc="<%= utls.priceFormat(cart.shipping_cost) %>" class="btn btn-primary pull-right btn-md">weiter</a>
+		</div>
+	 </div>
+   </div>
+ </div>

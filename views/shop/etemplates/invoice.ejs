@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{margin: 0px; padding: 0px}
+table {font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;font-size: 8px;}
+</style>
+</head>
+<body>
+<div style="background: white; width: 85%;  margin: 0 7.55%; height: 100%; position: relative;">
+	<table id="customers" width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;font-size: 8px;">
+		<table width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;font-size: 8px;">
+			<tr>
+			   <td colspan="2" align="left" width="100%" style="padding: 10px 0px; border-bottom:1px solid #000;">
+				<img src="https://zoocialshop.ch/images/logo1.jpg" alt="" width="80">
+			   </td>
+			 </tr>
+			 <tr>
+				<td align="left" width="60%" style="padding: 20px 0px">
+				 <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #000; font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;font-size: 8px;">
+				   <tr>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;" >
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Kundennr.</p>
+						<p style="padding:0px; color: #000; margin:0px"><%= parseInt(order.customer_id) > 0 ? order.customer_id : "Gast" %></p>
+					 </td>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Lieferdatum</p>
+						<p style="padding:0px; color: #000; margin: 0px;"><%= utls.dateFormat(order.date_created).date %></p>
+					 </td>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Auftragsnr.</p>
+						<p style="padding:0px; color: #000; margin: 0px;"><%= order.number %></p>
+					 </td>
+				   </tr>
+				   <tr>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Datum</p>
+						<p style="padding:0px; color: #000; margin: 0px;"><%= utls.dateFormat(order.date_created).date %></p>
+					 </td>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Bestellung vom</p>
+						<p style="padding:0px; color: #000; margin: 0px;"><%= utls.dateFormat(order.date_created).date %></p>
+					 </td>
+					 <td width="33%" valign="top" align="left" style="padding: 10px; border-bottom:1px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">Bestellart</p>
+						<p style="padding:0px; color: #000; margin: 0px;">ZOOCIAL</p>
+					 </td>
+				   </tr>
+				   <tr>
+					 <td valign="top" colspan="3" align="left" style="padding: 10px; border-bottom:0px solid #000;">
+						<p style="padding:0px; color: #000; font-weight: bold; margin:0px 0px 5px 0px">MwSt Nummer</p>
+						<p style="padding:0px; color: #000; font-weight: bold; margin: 0px">CHE-430.592.530 MWST</p>
+					 </td>
+				   </tr>
+				 </table>
+			   </td>
+			   <td align="left" width="40%" style="padding: 10px 0px">
+				 <p style="padding:0px; color: #000; line-height: normal; margin:0px 0px 0px 30px">
+				   <%= order.billing.company %><br>
+				   <%= order.billing.first_name %> <%= order.billing.last_name %><br>
+				   <%= order.billing.address_1 %><br>
+				   <% if(order.billing.address_2 != "") { %>
+				   	<%= order.billing.address_2 %><br>
+				   <% } %>
+				   <%= order.billing.postcode %> <%= order.billing.city %><br>
+				   <%= utls.getCountry(order.billing.country) %>
+				 </p>
+			   </td>
+			 </tr>
+			<tr>
+			   <td align="left" width="50%" style="padding:10px 0px;">
+				<p style="padding:0px; color: #000; font-weight: bold; font-size: 10px; margin: 0px;">Rechnung</p>
+			  </td>
+			  <td align="right" width="50%" style="padding:10px 0px;">
+				<p style="padding:0px; color: #000; font-weight: bold; font-size: 10px; margin: 0px;"><%= order.number %></p>
+			  </td>
+			</tr>
+			<tr>
+			  <td colspan="2" align="left" style="padding:0px 0px">
+				<table cellpadding="0" cellspacing="0" width="100%" >
+				  <thead>
+					<tr>
+					  <th width="20%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">Artikelnr.</th>
+					  <th width="40%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">Artikelname</th>
+					  <th width="10%" align="center" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">VAR</th>
+					  <th width="10%" align="center" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">Menge</th>
+					  <th width="10%" align="center" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">MWST</th>
+					  <th width="10%" align="right" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; ">Betrag</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<% order.line_items.forEach(function(item, el) { %>
+					<tr>
+					  <td align="left" valign="top" style="padding: 10px 0px; "><%= item.sku %></td>
+					  <td align="left" valign="top" style="padding: 10px 0px; "><%= item.name %></td>
+					  <td align="center" valign="top" style="padding: 10px 0px; ">
+						<% if(item.hasOwnProperty('meta_data')) { %>
+							<% var remiAvail = false;
+							if(item.meta_data.length > 0) {
+								item.meta_data.forEach((meta, el)=> {
+									if(meta.key == "remi") {
+										remiAvail = true;
+										return false;
+									}				
+								}); 
+							} %>
+							<% if(remiAvail) { %>
+								Remi	
+							<% } %>	
+						<% } %>
+					  </td>
+					  <td align="center" valign="top" style="padding: 10px 0px; "><%= item.quantity %> <%= item.quantity > 1 ? "" : "" %></td>
+					  <td align="center" valign="top" style="padding: 10px 0px; ">
+						<!-- 2.5% -->
+						<% if(item.tax_class == 'mwst-2-5') { %>
+							B	
+						<% } %>
+						<!-- 7.7% -->
+						<% if(item.tax_class == 'mwst-7-7') { %>
+							C
+						<% } %>
+					</td>
+					<td align="right" valign="top" style="padding: 10px 0px; ">
+						<!-- <%= utls.priceFormat(item.subtotal) %> -->
+						<% if(item.hasOwnProperty('meta_data')) { %>
+							<% if(item.meta_data.length > 0) {
+								item.meta_data.forEach((meta, el)=> {
+									if(meta.key == "price") { %>
+										<span class="chf">CHF</span> <%= utls.priceFormat(meta.value) %>
+									<% }				
+								}); 
+							} %>
+						<% } else { %>
+							<%= utls.priceFormat((item.subtotal + item.subtotal_tax)) %>
+						<% } %>
+					</td>
+					</tr>
+					<% }); %>
+				  </tbody>
+				</table>
+			  </td>
+			</tr>
+		  	<tr>
+		  		<td colspan="2">
+		  			<table cellpadding="0" cellspacing="0" width="100%" >
+		  				<tr>
+							<td width="20%" align="left" style="padding:10px 0px; border-top:1px solid #000;">
+								<p style="padding:0px; color: #000; margin: 0px">Zwischensumme</p>
+							</td>
+							<td width="40%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							<td width="10%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							<td width="10%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							<td width="10%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							<td width="10%" align="right" style="padding:10px 0px; border-top:1px solid #000;">
+								<p style="padding:0px; color: #000; margin: 0px"><%= order.shipping_total > 0 ? utls.priceFormat((order.total - order.shipping_total)) : utls.priceFormat(order.total) %></p>
+							</td>
+		  				</tr>
+		  			</table>
+		  		</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+		  			<table cellpadding="0" cellspacing="0" width="100%" >
+		  				<tr>
+		  					  <td width="20%" align="left" style="padding:10px 0px; border-top:1px solid #000;">
+								<p style="padding:0px; color: #000; margin: 0px">Versandkosten</p>
+							  </td>
+							  <td width="40%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							  <td width="10%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							  <td width="10%" style="padding:10px 0px; border-top:1px solid #000;"></td>
+							  <td width="10%" align="center" style="padding:10px 0px; border-top:1px solid #000;">
+								<p style="padding:0px; color: #000; margin: 0px">
+									<% if(parseFloat(mwst_7_7) > 0) { %>
+										C
+									<% } else { %>
+										<% if(parseFloat(mwst_2_5) > 0) { %>
+											B
+										<% } %>	
+									<% } %>
+								</p>
+							  </td>
+							  <td width="10%" align="right" style="padding:10px 0px; border-top:1px solid #000;">
+								<p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(order.shipping_total) %></p>
+							  </td>
+		  				</tr>
+		  			</table>
+		  		</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+		  			<table cellpadding="0" cellspacing="0" width="100%" >
+		  				<tr>
+		  					<td colspan="6" width="100%" style="padding:0px;">
+							  <table cellpadding="0" cellspacing="0" width="100%">
+								<% if(parseFloat(mwst_2_5) > 0) { %>
+									<tr>
+										<td align="left" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px">B <span style="padding-left: 10px">MWSt, 2.5%</span></p>
+										</td>
+										<!-- <td align="left" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(total_2_5) %></p>
+										</td> -->
+										<td align="left" width="20%" style="padding:5px 0px;">
+											<!-- <p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(vat_plustotal_2_5) %></p> -->
+										</td>
+										<td align="right" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(mwst_2_5) %></p>
+										</td>
+									</tr>
+								<% } %>
+								<% if(parseFloat(mwst_7_7) > 0) { %>
+									<tr>
+										<td align="left" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px">C <span style="padding-left: 10px">MWSt, 7.7%</span></p>
+										</td>
+										<!-- <td align="left" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(total_7_7) %></p>
+										</td> -->
+										<td align="left" width="20%" style="padding:5px 0px;">
+											<!-- <p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(vat_plustotal_7_7) %></p> -->
+										</td>
+										<td align="right" width="20%" style="padding:5px 0px;">
+											<p style="padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(mwst_7_7) %></p>
+										</td>
+									</tr>
+								<% } %>
+							  </table>
+						  </td>
+		  				</tr>
+		  			</table>
+		  		</td>
+			  
+			</tr>
+			<tr>
+				<td colspan="2">
+		  			<table cellpadding="0" cellspacing="0" width="100%" >
+		  				<tr>
+		  					<td colspan="5" align="left" style="padding:10px 0px;">
+								<p style="padding:0px; color: #000; font-weight: bold; font-size: 10px; margin: 0px">Total CHF inkl. MwSt.</p>
+							</td>
+							<td align="right"  style="padding:10px 0px;">
+								<p style="padding:0px; color: #000; font-weight: bold; font-size: 10px; margin: 0px"><%= utls.priceFormat(order.total) %></p>
+							</td>
+		  				</tr>
+		  			</table>
+		  		</td>
+			  
+			</tr>
+		  </tbody>
+		</table>
+		<table cellpadding="0" cellspacing="0" width="100%" style="font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;font-size: 8px;">
+		  <tbody>
+			<tr>
+			  <td align="left" width="100%" style="padding:20px 0px;">
+				<p style="padding:5px 0px; color: #000; margin: 0px"><b>Lieferung an:</b> 
+					<% if(order.shipping.company != "") { %>
+						<%= order.shipping.company %>, 
+					<% } %>
+					<%= order.shipping.first_name %> <%= order.shipping.last_name %>, <%= order.shipping.address_1 %>,
+					<% if(order.shipping.address_2 != "") { %>
+						<%= order.shipping.address_2 %>, 
+					<% } %>
+					<%= order.shipping.postcode %> <%= order.shipping.city %>, <%= utls.getCountry(order.shipping.country) %></p>
+				<p style="padding:5px 0px; color: #000; margin: 0px">Beanstandungen sind uns innerhalb von 5 Arbeitstagen nach Erhalt der Ware zu melden.</p>
+				<p style="padding:5px 0px; color: #000; margin: 0px">Zahlungsart: <b><%= payment_type %></b></p>
+			  </td>
+			</tr>
+			<tr>
+			  <td style="padding: 0px">
+				<table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #000;" >
+				  <tbody>
+					<tr>
+					  <td align="center" style="padding:10px;">
+						<p style="padding:0px; color: #000; font-weight: bold; font-size: 10px; margin: 0px">
+						  Nachhaltiges Denken fördern und aktiv die <br>Ressourcenverschwendung reduzieren </p>
+					  </td>
+					</tr>
+				  </tbody>
+				</table>
+			  </td>
+			</tr>
+		  </tbody>
+		</table>
+	</table>
+
+	<table id="pageFooter" style="position: fixed; bottom: 0; right: 0; left: 0; padding: 10px 0px;">
+		<tr>
+			<td>
+				<p style="font-family:Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%; font-size: 8px; text-align: center;">
+				ZOOCIAL • 4beeees GmbH • Bottmingerstrasse 50 • 4102 Binningen • info@zoocial.ch • www.zoocial.ch</p>
+			</td>
+		</tr>
+	</table>
+</div>
+
+</body>
+</html>

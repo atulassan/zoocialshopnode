@@ -1,0 +1,247 @@
+<% console.log(shipping_cost) %>
+<% console.log(shipping_lines) %>
+<% if(utls.isEmpty(cartproducts)) { %>
+<style type="text/css">
+.cart-coupon{
+max-width: 60%;
+margin-top: 30px;
+}
+.cart-coupon .form-control, .cart-coupon .input-group-text{
+border-radius: 20px;
+height: 42px;
+font-size: 14px;
+padding: .375rem 1.2rem;
+border:1px solid #a1be90;
+}
+.cart-coupon .input-group-text{
+background-color: #a1be90;
+color: #fff;
+font-weight: 600;
+}
+.cart-coupon .input-group-text:hover {
+background: #fcaf26 !important;
+border: 1px solid #fcaf26 !important;
+box-shadow: none !important;
+color: #fff !important;
+}
+@media (min-width: 320px) and (max-width: 575px) {
+	.cart-coupon{
+		max-width: 100%;
+		margin-top: 0px;
+		margin-bottom: 20px
+	}
+}
+@media (min-width: 576px) and (max-width: 768px) {
+	.cart-coupon{
+		max-width: 100%;
+		margin-top: 0px;
+		margin-bottom: 20px
+	}
+}
+</style>
+<div class="col-lg-12 col-md-12">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="main-post-box white-bg br-6 p-15 mb-3 cart-table">
+				<div class="row cart-header">
+					<div class="col-md-6 col-sm-12 col-12">
+						<h2>Warenkorb</h2>
+					</div>
+					<div class="col-md-6 col-sm-12 col-12 text-right">
+						<a href="javascript:void(0)" class="btn btn-primary btn-cart" onClick="history.go(-1); return false;">weiter einkaufen</a> <a href="/checkout" class="btn btn-primary btn-cart">zur Kasse</a>
+					</div>
+				</div>
+				
+					<form id="cartform" action="/cart">
+						<div class="table-responsive" style="overflow:inherit">
+							<table class="table mb-0" cellspacing="0">
+								<thead>
+									<tr>
+										<th width="10%" class="product-thumbnail">Artikelbild</th>
+										<th width="10%" class="product-price">Artikelnr.</th>
+										<th width="30%" class="product-price">Artikelname</th>
+										<th width="10%" class="product-price">VAR</th>
+										<th width="10%" class="product-price">Preis</th>
+										<th width="10%" align="center" class="product-quantity">Menge</th>
+										<th width="10%" align="center" class="product-subtotal">Gesamt</th>
+										<th width="10%" align="center"></th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<% cartproducts.forEach(function(cartproduct, el) { %>
+										<% //console.log(cartproduct) %>
+									<tr class="remove_cartitem">
+										<td class="product-image">
+											<% if (cartproduct.images.length > 0) { %>
+											<a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<!-- <% var fname = path.parse(cartproduct.images[0].src); %>
+												 <img src="<%= fname.dir+"/"+fname.name+"-100x100"+fname.ext %>"> -->
+												<img src="<%= utls.imageOptimize(cartproduct.images[0].src, "t") %>">
+											</a>
+											<!-- <a class="product-thumbnail" href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<img src="<%= cartproduct.images[0].src %>">
+											</a> -->
+											<% } %>
+										</td>
+										<td class="product-kilo">
+											<%= cartproduct.sku %>
+										</td>
+										<td class="product-name">
+											<% if(cartproduct.tags.length > 0) { %>
+													<%= cartproduct.tags[0].name.replace(/&amp;/g, "&") %>
+												<br />
+											<% } %>
+											<a href="/product/<%= cartproduct.slug %>/<%= cartproduct.id %>">
+												<%= cartproduct.name %> <%= cartproduct.type == "variable" ? cartproduct.attributes[0].option : "" %>
+											</a>
+										</td>
+										<td class="product-kilo">
+											<% if(cartproduct.shipping_class == "remi") { %>
+												<%= cartproduct.remi %>
+											<% } %>
+										</td>
+										<td class="product-price">
+											<span>CHF <%= utls.priceFormat(cartproduct.price) %></span>
+											<br />
+											<% if(utls.priceFormat(cartproduct.price) !== utls.priceFormat(cartproduct.regular_price)) { %>
+												<span style="text-decoration:line-through;color: #d25050;">
+													CHF <%= utls.priceFormat(cartproduct.regular_price) %>
+												</span>
+											<% } %>
+										</td>
+										<td class="product-quantity add-tocart-grouped">
+											<div class="cart-grouped">
+												<% if(cartproduct.quantity <= 20) { %>
+													<select product-qty="<%= cartproduct.quantity %>" class="cartqty"
+														product-id="<%= cartproduct.id %>" variation-id="<%= cartproduct.variation_id %>" per-kilo="" kilo-gram=""
+														class="quantity" name="quantity">
+														<% for(var i=1; i<=20; i++) { %>
+														<option value="<%= i %>" 
+														<%= i == cartproduct.quantity ? 'selected' : '' %>>
+															<%= i %>
+														</option>
+														<% } %>
+														<option value="0">frei wählbar</option>
+													</select>
+												<% } else { %>
+													<input type="number" class="cartqty" product-id="<%= cartproduct.id %>" variation-id="<%= cartproduct.variation_id %>" value="<%= cartproduct.quantity %>" name="quantity">
+												<% } %>
+											</div>
+										</td>
+										<td align="left" class="product-subtotal">
+											<span class="amount">
+												<span>CHF <%= utls.priceFormat(cartproduct.subtotal) %></span>
+											</span>
+										</td>
+										<td class="product-remove">
+											<a style="margin: 0 auto;" href="javascript:;" class="remove_cart" product-type="<%= cartproduct.type %>" product-variation_id="<%= cartproduct.hasOwnProperty('variation_id') ? parseInt(cartproduct.variation_id) : 0  %>" product-id="<%= cartproduct.id %>"
+												title="Remove this item"></a>
+										</td>
+									</tr>
+									<% }); %>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td align="right" colspan="6" class="product-grdtotal">Zwischensumme</td>
+										<td align="right" colspan="2" class="product-grdtotal">
+											<span>CHF </span><%= utls.priceFormat(noDiscountTotal) %>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+							<!--  <table class="table table-border-none">
+								<thead>
+									<tr>
+										<td align="right"><button class="updatecart btn btn-primary btn-md" type="submit"
+												value="update cart" name="updatecart" disabled><span class="btnldr"><img src="/images/spinner.gif" /></span>aktualisieren</button>
+										</td>
+									</tr>
+								</thead>
+							</table> -->
+						</div>
+						<div class="row">
+							<div class="col-lg-12 mt-3">
+								<button class="updatecart btn btn-primary" type="submit" value="update cart" name="updatecart" disabled>
+									<span class="btnldr"><img src="/images/loader-white.gif"></span>aktualisieren</button>
+							</div>
+						</div>
+					</form>
+				
+			</div>
+		</div>
+		<div class="col-lg-7 col-md-12 col-sm-12 col-12">
+			<form id="coupon" action="/coupon">
+				<div class="cart-coupon">
+					<div class="input-group">
+					<% if(Object.keys(coupon).length > 0) { %>
+						<input name="coupon" type="text" class="form-control coupontxt" style="font-size:18px" value="<%= coupon.code %>" placeholder="Gutscheincode" disabled>
+					<% } else { %>
+						<input name="coupon" type="text" class="form-control coupontxt" placeholder="Gutscheincode">
+					<% } %>
+					<div class="input-group-append">
+						<% if(Object.keys(coupon).length > 0) { %>
+							<button class="input-group-text" type="button" id="removeCoupon">Gutschein löschen</button>
+						<% } else { %>	
+							<button class="input-group-text" type="submit" id="couponcode">Gutschein anwenden</button>
+						<% } %>
+					</div>
+					</div>
+				</div>
+				<input type="hidden" name="redirect" value="cart" />
+			</form>
+		</div>
+		<div class="col-lg-5 col-md-12 col-sm-12 col-12">
+			<div class="main-post-box white-bg pb-3">
+				<div class="cart-detail bg-light p-2 same-height cart-table">
+					
+					<!-- <h2>Warenkorb</h2> -->
+					<p class="mb-3">
+						<span>Versandkosten in der Schweiz</span>
+						<!-- <span>CHF <%= parseFloat(carttotal) < 100 ? '7.50' : '0.00' %></span> -->
+						<span>CHF <%= utls.priceFormat(shipping_cost) %></span>
+					</p>
+					<hr>
+					<% if(Object.keys(coupon).length > 0) { %>
+						<p class="mb-3">
+							<% if(coupon.discount_type == 'percent') { %>
+								<span>Rabatt <%= parseInt(coupon.amount) %>% - <%= coupon.code %></span>
+							<% } else { %>
+								<span>Gutschein - <%= coupon.code %></span>
+							<% } %>
+							<!-- <span>CHF <%= parseFloat(carttotal) < 100 ? '7.50' : '0.00' %></span> -->
+							<% if(coupon.discount_type == 'percent') { %>
+								<span>CHF - <%= utls.priceFormat(((noDiscountTotal / 100) * parseInt(coupon.amount))) %></span>
+							<% } else { %>
+								<span>CHF -<%= utls.priceFormat(coupon.amount) %></span>
+							<% } %>
+						</p>
+						<hr>
+					<% } %>
+					<p class="total-price">
+						<span>Gesamtsumme</span>
+						<!-- <span>CHF <%= utls.priceFormat((carttotal + shipping_cost)) %></span> -->
+						<span>CHF <%= utls.priceFormat(finaltotal) %></span>
+					</p>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-6">
+						<a href="javascript:void(0)" class="btn btn-primary  btn-block btn-cart" onClick="history.go(-1); return false;">weiter einkaufen</a>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-6">
+						<a href="/checkout" class="btn btn-primary  btn-block btn-cart">zur Kasse</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% } else { %>
+<div class="col-lg-12 min50vh">
+	<div class="noProductListing">
+		<img src="/images/noProductList.jpg" alt="">
+		<h3>kein Eintrag vorhanden</h3>
+	</div>
+</div>
+<% } %>

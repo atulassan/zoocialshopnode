@@ -1,0 +1,164 @@
+<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+  <div class="info-panel product-view info_bg">
+    <h2 class="product-title wow fadeInUp">
+      <% if (product.tags.length > 0) { %>
+      <% product.tags.forEach((tag, el) => { %>
+      <span class="listBrand"><a href="/brand/<%= tag.slug %>/<%= tag.id %>"><%= tag.name.replace("&amp;", "&") %></a></span>
+      <% }); %>
+      <% } %>
+      <%= product.name.replace("&amp;", "&") %>, <%= description2 != null && Object.keys(description2).length > 0 ? description2.value : '' %>
+    </h2>
+    <div class="DisplyRating">
+      <% for(var i=1; i<=5; i++) { %>
+          <i class="fa fa-star<%= avrgRating >= i ? '' : '-o' %>"></i>
+      <% } %>
+      <% if(product.reviews.length > 0) { %>
+          <a href="javascript:void(0)"> (<%= product.reviews.length %>)</a>
+      <% } %>
+    </div>
+    <div class="stockAvailable">
+      <ul>
+        <% if(parseInt(product.stock_quantity) > 0) { %>
+          <li class="instock"><span></span>verfügbar</li>
+        <% } else { %>
+        <!-- <li class="orderBooked"><span></span>auf Bestellung</li> -->
+        <li class="outstock"><span></span>nicht verfügbar</li>
+        <% } %>
+        <li>
+            <% if (discountperiod != null && discountperiod.value != "") { %>
+              <span class="auslaufmodelle bold"><%= discountperiod.value %>%</span>
+            <% } %>
+            <% if (discountperiod != null && discountperiod.value != "") { %>
+                  <span class="auslaufmodelle"><%= discountdesc.value %></span>
+              <% } %>
+            </li>
+      </ul>
+    </div>
+    <div class="weight">
+      <% if(short_description != null && short_description.value != "" && Object.keys(JSON.parse(short_description.value)).length > 0) { %>
+        <% if(JSON.parse(short_description.value).D != "") { %>
+          <p><%= JSON.parse(short_description.value).D %></p>
+        <% } %>
+      <% } %>
+      <% if(product_description_2 != null && product_description_2.value != "" && Object.keys(product_description_2).length > 0) { %>
+        <% if(JSON.parse(product_description_2.value).D != "") { %>
+         <p><%= JSON.parse(product_description_2.value).D %></p>
+        <% } %>
+      <% } %>
+        <% if(additional_text != null && additional_text.value != "" && Object.keys(additional_text).length > 0) { %>
+          <% if(JSON.parse(additional_text.value).D != undefined && JSON.parse(additional_text.value).D != 'undefined' ) { %>
+            <p><%= JSON.parse(additional_text.value).D %></p>
+          <% } %>
+        <% } %>
+    </div>
+    <div style="border-top: 1px solid #f1f1f1; border-bottom: 1px solid #f1f1f1; padding: 10px 0px">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 my-auto">
+          <!--<% if(parseFloat(product.weight) > 0) { %>
+                <div class="grouped-name"><%= utls.priceFormat2(product.weight) %> kg</div>
+              <% } %> -->
+              <% if(sales_unit_measure != null) { %>
+                <div class="grouped-name">
+                  <% console.log(typeof(disp_weight.value)) %>
+                  <%= sales_unit_measure.value %> <% if (disp_weight != null && disp_weight.value != "0.00000000000000000000") { %> - <span class="auslaufmodelle"><%= disp_weight.value %></span> <% } %>
+                </div>
+              <% } %>
+        </div>
+        <div class="col-lg-8 col-md-8 my-auto mPosFixed">
+            <div class="row">
+              <div class="col-lg-7 col-7 my-auto">
+                <div class="price-info-block">
+                  <div class="price-box">
+                    <span class="regular-price">
+                      <% if (product.type == 'simple' && parseFloat(product.regular_price) > parseFloat(product.price)) { %>
+                        <span class="strike">CHF <%= utls.priceFormat(product.regular_price) %></span>
+                      <% } %>
+                      <span class="price">CHF <%= utls.priceFormat(product.price) %></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5 col-5 my-auto">
+                 <div class="row cart-updgroup">
+                    <div class="col-lg-6 col-6 text-right my-auto">
+                      <div class="add-tocart-grouped">
+                          <div class="DropTriangle add-tocart-grouped-arrow cart-grouped">
+                            <% if(parseInt(product.stock_quantity) > 0) { %>
+                              <select id="quantity" class="shopqty" name="quantity" product-id="<%= product.id %>" variation-id="">
+                                <% for(var i=1; i<=20; i++) { %>
+                                  <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                                <option value="0">frei wählbar</option>
+                              </select>
+                            <% } else { %>
+                              <select disabled="true" id="quantity" class="shopqty" name="quantity" product-id="<%= product.id %>" variation-id="">
+                                <% for(var i=1; i<=20; i++) { %>
+                                  <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                                <option value="0">frei wählbar</option>
+                              </select>
+                            <% } %>  
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-6 text-right my-auto">
+                      <% if(parseInt(product.stock_quantity) > 0) { %>
+                        <div class="add-tocart-grouped">
+                          <a product-qty="1" data-toggle="modal" data-target="#addtocart-add-confirm" var-id=""
+                            product-id="<%= product.id %>" class="addtocart" href="javascript:;">
+                            <span style="display: inline-block;" class="btn inner-gradient-bg" data-toggle="tooltip" data-placement="top" data-original-title="In den Warenkorb" ><i class="fa fa-shopping-cart "></i></span>
+                          </a>
+                        </div>
+                      <% } else { %>
+                        <div class="add-tocart-grouped">
+                          <a class="btn" href="javascript:void(0);">
+                            <span style="background:#4a4a4a;" style="display: inline-block;" class="btn inner-gradient-bg" data-toggle="tooltip" data-placement="top" data-original-title="In den Warenkorb" ><i class="fa fa-shopping-cart "></i></span>
+                          </a>
+                        </div>
+                      <% } %>
+                    </div>
+                  </div>
+                <table>
+                  <tr class="">
+                    <td>
+                        
+                    </td>
+                    <td>
+                      
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="productTags">
+        <ul>
+          <li><span>Lagerbestand</span> <i><%= product.stock_quantity !== null ? product.stock_quantity : 0 %></i></li>
+          <li><span>Artikelnummer</span> <i><%= product.sku %></i></li>
+          <% if(filters.hasOwnProperty('bedurfnisse')) { %>
+              <li><span>Futtermittelart</span> <i><%= filters.hasOwnProperty('bedurfnisse') ? filters.bedurfnisse[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('krankheit')) { %>
+              <li><span>Symptome</span><i><%= filters.hasOwnProperty('krankheit') ? filters.krankheit[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('futterart')) { %>
+              <li><span>Futterart</span> <i><%= filters.hasOwnProperty('futterart') ? filters.futterart[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('geschmack')) { %>
+              <li><span>Geschmacksrichtung</span><i><%= filters.hasOwnProperty('geschmack') ? filters.geschmack[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('spezial')) { %>
+              <li><span>Spezialeigenschaft</span> <i><%= filters.hasOwnProperty('spezial') ? filters.spezial[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('lebensphase')) { %>
+              <li><span>Lebensphase</span> <i><%= filters.hasOwnProperty('lebensphase') ? filters.lebensphase[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+          <% if(filters.hasOwnProperty('grosse')) { %>
+              <li><span>Grösse</span> <i><%= filters.hasOwnProperty('grosse') ? filters.grosse[0].name.replace(/&amp;/g, "&") : ""  %></i></li>
+          <% } %>
+        </ul>
+    </div>
+  </div>
+</div>

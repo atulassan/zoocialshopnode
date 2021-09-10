@@ -1,0 +1,68 @@
+
+			<ul>
+				<% favproducts.forEach(function(favproduct, el) { %>
+					<% if(favproduct.tax_class ==  "mwst-2-5") { %>
+				<li class="mb-4 wishlist-item">
+					<div class="mcart-spc">
+						<div class="col-md-12">
+							<div class="mcart-prd">
+								<a href="javascript:;" class="minicart_remove_cart remove_wish" product-id="<%= favproduct.id %>" title="Remove this item"></a>
+								<div class="form-row">
+									<div class="col-md-2 col-sm-2 col-2">
+										<div class="slideCartimage">
+											<% if (favproduct.images.length > 0) { %>
+												<a href="/product/<%= favproduct.slug %>/<%= favproduct.id %>">
+													<img class="img-fluid" src="<%= utls.imageOptimize(favproduct.images[0].src, "t") %>" alt="">
+												</a>
+												<!-- <a class="product-thumbnail" href="/product/<%= favproduct.slug %>/<%= favproduct.id %>">
+													<img src="<%= favproduct.images[0].src %>">
+												</a> -->
+											<% } %>
+											
+										</div>
+									</div>
+									<div class="col-md-10 col-sm-10 col-10">
+										<div class="pl-2">
+											<% if(favproduct.tags.length > 0) { %>
+												<div>
+													<%= favproduct.tags[0].name.replace(/&amp;/g, "&") %>
+												</div>
+											<% } %>
+											<h4><a href="/product/<%= favproduct.slug %>/<%= favproduct.id %>"><%= favproduct.name %></a></h4>
+											<% if(favproduct.type == 'simple') { %>
+											<div class="d-flex flex-row flex-items-middle">
+												<!-- <div class="cartProductCount">
+													<div class="cart-grouped">
+														<select product-qty="<%= favproduct.quantity %>" class="cartqty" product-id="<%= favproduct.id %>" 
+															variation-id="<%= favproduct.variation_id %>" per-kilo="" kilo-gram="" name="quantity">
+																<% for(var i=1; i<=40; i++) { %>
+																	<option value="<%= i %>" <%= i == favproduct.quantity ? 'selected' : '' %>><%= i %></option>
+																<% } %>
+																<option value="0">frei wählbar</option>
+														</select>
+													</div>
+												</div>
+												<div class="p-2">
+													<div class="cartMultiple">&times;</div>
+												</div> -->
+												<div class="cart-item-price" value="4395">
+														<span>CHF <%= utls.priceFormat(favproduct.price) %></span>
+														<% if(utls.priceFormat(favproduct.price) !== utls.priceFormat(favproduct.regular_price)) { %>
+															<span style="text-decoration:line-through; color: #d25050; margin-left: 10px">
+																CHF <%= utls.priceFormat(favproduct.regular_price) %>
+															</span>
+														<% } %>
+												</div>
+												</div>
+											<% } %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<% } %>
+				<% }); %>
+			</ul>
+		

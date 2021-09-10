@@ -1,0 +1,30 @@
+<% if(utls.isEmpty(listSubCategories)) { %>
+
+<h4>Kategorie <span class="mobFilterClose">&times;</span></h4>
+<div class="jquery-accordion-menu">
+  <ul>
+    <% listSubCategories.forEach(function(category, el) { %>
+    <li>
+      <a href="/category/<%= category.slug %>/<%= category.id %>"></i><%= category.name %></a>
+      <% if(utls.isEmpty(category.children) && category.children.length > 0 ) { %>
+      <ul class="submenu">
+        <% category.children.forEach(function(childlevel1, el) { %>
+        <li>
+          <a href="/category/<%= childlevel1.slug %>/<%= childlevel1.id %>"><%= childlevel1.name %></a>
+          <% if(utls.isEmpty(childlevel1.children) && childlevel1.children.length > 0 ) { %>
+          <% //console.log(childlevel1.children); %>
+          <ul class="submenu">
+            <% childlevel1.children.forEach(function(childlevel2, el) { %>
+            <li><a href="/category/<%= childlevel2.slug %>/<%= childlevel2.id %>">- <%= childlevel2.name %></a></li>
+            <% }); %>
+          </ul>
+          <% } %>
+        </li>
+        <% }); %>
+      </ul>
+      <% } %>
+    </li>
+    <% }); %>
+  </ul>
+</div>
+<% } %>

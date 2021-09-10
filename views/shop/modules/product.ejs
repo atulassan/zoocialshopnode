@@ -1,0 +1,87 @@
+<%
+//console.log(utls.imageOptimize(product.images[0].src, "o"));
+//console.log(product.images[0].src);
+%>
+
+<% if(product.reviews.length > 0) { %>	
+	<%
+	var rts = 0;
+	product.reviews.forEach(function(review, el) {
+		  rts += parseInt(review.rating);
+	});
+	var avrgRating = Math.round(rts/parseInt(product.reviews.length));
+	%>
+<% } %>
+
+<% 
+  let discountperiod = null;
+  if(product.meta_data.length > 0) {
+    for (const [indx, metainfo] of product.meta_data.entries()) {
+        if(metainfo.key == "discountperiod") {
+          discountperiod = metainfo;
+        }
+    }
+  }
+%>
+
+<div class="col-lg-4 col-md-4 col-sm-6 col-6">
+  <div class="card">
+    <div class="card-body">
+      <a class="fav-product addfavourite" href="javascript:void(0);" product-id="<%= product.id %>" data-toggle="tooltip" data-placement="top" data-original-title="zu Favoriten hinzufügen" >
+        <i class="fa fa-heart"></i>
+      </a>
+      <% if(product.reviews.length > 0) { %>
+        <div class="ListingStarRating">
+          <% for(var i=1; i<=5; i++) { %>
+            <i class="fa fa-star<%= avrgRating >= i ? '' : '-o' %>"></i>
+          <% } %>
+        </div>
+      <% } %>
+      <% if (discountperiod != null && discountperiod.value != "") { %>
+        <div class="ProduktOffer">
+              <span><%= discountperiod.value %>%</span>
+        </div>
+      <% } %>
+      <% if (product.type== 'simple') { %>
+      <!-- <a class="newAddtoCart addtocart" href="javascript:void(0);" product-id="<%= product.id %>"
+        product-price="<%= product.price %>" product-qty="1">
+        <i class="fa fa-shopping-cart"></i>
+      </a> -->
+      <% } %>
+      <a class="product-link" href="/product/<%= product.slug %>/<%= product.id %>">
+          <% if (product.images.length > 0) { %>
+            <img class="lazyload img-fluid" src="/images/8kpb.gif"
+              data-src="<%= utls.imageOptimize(product.images[0].src, "o") %>" alt="">
+          <% } else { %>
+            <img class="img-fluid" src="/images/noimage.jpg" alt="">
+          <% } %>
+      </a>
+      <!-- <span class="product-new-label inner-gradient-bg">Neu</span> -->
+      <% if(product.shipping_class == "remi") { %>
+          <div class="ribbon-sm ribbon-top-left ribbon-top-left-sm"><span>Remi</span></div>
+      <% } %>
+    </div>
+    <div class="card-footer shop-footer">
+      <div class="listBrand">
+      <% if (product.tags.length > 0) { %>
+      <% product.tags.forEach((tag, el) => { %>
+      <p><a href="/brand/<%= tag.slug %>/<%= tag.id %>" data-toggle="tooltip" data-placement="top" data-original-title="Alle <%= tag.name.replace("&amp;", "&") %> Produkte anzeigen" ><%= tag.name.replace("&amp;", "&") %></a></p>
+      <% }); %>
+      <% } %>
+      </div>  
+      <h3 class="title"><a href="/product/<%= product.slug %>/<%= product.id %>"  data-toggle="tooltip" data-placement="top" data-original-title="Zum Produkt" ><%= product.name.replace(/&amp;/g, "&") %></a></h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="mprice shop-price-box">
+            <span>
+              <% if (product.type == 'simple' && parseFloat(product.regular_price) > parseFloat(product.price)) { %>
+                <i class="strike">CHF <%= utls.priceFormat(product.regular_price) %></i>
+              <% } %>
+              CHF <%= utls.priceFormat(product.price) %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

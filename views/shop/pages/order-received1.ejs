@@ -1,0 +1,48 @@
+<% include ../templates/shop-header %>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 my-auto">
+					<h1>Order Received</h1>
+				</div>
+				<div class="col-lg-6 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">order-received</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<% if(typeof(orderdetails) !== 'undefined') { %>
+<section id="" class="inner-grey-bg pb-5 pt-4 ">
+	<div class="container">
+		<!--- Alert msg will come here-->
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<h1>#<%= orderdetails.id %> Order Successfully Placed</h1>
+				<p>Order Number: <b><%= orderdetails.id %></b></p>
+				<p>Total: <b><%= orderdetails.currency %> <%= orderdetails.total %></b></p>
+				<p>Payment Mode: <b><%= orderdetails.payment_method %></b></p>
+			</div>
+		</div>
+	</div>
+</section>
+<% } else { %>
+	<section id="" class="inner-grey-bg pb-5 pt-4 ">
+		<div class="container">
+			<!--- Alert msg will come here-->
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					<h1>Bestellnummer ist nicht gültig.</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+<%  } %>
+
+<% include ../templates/shop-footer %>

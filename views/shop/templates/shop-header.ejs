@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang=”en”>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index,follow">
+<% include metas %>
+<div id='hidden' style='display:none;'><img src="https://zoocialshop.ch/images/share-logo.jpg"></div>
+<link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+<link rel="manifest" href="images/favicon/site.webmanifest">
+<link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="images/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/fonts/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/base-fonts/web-fonts.css" />
+<link rel="stylesheet" href="/css/owl.theme.default.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/styles.css?v=1">
+<link rel="stylesheet" type="text/css" href="/css/accordion.css">
+<link rel="stylesheet" type="text/css" href="/css/plugin.css">
+<link rel="stylesheet" type="text/css" href="/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="/css/eagle.gallery.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/alertify.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<!--[if lt IE 9]> <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+ 
+<style type="text/css">
+#preloader { position: fixed; left: 0; top: 0; z-index: 20000; width: 100%; height: 100%; overflow: visible; background-color:rgba(255,255,255,1);}
+.loader-logo{background:url('./images/loader.gif') no-repeat center center; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) !important; z-index: 1000; width: 120px; height: 120px; animation: fadein 1s ease-out ;-webkit-animation: fadein 1s ease-out; }
+.paginate { padding: 0; margin: 0; }
+.paginate > li { list-style: none; padding: 10px 20px; margin: 10px 0; }
+</style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174570411-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-174570411-1');
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2580032808916492');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2580032808916492&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+  <!-- Hotjar Tracking Code for www.zoocialshop.ch -->
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:2104004,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script> 
+</head>
+<body>
+<div id="preloader">
+   <div class="loader-logo"></div>
+</div>
+<header class="header_login fixedHeader home-grey-bg">
+  <div class="header_Padding">
+    <div class="container">
+      <div class="form-row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+          <a class="navbar-brand" href="/">
+            <img src="/images/logo.svg" alt="logo" title="zoocial">
+          </a>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 my-auto">
+          <div class="headerRightBase">
+            <% if(utls.isEmpty(categories)) { %>
+                <div class="header-slider owl-carousel category-nav homeCatTop">
+                    <div class="item">
+                        <a href="/hunde">
+                          <img class="img-fluid" src="/images/hund-1-100x100.jpg" alt="">
+                          <span>Hunde</span>
+                      </a>
+                    </div>
+                    <div class="item">
+                      <a href="/katze">
+                        <img class="img-fluid" src="/images/katzen-1-100x100.jpg" alt="">
+                        <span>katze</span>
+                      </a>
+                  </div>
+
+                  <div class="item">
+                    <a href="/category/andere/646">
+                      <img class="img-fluid" src="/images/andere-100x100.jpg" alt="">
+                      <span>Andere</span>
+                    </a>
+                  </div>
+                </div>
+              <% } %>
+              <div class="d-flex headerLoginArea">
+                <div class="headerCart">
+                  <span class="top-count  fav-count">0</span>
+                  <a id="favOpen" href="javascript:;">
+                    <img src="/images/svg/heart.svg">
+                  </a>
+                </div>
+                <div class="headerCart">
+                  <span class="top-count product_count">0</span>
+                  <a id="cartPopupOpen" href="javascript:;">
+                    <img src="/images/svg/shopping-cart.svg">
+                  </a>
+                </div>
+                <div class="headerCart usermenus">
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+            <form method="GET" class="navSearch" action="/search-products">
+              <input type="text" placeholder="Suche.." name="search" class="product_search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+              <div class="searchlisting box-shadow" style="display:none">
+                <div class="pageloader" data-visible="1" style="text-align:center; display:none;">
+                  <img width="100" src="/images/loader.gif" alt="">
+                </div>
+                <ul class="searchul"></ul>  
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

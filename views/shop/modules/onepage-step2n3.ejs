@@ -1,0 +1,308 @@
+<div class="geustOpen">
+	<%
+		var size = Object.keys(userdata).length;
+		console.log(userdata);	
+		console.log(size);
+	%>
+
+	<form id="oneguestregister" class="register-form" name="register-form" action="#" method="post">
+		<div class="card personal_info" id="opc-billing">
+			<div class="card-header">
+				<h5 class="mb-0">
+					<a class="btn-link">
+					<span>2</span>Rechnungsadresse
+					</a>
+				</h5>
+			</div>
+			<div class="card-body">
+				<!-- <div class="row">
+					<div class="col-md-12 mt-3">
+						<div class="form-group">
+							<div class="checkbox" style="padding-left:0px;">
+								<input id="möchte"  class="adresse_versenden" type="checkbox" name="" value="" checked="">
+								<label for="möchte">Ja, ich möchte über Neuigkeiten, Angebote und Themen Nachhaltigkeit informiert werden.</label>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-lg-12">
+						<h6 class="txt-upper mb-3">Persönliche Informationen</h6>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Vorname <span class="redStar">*</span></label>
+						<span><input title="Vorname" data-valcode="!b" type="text" name="first_name" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.first_name : "" %>"
+								class="form-control"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Nachname <span class="redStar">*</span></label>
+						<span><input title="Nachname" data-valcode="!b" type="text" name="last_name" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.last_name : "" %>"
+								class="form-control"></span>
+					</div>
+					
+					<div class="col-lg-12 form-group">
+						<label>Firma </label>
+						<span><input title="Firma" type="text" data-valcode="" name="company" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.company : "" %>"
+								class="form-control"></span>
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Adresse <span class="redStar">*</span> <a href="#" class="priorityPopover" data-toggle="popover" data-content="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+						<span><input title="Adresse 1" placeholder="Strasse Nr., PLZ und Ort" data-valcode="!b" type="text" name="address_1" id="billing_address" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.address_1 : "" %>"
+								class="form-control"></span>
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Adresszusatz </label>
+						<span><input title="Adresse 2" data-valcode="" type="text" name="address_2" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.address_2 : "" %>"
+								class="form-control"></span>
+					</div>
+					<div class="col-lg-6 form-group"> 
+						<label>PLZ <span class="redStar">*</span></label>
+						<span><input title="PLZ" data-valcode="!b" type="text" name="postcode" id="billing_postcode" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.postcode : "" %>"
+								class="form-control greyInput"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Ort <span class="redStar">*</span></label>
+						<span><input title="Ort" data-valcode="!b" type="text" name="city" id="billing_city" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.city : "" %>"
+								class="form-control greyInput"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Kanton <span class="redStar">*</span></label>
+						<span>
+							<select title="kanton" type="text" name="billing_stateshort" class="form-control kanton-billing greyInput">
+								<% if(utls.isNotEmpty(chstates)) { %>
+									<% Object.keys(chstates).forEach((key, index) => { %>
+										<% if(userdata.hasOwnProperty('billing')) { %>
+											<option value="<%= key %>" <%= key == userdata.billing.state ? 'selected' : '' %>><%= chstates[key]  %></option>
+										<% } else { %>
+											<option value="<%= key %>"><%= chstates[key] %></option>
+										<% } %>
+									<% }); %>
+								<% } %>
+							</select>
+							<!--<input title="Kanton" data-valcode="!b" type="text" name="state" id="billing_state" value="<%= userdata.hasOwnProperty('billing') ? utls.getState(userdata.billing.state) : "" %>" class="form-control greyInput">
+							<input title="Kanton" type="hidden" name="billing_stateshort" id="billing_stateshort" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.state : "" %>" class="form-control greyInput" readonly>-->
+						</span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Land <span class="redStar">*</span></label>
+						<span>
+							<select title="" type="text" name="billing_countryshort" class="form-control land-billing greyInput">
+								<% if(utls.isNotEmpty(countries)) { %>
+									<% Object.keys(countries).forEach((key, index) => { %>
+									<option value="<%= key %>"><%= countries[key] %></option>
+									<% }); %>
+								<% } %>
+							</select>
+							<!-- <input title="land" data-valcode="!b" type="text" name="countryn" id="billing_country" value="<%= userdata.hasOwnProperty('billing') ? utls.getCountry(userdata.billing.country) : "" %>" class="form-control greyInput">
+							<input title="Kanton" type="hidden" name="billing_countryshort" id="billing_countryshort" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.country : "" %>" class="form-control greyInput" readonly>-->
+						</span>
+					</div>
+					
+					<div class="col-lg-6 form-group">
+						<label>Telefon </label>
+						<span><input title="Telefon" data-valcode="" type="text" name="phone" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.phone : "" %>"
+								class="form-control"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Mobile </label>
+						<span><input title="Mobile" data-valcode="" type="text" name="mobile" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.mobile : "" %>" class="form-control"></span>
+					</div>
+
+					<div class="col-lg-12 form-group">
+						<label>E-Mail <span class="redStar">*</span></label>
+						<% if(!userdata.hasOwnProperty('role')) { %>
+						<span><input title="E-Mail-Adresse" data-valcode="e" type="email" name="email" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.email : "" %>"
+								class="form-control"></span>
+								<% } else { %>
+									<span><input title="E-Mail-Adresse" data-valcode="e" type="email" name="email" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.email : "" %>"
+										class="form-control greyInput" readonly></span>
+								<% } %> 
+					</div>
+				</div>
+				<% if(!userdata.hasOwnProperty('role')) { %>
+				<div class="row onepage_credentials">
+					<!-- <div class="col-lg-12 form-group">
+						<label>Anmeldedaten <span class="redStar">*</span></label>
+						<span><input title="Anmeldedaten" data-valcode="!b" type="text" name="username" value=""
+								class="form-control oneusername"></span>
+					</div> -->
+					<div class="col-lg-6 form-group">
+						<label>Passwort <span class="redStar">*</span></label>
+						<div class="form-icon-base">
+							<span><input title="Password" id="password" data-valcode="spl_min" valcode-min="6" type="password" name="password" value=""
+								class="form-control onepassword"></span>
+							<span class="form-icon"><img id="pas_visible5" src="/images/svg/eye2.svg"></span>
+						</div>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Passwort bestätigen <span class="redStar">*</span></label>
+						<div class="form-icon-base">
+							<span><input id="pass6" title="Passwort bestätigen" valcode-pss="password" data-valcode="!b_pas"  type="password" name="confirm_password" value=""
+								class="form-control oneconfirmpassword"></span>
+							<span class="form-icon"><img id="pas_visible6" src="/images/svg/eye2.svg"></span>
+						</div>
+					</div>
+				</div>
+				<% } else { %>
+					 <input id="shipaddresstype" type="hidden" name="shipaddress" value="2" />
+				<% } %>
+				
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder </p>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group shp">
+							<div class="radio shipaddress" style="padding-left:0px;">
+								<input id="andiese" class="" type="radio" name="shipaddress" value="1" checked>
+								<label for="andiese">An diese Adresse verschicken</label>
+							</div>
+						<div class="radio shipaddress" style="padding-left:0px;">
+							<input id="andere" type="radio" name="shipaddress" value="2">
+							<label for="andere" id="txt">An andere Adresse verschicken</label>
+						</div>
+						</div>
+					</div>
+				</div>	
+
+				<p>
+					<% if(userdata.hasOwnProperty('role')) { %>
+						<input class="formtype" type="hidden" name="formtype" value="<%= userdata.role == 'customer' ? '1' : '2' %>" class="form-control">
+					<% } else { %>
+						<input class="formtype" type="hidden" name="formtype" value="1" class="form-control">
+					<% } %>
+					<input type="hidden" name="country" value="CH" class="form-control">
+				</p>
+				<!--<p style="text-align:center"><input type="submit" value="Ein Konto erstellen" class="btn btn-secondary" /></p>-->
+				<div class="row">
+					<div class="col-md-12 mt-3">
+						<% if(userdata.hasOwnProperty('role')) { %>
+							<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Seite wird geladen...</p></div>
+							<!-- <a href="javascript:void(0);" id="gostep3" class="btn btn-primary pull-right btn-md">weiter</a> -->
+							<p class="trigger_versandetails">
+								<button type="submit" id="submit1" class="btn btn-primary pull-right btn-md">weiter</button>
+							</p>
+						<% } else { %>
+							<p class="trigger_versandetails"><a href="javascript:void(0);" id="backstep1" class="btn btn-primary pull-left btn-md">zurück</a>
+								<button type="submit" id="submit1" class="btn btn-primary pull-right btn-md">weiter</button></p>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card shipping_info" id="opc-shipping">
+			<div class="card-header">
+			<h5 class="mb-0">
+				<a class="btn-link">
+				<span>3</span>Lieferadresse
+				</a>
+			</h5>
+			</div>
+			<div class="card-body" style="display: none;">
+				<% if(parseInt(shipaddresses.length) > 0) { %>
+					<% include onepage-shipaddresses %>
+				<% } %>
+				<div class="row versanddetails">
+					<div class="col-lg-6 form-group inputbox">
+						<label>Vorname <span class="redStar">*</span></label>
+						<input type="hidden" id="sid" name="sid" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.id : "" %>" class="sid">
+						<span><input title="Vorname" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" type="text" name="b2_first_name" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.first_name : "" %>"
+								class="form-control shipping_valid billing_fname"></span>
+					</div>
+					<div class="col-lg-6 form-group inputbox">
+						<label>Nachname <span class="redStar">*</span></label>
+						<span><input title="Nachname" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" type="text" name="b2_last_name" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.last_name : "" %>"
+								class="form-control shipping_valid billing_lname"></span>
+					</div>
+					<div class="col-lg-12 form-group inputbox">
+						<label>Firma </label>
+						<span><input title="Firma" data-valcode="" type="text" name="b2_company" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.company : "" %>"
+								class="form-control billing_company"></span>
+					</div>
+					<div class="col-lg-12 form-group inputbox">
+						<label>Adresse <span class="redStar">*</span> <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+						<span><input title="Adresse 1" placeholder="Strasse Nr., PLZ und Ort"  data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" id="shipping_address" type="text" name="b2_address_1" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.address_1 : "" %>"
+								class="form-control shipping_valid billing_address_1"></span>
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Adresszusatz </label>
+						<span><input title="" data-valcode="" type="text" name="b2_address_2" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.address_2 : "" %>" class="form-control billing_address_2"></span>
+					</div>
+					<!-- <div class="col-lg-12 form-group inputbox">
+						<label>Adresse 2 <span class="redStar">*</span></label>
+						<span><input title="Adresse 2" data-valcode="" type="text" name="b2_address_2" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.address_2 : "" %>"
+								class="form-control"></span>
+					</div> -->
+					<div class="col-lg-6 form-group inputbox">
+						<label>PLZ <span class="redStar">*</span></label>
+						<span><input title="PLZ" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" type="text" name="b2_postcode" id="shipping_postcode" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.postcode : "" %>"
+								class="form-control shipping_valid greyInput billing_postcode"></span>
+					</div>
+					<div class="col-lg-6 form-group inputbox">
+						<label>Ort <span class="redStar">*</span></label>
+						<span><input type="text" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" title="Ort" data-valcode="" name="b2_city" id="shipping_city" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.city : "" %>"
+								class="form-control shipping_valid greyInput billing_city"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Kanton <span class="redStar">*</span></label>
+						<span>
+							<select title="kanton" type="text" name="b2_stateshort" class="form-control kanton-shipping greyInput">
+								<% if(utls.isNotEmpty(chstates)) { %>
+									<% Object.keys(chstates).forEach((key, index) => { %>
+										<% if(userdata.hasOwnProperty('shipping')) { %>
+											<option value="<%= key %>" <%= key == userdata.shipping.state ? 'selected' : '' %>><%= chstates[key]  %></option>
+										<% } else { %>
+											<option value="<%= key %>"><%= chstates[key] %></option>
+										<% } %>
+									<% }); %>
+								<% } %>
+							</select>							
+							<!-- <input title="kanton" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" type="text" name="b2_state" id="shipping_state" value="<%= userdata.hasOwnProperty('shipping') ? utls.getState(userdata.shipping.state) : "" %>" class="form-control shipping_valid greyInput billing_state">
+							<input title="kanton" data-valcode="" type="hidden" name="b2_stateshort" id="shipping_stateshort" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.state : "" %>" class="form-control billing_stateshort" readonly="">-->
+
+						</span>
+					</div>
+					<div class="col-lg-6 form-group selectbox">
+						<label>Land <span class="redStar">*</span></label>
+						<span>
+							<select title="" type="text" name="b2_countryshort" class="form-control land-shipping greyInput">
+								<% if(utls.isNotEmpty(countries)) { %>
+									<% Object.keys(countries).forEach((key, index) => { %>
+										<option value="<%= key %>"><%= countries[key] %></option>
+									<% }); %>
+								<% } %>
+							</select>
+							<!-- <input title="Land" data-valcode="<%= userdata.hasOwnProperty('role') ? "!b" : "" %>" type="text" name="b2_country" id="shipping_country" value="<%= userdata.hasOwnProperty('shipping') ? utls.getCountry(userdata.shipping.country) : "" %>" class="form-control shipping_valid greyInput billing_country">
+							<input title="Land" data-valcode="" type="hidden" name="b2_countryshort" id="shipping_countryshort" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.country : "" %>" class="form-control billing_countryshort" readonly=""> -->
+						</span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Telefon </label>
+						<span><input title="Telefon" data-valcode="" type="text" name="b2_phone" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.phone : "" %>" class="form-control billing_phone"></span>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Mobile </label>
+						<span><input title="Mobile" data-valcode="" type="text" name="b2_mobile" value="<%= userdata.hasOwnProperty('shipping') ? userdata.shipping.mobile : "" %>" class="form-control billing_mobile"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder </p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 mt-3">
+						<% if(userdata.hasOwnProperty('role')) { %>
+							<!-- <a href="javascript:void(0);" id="gostep4" class="btn btn-primary pull-right btn-md">WEITER</a> -->
+							<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Seite wird geladen...</p></div>
+							<a href="javascript:void(0);" id="back2billing" class="btn btn-primary pull-left btn-md">zurück</a>
+							<button type="submit" id="submit2" class="btn btn-primary pull-right btn-md">weiter</button>
+						<% } else { %>
+							<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Seite wird geladen...</p></div>
+							<a href="javascript:void(0);" id="backstep2" class="btn btn-primary pull-left btn-md">zurück</a>
+							<button type="submit" id="submit2" class="btn btn-primary pull-right btn-md">weiter</button>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

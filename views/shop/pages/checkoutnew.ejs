@@ -1,0 +1,196 @@
+<% include ../templates/shop-header %>
+<%
+var states = utls.swissStates();
+%>
+
+<style type="text/css">
+	.fixedHeader {
+		position: inherit !important;
+		top: inherit;
+		right: inherit;
+		left: inherit;
+	}
+
+	#staic-page-banner {
+		margin-top: 0px !important;
+	}
+</style>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item">Checkout New</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5">
+	<div class="container">
+		<!--- Alert msg will come here-->
+		<div class="row">
+			<div class="col-lg-8 col-md-12">
+				
+				<div id="checkoutsteps">
+					<ol>
+						<li id="opc-login">
+							<div class="step-info">
+								<h2>Wie möchten Sie bestellen?</h2>
+							</div>
+							<div class="opc-step2">
+								
+								<div class="checkout-page-login">
+									<div class="row">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+											<h3>Registrierung</h3>
+											<p>Die Registrierung Ihres eigenen Kundenkontos bietet folgende Vorteile:</p>
+											<div class="check_step_col_list">
+												<ul>
+													<li>
+														<i class="fa fa-check" aria-hidden="true"></i>
+														<span>10 Fr. Neukundenrabatt</span>
+													</li>
+													<li>
+														<i class="fa fa-check" aria-hidden="true"></i>
+														<span>Treuepunkte (2% Rabatt)</span>
+													</li>
+													<li>
+														<i class="fa fa-check" aria-hidden="true"></i>
+														<span>bequemes Bestellen</span>
+													</li>
+													</ul>
+											</div>
+											<p><a id="onepage-register-checkout" class="btn btn-secondary chkoutlogin" href="javascript:void(0)">Weiter zur Adresse</a></p>
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+											<h3>Ohne Registrierung</h3>
+											<p>Bestellen Sie einfach und schnell als Gast ohne ein Kundenkonto zu Eröffnen</p>
+											<p><a id="onepage-guest-checkout" class="btn btn-secondary" href="javascript:void(0)">Weiter zur Adresse</a></p>
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+											<h3>Kunden - Login</h3>
+											<form id="loginform" name="login-form" action="#" method="post">
+												<div class="form-group">
+													<label>E-Mail-Adresse <span class="redStar">*</span></label>
+													<span><input type="text" title="Username" data-valcode="!b" name="username" value="" class="form-control"></span>
+												</div>
+												<div class="form-group">
+													<label>Password <span class="redStar">*</span></label>
+													<span><input title="Password" data-valcode="!b" type="password" name="password" value="" class="form-control"></span>
+												</div>
+												<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div>
+												<p style="text-align:center">
+													<input type="submit" id="authsubmit" name="submit" value="Submit" class="btn btn-secondary">
+												</p>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li id="opc-billing">
+							<div class="step-info">
+								<h2>Rechnungsadresse</h2>
+							</div>
+							<div class="opc-step2">
+								<% include ../modules/guestorderformnew %>
+							</div>
+						</li>
+						<li id="opc-review">
+							<div class="step-info">
+								<h2>Bestellübersicht</h2>
+							</div>
+							<div class="opc-step6">
+								<h4 class="d-flex justify-content-between align-items-center mb-3">
+									<p class="text-muted">Bestellübersicht</p>
+									<span class="badge badge-secondary badge-pill"><%= cart.cartproducts.length %></span>
+								</h4>
+								<div class="cart-detail bg-light same-height checkOutLeftCart">
+									<% if(utls.isEmpty(cart.cartproducts)) { %>
+									<% cart.cartproducts.forEach(function(cartproduct, el) { %>
+									<p>
+										<span><%= cartproduct.name %></span>
+										<span><%= cartproduct.quantity %> x <%= utls.priceFormat(cartproduct.price) %> = CHF
+											<%= utls.priceFormat(cartproduct.subtotal) %></span>
+									</p>
+									<% }); %>
+									<% } %>
+									<hr>
+									<p>
+										<span>Zwischensumme</span>
+										<span>CHF <%= utls.priceFormat(cart.carttotal) %></span>
+									</p>
+									<p>
+										<span>Rabatt</span>
+										<span style="text-decoration:line-through; color: #d25050;">CHF
+											<%= utls.priceFormat(cart.discount) %></span>
+									</p>
+									<hr>
+									<p class="total-price">
+										<span>Gesamt</span>
+										<span>CHF <%= utls.priceFormat(cart.carttotal) %></span>
+									</p>
+									<hr>
+								</div>
+							</div>
+						</li>
+					</ol>
+				</div>
+
+			</div>
+			<div class="col-lg-4 col-md-12">
+				<div class="right">
+					<div class="main-post-box white-bg br-6 mb-3 info_bg">
+						<div class="block block-progress opc-block-progress">
+							<div class="block-title">
+							<strong><span>Ihr Bestellfortschritt</span></strong>
+							</div>
+							<div class="block-content">
+							<dl>
+							<div id="billing-progress-opcheckout">
+							<dt>
+							Rechnungsadresse</dt>
+							</div>
+							<div id="shipping-progress-opcheckout">
+							<dt>
+							Lieferadresse</dt>
+							</div>
+							<div id="shipping_method-progress-opcheckout">
+							<dt>
+							Versandinformationen</dt>
+							</div>
+							<div id="payment-progress-opcheckout">
+							<dt>
+							Zahlungsart</dt>
+							</div>
+							</dl>
+							</div>
+							</div></div><div class="cart-info-box">
+							<div class="row">
+							<p>Helpline: <a title="Helpline" href="tel:0800440044">0800 44 00 44</a><br>E-Mail: <a title="E-Mail Support" href="mailto:info@ipet.ch">info@ipet.ch</a></p>
+							</div>
+							<div class="row">Montag bis Freitag: 8:00 - 12:00 Uhr / 13:30 - 17:00 Uhr</div>
+							</div>
+							<div class="cart-info-box">
+							<div class="row"><strong>Ihre Vorteile:</strong>
+							<ul>
+							<li>Schnelle Lieferzeiten</li>
+							<li>Schweizer Unternehmen</li>
+							<li>Sichere Zahlung mit SSL-Verschlüsselung</li>
+							</ul>
+							</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include ../templates/shop-footer %>

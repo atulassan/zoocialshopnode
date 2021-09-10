@@ -1,0 +1,37 @@
+<% //console.log(categories); %>
+
+<% if(utls.isEmpty(categories)) { %>
+
+<h4 class="shopProductTitles">Kategorie <span class="mobFilterClose">&times;</span></h4>
+<hr>
+<ul class="filterList ">
+  <nav class="nav" role="navigation">
+    <ul class="nav__list">
+      <% categories.forEach(function(category, el) { %>
+      <li class="leve1">
+        <input id="group-1" type="checkbox" hidden />
+        <label for="group-1"><span class="fa fa-angle-right"></span> <%= category.name %></label>
+        <% if(utls.isEmpty(category.children) && category.children.length > 0 ) { %>
+        <ul class="group-list">
+          <% category.children.forEach(function(childlevel1, el) { %>
+          <li class="leve2">
+            <input id="sub-group-1" type="checkbox" hidden />
+            <label for="sub-group-1"><span class="fa fa-angle-right"></span><%= childlevel1.name %></label>
+            <% if(utls.isEmpty(childlevel1.children) && childlevel1.children.length > 0 ) { %>
+              <% //console.log(childlevel1.children); %>
+            <ul class="sub-group-list">
+              <% childlevel1.children.forEach(function(childlevel2, el) { %>
+                  <li class="level3"><a href="#"><%= childlevel2.name %></a></li>
+              <% }); %>
+            </ul>
+            <% } %>
+          </li>
+          <% }); %>
+        </ul>
+        <% } %>
+      </li>
+      <% }); %>
+    </ul>
+  </nav>
+</ul>
+<% } %>

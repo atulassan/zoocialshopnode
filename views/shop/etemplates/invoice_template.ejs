@@ -1,0 +1,232 @@
+<div style="font-family:arial, sans-serif;font-size:13px;margin:0px auto; border:10px solid #A9C598; background:#ffffff; min-width: 600px; max-width: 800px; padding: 20px; "> 
+    <table width="" border="0" cellspacing="0" cellpadding="0" style="font-family:arial, sans-serif; font-size:13px; width: 100%;">
+        <tr>
+            <td colspan="3">
+              <a href="#" style="text-align:center; display:block;"><img alt="zoocialshop" title="zoocialshop" border="0" src="https://zoocialshop.ch/images/logo1.jpg"></a>
+            </td>
+        </tr>               
+        <tr style="text-align:left">
+            <td colspan="3">
+              <p style="margin:15px 0px; line-height:20px; font-size: 16px">Vielen Dank für deine Bestellung</p>
+              <p style="margin:10px 0px; line-height:20px; font-size: 14px">Diese automatische Empfangsbestätigung informiert dich über deinen Bestelleingang bei uns.<br><b>Gesamtsumme deiner Bestellung: CHF <%= utls.priceFormat(order.total) %></b></p>
+            </td>
+        </tr>    
+        <tr>
+            <td colspan="3">
+                <p style="background: #A9C598;color: #fff; margin: 0px; padding: 8px 15px; font-size: 16px; font-weight: bold;">Bestellinformation:</p>
+            </td>
+        </tr>
+        <tr>
+		  <td>
+			  <p style="margin:10px 0px; line-height:20px; font-size: 16px; font-weight: bold;">Kundennummer: <%= parseInt(order.customer_id) > 0 ? order.customer_id : "Gast" %></p>
+		  </td>
+        </tr>
+        <tr>
+            <td valign="top" width="50%">
+              <p style="margin:0px 0px; line-height:20px; font-size: 16px; font-weight: bold;">Rechnungsadresse:</p>
+			   <p style="margin:5px 0px 10px 0px; line-height:20px; font-size: 14px">
+					<% if(order.billing.company != "") { %>
+					<%= order.billing.company %><br>
+					<% } %>
+					<%= order.billing.first_name %> <%= order.billing.last_name %><br>
+					<%= order.billing.address_1 %><br>
+					<% if(order.billing.address_2 != "") { %>
+						<%= order.billing.address_2 %><br>
+					<% } %>
+					<%= order.billing.postcode %> <%= order.billing.city %><br>
+					<%= utls.getCountry(order.billing.country) %>
+              </p>
+            </td>
+            <td valign="top" width="50%">
+                <p style="margin:0px 0px; line-height:20px; font-size: 16px; font-weight: bold;">Lieferadresse:</p>
+				<p style="margin:5px 0px 10px 0px; line-height:20px; font-size: 14px">
+					<% if(order.shipping.company != "") { %>
+						<%= order.shipping.company %><br>
+					<% } %>
+					<%= order.shipping.first_name %> <%= order.shipping.last_name %><br>
+					<%= order.shipping.address_1 %><br>
+					<% if(order.shipping.address_2 != "") { %>
+						<%= order.shipping.address_2 %><br>
+					<% } %>
+			   		<%= order.shipping.postcode %> <%= order.shipping.city %><br>
+			   		<%= utls.getCountry(order.shipping.country) %>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <p style="background: #A9C598;color: #fff; margin: 0px; padding: 8px 15px; font-size: 16px; font-weight: bold; ">Bestellübersicht:</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <p style="margin:15px 0px 5px 0px; line-height:20px; font-size: 14px"><b>Bestellnummer:</b> #<%= order.number %></p>
+                <p style="margin:5px 0px; line-height:20px; font-size: 14px"><b>Bestelleingang:</b> <%= utls.dateFormat(order.date_created).date %> <%= utls.dateFormat(order.date_created).time %></p>
+                <p style="margin:5px 0px 15 0px; line-height:20px; font-size: 14px"><b>Versand:</b> Priority-Versand (Lieferung innerhalb 1-2 Arbeitstage)</p>
+            </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table cellpadding="0" cellspacing="0" width="100%" >
+				<thead>
+				  <tr>
+					<th width="10%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px">Artikelnr.</th>
+					<th width="40%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px">Artikelname</th>
+					<th width="10%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px; text-align: center;">VAR</th>
+					<th width="10%" align="left" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px; text-align: center;">Menge</th>
+					<th width="10%" align="center" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px; text-align: center;">MWST</th>
+					<th width="10%" align="right" style="border-top:1px solid #000; border-bottom:1px solid #000; padding: 10px 0px; font-size: 14px; text-align: right;">Betrag</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <% order.line_items.forEach(function(item, el) { %>
+				  <tr>
+						<td align="left" valign="top" style="padding: 7px 0px; font-size: 14px"><%= item.sku %></td>
+						<td align="left" valign="top" style="padding: 7px 0px; font-size: 14px"><%= item.name %></td>
+						<td align="center" valign="top" style="padding: 7px 0px; font-size: 14px;">
+							<% if(item.hasOwnProperty('meta_data')) { %>
+								<% var remiAvail = false;
+								if(item.meta_data.length > 0) {
+									item.meta_data.forEach((meta, el)=> {
+										if(meta.key == "remi") {
+											remiAvail = true;
+											return false;
+										}				
+									}); 
+								} %>
+								<% if(remiAvail) { %>
+									Remi	
+								<% } %>	
+							<% } %>
+						</td>
+						<td align="center" valign="top" style="padding: 7px 0px; font-size: 14px"><%= item.quantity %> <%= item.quantity > 1 ? "" : "" %></td>
+						<!-- <td align="center" valign="top" style="padding: 7px 0px; font-size: 14px;"><%= utls.priceFormat(item.price) %></td> -->
+						<td align="center" valign="top" style="padding: 7px 0px; font-size: 14px">
+						  <!-- 2.5% -->
+						  <% if(item.tax_class == 'mwst-2-5') { %>
+							  B	
+						  <% } %>
+						  <!-- 7.7% -->
+						  <% if(item.tax_class == 'mwst-7-7') { %>
+							  C
+						  <% } %>
+					  	</td>
+						<td align="right" valign="top" style="padding: 7px 0px; font-size: 14px">
+							<!-- <%= utls.priceFormat(item.subtotal) %> -->
+							<% if(item.hasOwnProperty('meta_data')) { %>
+								<% if(item.meta_data.length > 0) {
+									item.meta_data.forEach((meta, el)=> {
+										if(meta.key == "price") { %>
+											<span class="chf">CHF</span> <%= utls.priceFormat(meta.value) %>
+										<% }				
+									}); 
+								} %>
+							<% } else { %>
+								<%= utls.priceFormat((item.subtotal + item.subtotal_tax)) %>
+							<% } %>
+						</td>
+				  </tr>
+				  <% }); %>
+					<tr>
+					  <td colspan="5" align="left" style="padding:10px 0px; border-top:2px solid #000;">
+						<p style=" font-family:arial; padding:0px; color: #000; margin: 8px 0px; font-size: 14px;">Zwischensumme</p>
+					  </td>
+					  <td align="right" style="padding:10px 0px; border-top:2px solid #000;">
+						<p style=" font-family:arial; padding:0px; color: #000; margin: 8px 0px; font-size: 14px;"><%= order.shipping_total > 0 ? utls.priceFormat((order.total - order.shipping_total)) : utls.priceFormat(order.total) %></p>
+					  </td>
+					</tr>
+					<tr>
+					  <td colspan="4" align="left" style="padding:10px 0px; border-top:2px solid #000;">
+						<p style=" font-family:arial; padding:0px; color: #000; margin: 8px 0px; font-size: 14px;">Versandkosten</p>
+					  </td>
+					  <td align="center" style="padding:10px 0px; border-top:2px solid #000;">
+						<p style=" font-family:arial; padding:0px; color: #000; margin: 8px 0px; font-size: 14px;">
+							<% if(mwst_7_7 > 0) { %>
+								C
+							<% } else { %>
+								<% if(mwst_2_5 > 0) { %>
+									B
+								<% } %>	
+							<% } %>
+						</p>
+					  </td>
+					  <td align="right" style="padding:10px 0px; border-top:2px solid #000;">
+						<p style=" font-family:arial; padding:0px; color: #000; margin: 8px 0px; font-size: 14px;"><%= utls.priceFormat(order.shipping_total) %></p>
+					  </td>
+					</tr>
+					<tr>
+					  <td colspan="6" width="100%" style="padding:0px;">
+						  <table cellpadding="0" cellspacing="0" width="100%">
+							<% if(parseFloat(mwst_2_5) > 0) { %>
+								<tr>
+									<td align="left" width="40%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px">B <span style="padding-left: 10px">MWSt, 2.5%</span></p>
+									</td>
+									<!-- <td align="left" width="20%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(total_2_5) %></p>
+									</td> -->
+									<td align="left" width="20%" style="padding:5px 0px;">
+										<!-- <p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(vat_plustotal_2_5) %></p>-->
+									</td>
+									<td align="right" width="20%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(mwst_2_5) %></p>
+									</td>
+								</tr>
+							<% } %>
+							<% if(parseFloat(mwst_7_7) > 0) { %>
+								<tr>
+									<td align="left" width="40%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px">C <span style="padding-left: 10px">MWSt, 7.7%</span></p>
+									</td>
+									<!-- <td align="left" width="20%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(total_7_7) %></p>
+									</td> -->
+									<td align="left" width="20%" style="padding:5px 0px;">
+										<!-- <p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(vat_plustotal_7_7) %></p>-->
+									</td>
+									<td align="right" width="20%" style="padding:5px 0px;">
+										<p style=" font-family:arial; font-size: 14px; padding:0px; color: #000; margin: 0px"><%= utls.priceFormat(mwst_7_7) %></p>
+									</td>
+								</tr>
+							<% } %>
+						  </table>
+					  </td>
+					</tr>
+					<tr>
+					  <td colspan="5" align="left" style="padding:10px 0px;">
+						<p style=" font-family:arial; font-size: 16px; padding:0px; color: #000; font-weight: bold; margin: 5px 0px">
+						  Total CHF inkl. MwSt.</p>
+					  </td>
+					  <td align="right" style="padding:10px 0px;">
+						<p style=" font-family:arial; font-size: 16px; padding:0px; color: #000; font-weight: bold; margin: 5px 0px"><%= utls.priceFormat(order.total) %></p>
+					  </td>
+					</tr>
+				  </tbody>
+            </table>
+          </td>
+        </tr>  
+        <tr>
+          <td colspan="3">
+              <!-- <p style="margin:10px 0px;font-size: 16px; font-weight: bold;">Gewählte Zahlungsart:</p> -->
+			  <p style="margin:8px 0 5px; line-height:normal; font-size:14px;">Als Zahlungsmodalität hast du <b><%= payment_type %></b> 
+				<!-- <% if(userdata.hasOwnProperty('ptype')) { %>
+					<b><%= userdata.ptype %></b>
+				<% } else { %>
+					<b>Visa</b>
+				<% } %> -->
+				gewählt.</p>
+              <p style="margin:8px 0 5px; line-height:normal; font-size:14px;">Informationen zu unseren allgemeinen Geschäftsbedingungen findest du in unseren <a href="https://zoocialshop.ch/agb" target="_blank" style="text-decoration: none; color: #fcaf26;">AGB's</a>.<br> Umfassende Informationen darüber, wie du deine Bestellungen online aufrufen und verwalten kannst, findest du in unseren <a href="https://zoocialshop.ch/faq" target="_blank" style="text-decoration: none; color: #fcaf26;">FAQ</a>.</p>
+
+              <p style="margin:8px 0 5px; line-height:normal; font-size:14px;">Wir freuen uns auf  deinen nächsten Besuch!</p>
+          </td>
+        </tr>
+    </table>
+    <table width="" border="0" cellspacing="0" cellpadding="0" style="font-family:arial, sans-serif; font-size:13px; width: 100%; text-align: center; background: #f1f1f1; margin-top: 20px; border-top: 1px solid #ddd;">
+        <tr>
+            <td>
+            	<p style="margin:0px; line-height:20px; font-size:14px; padding-top: 16px">Tierische Grüsse</p>
+            	<p style="margin:10px 0px 0px; line-height:20px; color: #A9C598; font-size: 16px; font-weight: bold; padding-bottom: 20px">Dein <a href="https://zoocial.ch" target="_blank" style="text-decoration: none; color: #A9C598;">ZOOCIAL</a> Team</p>
+            </td>
+        </tr>
+    </table>
+  </div>

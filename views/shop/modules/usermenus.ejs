@@ -1,0 +1,24 @@
+<% if (status) { %>
+<div class="top-user-deatils" style="position: relative;">
+	<a class="" href="javascript:;"><span><i><%= userdata.hasOwnProperty('billing') ? userdata.billing.first_name.substring(0,1) : "" %></span></i></a>
+	<div class="my-acc dropdown-menu box-shadow" aria-labelledby="logout">
+		<ul>
+			<li><a href="/mein_ubersicht"><img src="/images/svg/overview.svg">Meine Übersicht</a></li>
+			<li><a href="/benutzerdaten"><img src="/images/svg/personalData.svg">Meine Benutzerdaten</a></li>
+			<li><a href="/meine_bestellungen"><img src="/images/svg/orderList.svg">Meine Bestellungen</a></li>
+			<li><a href="/lieferadressen-verwalten"><img src="/images/svg/bill.svg">Lieferadressen verwalten</a></li>
+			<li><a href="/logout"><img src="/images/svg/top-logout.svg">Abmelden</a></li>
+		</ul>
+	</div>
+</div>
+<% } else { %>
+	<div class="top-user-deatils" style="position: relative;">
+		<a class="" href="javascript:;"><img src="/images/svg/userIcon.svg"></a>
+		<div class="my-acc dropdown-menu box-shadow" aria-labelledby="logout">
+			<ul>
+				<li><a href="/login"><img src="/images/svg/top-users.svg">anmelden</a></li>
+				<li><a href="/registrieren"><img src="/images/svg/top-settings.svg">registrieren</a></li>
+			</ul>
+		</div>
+	</div>
+<% } %>

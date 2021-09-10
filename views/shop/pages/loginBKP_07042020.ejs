@@ -1,0 +1,67 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit!important; 
+		top:inherit; 
+		right: inherit; 
+		left: inherit;
+	 }
+	 #staic-page-banner { margin-top: 0px!important; }
+</style>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 my-auto">
+					<h1>Anmelden</h1>
+				</div>
+				<div class="col-lg-6 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Anmelden</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="inner-page-content" class="section-md inner-grey-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 mb-4">
+				<h4> Anmelden oder Benutzerkonto erstellen</h4>
+			</div>
+			<div class="col-lg-6 col-md-12  ab-content">
+				<h6 class="txt-upper mb-3">Neue Kunden</h6>
+				<p>Wenn Sie ein Benutzerkonto einrichten, profitieren Sie von unserem Neukundenrabatt, können Treupunkte
+					sammeln, Ihre letzte Bestellung wiederholen und vieles mehr.</p>
+				<p>Wenn Sie ein Benutzerkonto einrichten, profitieren Sie von unserem Neukundenrabatt, können Treupunkte
+					sammeln, Ihre letzte Bestellung wiederholen und vieles mehr.</p>
+
+				<a href="/register" class="btn btn-secondary registerBtnMt">Benutzerkonto anlegen</a>
+
+			</div>
+			<div class="col-lg-6 col-md-12 leftLineOnePx loginRight">
+				<h6 class="txt-upper mb-3">Registrierte Kunden</h6>
+				<p>Wenn Sie bei uns ein Benutzerkonto besitzen, melden Sie sich bitte an.</p>
+				<form id="loginform" name="login-form" action="#" method="post">
+					<div class="form-group">
+						<label>E-Mail-Adresse <span class="redStar">*</span></label>
+						<span><input type="text" title="Username" data-valcode="!b" name="username" value="" class="form-control"></span>
+					</div>
+					<div class="form-group">
+						<label>Password <span class="redStar">*</span></label>
+						<span><input title="Password" data-valcode="!b" type="password" name="password" value="" class="form-control"></span>
+					</div>
+					<div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p></div>
+					<p style="text-align:center">
+						<input type="submit" id="authsubmit" name="submit" value="Submit" class="btn btn-secondary">
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

@@ -1,0 +1,19 @@
+<div class="inner-page-banner-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 my-auto">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <% var active = singleCategory.breadcrumb.length -1; %>
+          <% singleCategory.breadcrumb.forEach((crumb, idx)=> { %>
+            <% if(idx === active) { %>
+              <li class="breadcrumb-item active"><%= crumb.name.replace(/&amp;/g, "&") %></li>
+            <% } else { %>
+              <li class="breadcrumb-item"><a href="/category/<%= crumb.name %>/<%= crumb.id %>"><%= crumb.name.replace(/&amp;/g, "&") %></a></li>
+            <% } %>			
+        <% }); %>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>

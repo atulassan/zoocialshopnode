@@ -1,0 +1,171 @@
+<form id="checkoutform" class="register-form" name="checkout-form" action="#" style="margin-top:40px;" method="post">
+	<div class="row">
+		<div class="col-lg-12">
+			<h6 class="txt-upper mb-3">Persönliche Informationen</h6>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Vorname <span class="redStar">*</span></label>
+			<span><input title="Vorname" data-valcode="!b" type="text" name="first_name" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Nachname <span class="redStar">*</span></label>
+			<span><input title="Nachname" data-valcode="!b" type="text" name="last_name" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>E-Mail-Adresse <span class="redStar">*</span></label>
+			<span><input title="E-Mail-Adresse" data-valcode="e" type="email" name="email" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Firma<span class="redStar">*</span></label>
+			<span><input title="Firma" type="text" data-valcode="!b" name="company" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group">
+			<label>Adresse 1<span class="redStar">*</span></label>
+			<span><input title="Adresse 1" data-valcode="!b" type="text" name="address_1" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group">
+			<label>Adresse 2<span class="redStar">*</span></label>
+			<span><input title="Adresse 2" data-valcode="!b" type="text" name="address_2" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Telefon<span class="redStar">*</span></label>
+			<span><input title="Telefon" data-valcode="!b" type="text" name="phone" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>PLZ<span class="redStar">*</span></label>
+			<span><input title="PLZ" data-valcode="no" type="text" name="postcode" value="" class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Stadt<span class="redStar">*</span></label>
+			<span><input title="Stadt" data-valcode="!b" type="text" name="city" value="" class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Zustand<span class="redStar">*</span></label>
+			<span>
+				<select title="Zustand" data-valcode="sel" type="text" name="state" class="form-control">
+					<% if(utls.isNotEmpty(states)) { %>
+					<% Object.keys(states).forEach((key, index) => { %>
+					<option value="<%= key %>">
+						<%= states[key]  %>
+					</option>
+					<% }); %>
+					<% } %>
+				</select>
+			</span>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-lg-12">
+			<div class="checkbox form-check-label">
+				<input id="versanddetail" class="styled verTrigger" type="checkbox" name="diffshipping" value="1">
+				<label for="versanddetail">Versand an Differenzadresse senden</label>
+			</div>
+		</div>
+	</div>
+	<div class="row versanddetails" style="display: none;">
+		<div class="col-lg-12">
+			<h6 class="txt-upper mb-3">Lieferanschrift</h6>
+		</div>
+		<div class="col-lg-6 form-group inputbox">
+			<label>Vorname <span class="redStar">*</span></label>
+			<span><input title="Vorname" data-valcode="" type="text" name="b2_first_name" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group inputbox">
+			<label>Nachname <span class="redStar">*</span></label>
+			<span><input title="Nachname" data-valcode="" type="text" name="b2_last_name" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group inputbox">
+			<label>Firma<span class="redStar">*</span></label>
+			<span><input title="Firma" data-valcode="" type="text" name="b2_company" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group inputbox">
+			<label>Adresse 1 <span class="redStar">*</span></label>
+			<span><input title="Adresse 1" data-valcode="" type="text" name="b2_address_1" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group inputbox">
+			<label>Adresse 2 <span class="redStar">*</span></label>
+			<span><input title="Adresse 2" data-valcode="" type="text" name="b2_address_2" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group inputbox">
+			<label>PLZ<span class="redStar">*</span></label>
+			<span><input title="PLZ" data-valcode="" type="text" name="b2_postcode" value=""
+					class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group inputbox">
+			<label>Stadt<span class="redStar">*</span></label>
+			<span><input type="text" title="Stadt" data-valcode="" name="b2_city" value="" class="form-control"></span>
+		</div>
+		<div class="col-lg-12 form-group selectbox">
+			<label>Zustand<span class="redStar">*</span></label>
+			<span>
+				<select title="Zustand" data-valcode="" type="text" name="b2_state" class="form-control">
+					<% if(utls.isNotEmpty(states)) { %>
+					<% Object.keys(states).forEach((key, index) => { %>
+					<option value="<%= key %>">
+						<%= states[key]  %>
+					</option>
+					<% }); %>
+					<% } %>
+				</select>
+			</span>
+			<p><input type="hidden" name="country" value="CH" class="form-control"></p>
+		</div>
+	</div>
+	<div class="shipmentBg">
+		<div class="row">
+			<div class="col-lg-6 shipmentdetails">
+				<h6 class="txt-upper mb-3">Shipment Details</h6>
+				<div class="col-lg-12">
+					<div class="form-group">
+						<div class="radio form-check-inline" style="padding-left:10px;">
+							<input class="form-check-input" id="local_pickup" type="radio" value="local_pickup"
+								name="ship_method" checked>
+							<label data-toggle="tooltip" data-placement="top" title="" for="local_pickup"
+								style="margin-top: -5px"
+								data-original-title="Allow customers to pick up orders themselves. By default, when using local pickup store base taxes will apply regardless of customer address.">Local
+								pickup</label>
+						</div>
+						<input name="ship_method_title" type="hidden"
+							value="Allow customers to pick up orders themselves. By default, when using local pickup store base taxes will apply regardless of customer address.">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 paymentdetails">
+				<h6 class="txt-upper mb-3">Payment Details</h6>
+				<div class="col-lg-12">
+					<div class="form-group">
+						<div class="radio form-check-inline" style="padding-left:10px;">
+							<input class="form-check-input" id="cod" type="radio" value="cod" name="payment_method"
+								checked>
+							<label data-toggle="tooltip" data-placement="top" title="" for="cod"
+								style="margin-top: -5px" data-original-title="Pay with cash upon delivery."
+								aria-describedby="tooltip743524">Cash on delivery</label>
+						</div>
+						<input type="hidden" value="Pay with cash upon delivery." name="pay_method_title">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div style="display: none; text-align: center;" class="process-loader">
+				<p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Please wait loading...</p>
+			</div>
+			<button type="submit" class="view-cart-button btn btn-block btn-secondary text-uppercase">Bestellung
+				aufgeben</button>
+		</div>
+	</div>
+</form>

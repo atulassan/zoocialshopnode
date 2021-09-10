@@ -1,0 +1,7 @@
+<% if(utls.isEmpty(products)) { %>
+<% products.forEach(function(product, el) { %>
+    <% include ../modules/product %>
+<% }); %>
+<% } else { %>
+<h3>Kommt bald...</h3>
+<% } %>

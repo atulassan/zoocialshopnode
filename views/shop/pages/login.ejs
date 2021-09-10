@@ -1,0 +1,97 @@
+<% include ../templates/shop-header %>
+<style type="text/css">
+	.fixedHeader {
+		position: inherit!important; 
+		top:inherit; 
+		right: inherit; 
+		left: inherit;
+	 }
+	 #staic-page-banner { margin-top: 0px!important; }
+</style>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<!-- <div class="col-lg-6 col-md-12 my-auto">
+					<h1>Anmelden</h1>
+				</div> -->
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Anmelden</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="inner-page-content" class="section-md inner-grey-bg min50vh">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 mb-4">
+				<h4>Anmelden oder Benutzerkonto erstellen</h4>
+			</div>
+			<div class="col-lg-6 col-md-12 order-md-2">
+				<h6 class="mb-3">Registrierte Kunden</h6>
+				<p>Hier kannst du dich mit deinem Benutzerkonto anmelden.</p>
+				<form id="loginform" name="login-form" action="#" method="post">
+					<div class="form-group">
+						<label>E-Mail-Adresse <span class="redStar">*</span></label>
+						<span><input type="text" title="Benutzername oder E-mail Adresse" data-valcode="!b" name="username" value="" class="form-control"></span>
+					</div>
+					<div class="form-group">
+						<label>Passwort <span class="redStar">*</span></label>
+						<div class="form-icon-base">
+                        	<input id="pass4" title="Password" data-valcode="!b" type="password" name="password" value="" class="form-control">
+                         	<span class="form-icon"><img id="pas_visible4" src="/images/svg/eye2.svg" id=""></span>
+                        </div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5 col-md-5 col-sm-5 col-5">
+								<input type="hidden" name="redirect" value="/mein_ubersicht" />
+								<button type="submit" id="authsubmit" name="submit" value="" class="btn btn-primary registerBtnMt">
+								<span class="process-loader btnldr"><img src="/images/Spinner-1s-91px.gif"></span>anmelden</button>
+
+						</div>
+						<div class="col-lg-7 col-md-7 col-sm-7 col-7 text-right my-auto">
+							<p><a href="/passwortvergessen">Passwort vergessen?</a></p>
+						</div>
+					</div>
+					<!--<div class="row mt-3">
+							<div class="col-lg-12 col-md-12">
+								<a href="/zoocialanmelden" id="zoocialanmelden" class="btn btn-primary btn-block registerBtnMt" name="zoocialanmelden"><span class="process-loader btnldr"><img src="/images/Spinner-1s-91px.gif"></span>Zoocial Anmelden</a>
+							</div>	
+					</div>-->
+					<!--<button type="button" id="zoocialanmelden" class="btn btn-primary btn-block registerBtnMt" name="zoocialanmelden">
+								<span class="process-loader btnldr"><img src="/images/Spinner-1s-91px.gif"></span>Zoocial Anmelden</button>-->
+								
+				</form>
+			</div>
+			<div class="col-lg-6 col-md-12 order-md-1 ab-content">
+				<h6 class="mb-3">Neue Kunden</h6>
+				<p>Wenn du ein Benutzerkonto einrichtest, profitierst du von folgenden Vorteilen:</p>
+
+				<div class="check_step_col_list">
+					 <ul>
+						  <li>
+						  <i class="fa fa-check" aria-hidden="true"></i> <span>Zoocial Community</span>
+						  </li>
+						  <li>
+						  <i class="fa fa-check" aria-hidden="true"></i> <span>Schneller Bestellvorgang</span>
+						  </li>
+						  <li>
+						  <i class="fa fa-check" aria-hidden="true"></i> <span>Du hast einfachen Zugriff auf deine letzten Bestellungen</span>
+						  </li>
+					 </ul>
+				</div>
+				<div class="form-group mt-4">
+					<a href="/registrieren" class="btn btn-primary registerBtnMt">Benutzerkonto erstellen</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</section>
+<% include ../templates/shop-footer %>

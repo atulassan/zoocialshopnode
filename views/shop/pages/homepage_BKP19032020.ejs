@@ -1,0 +1,84 @@
+<% include ../templates/shop-shop %>
+<section id="" class="section-lg topCommonPadding homePattern">
+	<% if(utls.isEmpty(categories)) { %>
+	<div class="container mb-5 homeStepOne">
+		<div class="row justify-content-lg-center justify-content-md-center justify-content-sm-center">
+			<div class="category-slider owl-carousel">
+				<% categories.forEach(function(category, el) { %>
+	                  <div class="item">
+							<div data-id="<%= category.id %>">
+								<div class="single-food-category cate-padding-1 text-center catItem">
+									<div class="single-food-hover">
+										<a data-id="<%= category.id %>" class="pcatone" href="javascript:void(0)">
+											<img class="lazyload img-fluid" src="/images/8kpb.gif"
+												data-src="<%= utls.imageOptimize(category.image.src, "o") %>" alt="<%= category.name %>"
+												title="<%= category.name %>">
+										</a>
+									</div>
+									<div class="single-food-content">
+										<h3><%= category.name %></h3>
+									</div>
+								</div>
+							</div>
+					</div>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+
+	<div class="container homeStepTwo homeStepPadding">
+			<% categories.forEach(function(category, el) { %>
+			<% if(utls.isEmpty(category.children) && category.children.length > 0 ) { %>
+			<div class="row justify-content-lg-center secondLevel" style="display: none;" id="<%= category.id %>">
+				<div class="sub-category-slider owl-carousel">
+				<% category.children.forEach(function(childlevel1, el) { %>
+				 <div class="item">
+					<div class="single-food-category cate-padding-1 text-center catItem">
+						<div class="single-food-hover">
+							<a data-pid="<%= childlevel1.parent %>" data-id="<%= childlevel1.id %>" 
+								class="pcatwo" href="javascript:void(0)">
+								<img class="lazyload img-fluid" src="/images/8kpb.gif"
+									data-src="<%= utls.imageOptimize(childlevel1.image.src, "o") %>"
+									alt="<%= childlevel1.name %>" title="<%= childlevel1.name %>">
+							</a>
+						</div>
+						<div class="single-food-content">
+							<h3><%= childlevel1.name %></h3>
+						</div>
+					</div>
+				</div>
+				<% }); %>
+				</div>
+			</div>
+			<% } %>
+			<% }); %>
+	</div>
+
+	<div class="container homeStepThree homeStepPadding">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="SubsubCatList">
+					<% categories.forEach(function(category, el) { %>
+					<% if(utls.isEmpty(category.children) && category.children.length > 0 ) { %>
+					<% category.children.forEach(function(childlevel1, el) { %>
+					<% if(utls.isEmpty(childlevel1.children) && childlevel1.children.length > 0 ) { %>
+					<ul id="<%= childlevel1.id %>" class="thirdLevel" style="display: none;">
+						<% childlevel1.children.forEach(function(childlevel2, el) { %>
+						<li class="parent-<%= childlevel2.parent %>" data-id="<%= childlevel2.id %>"><a
+								href="/category/<%= childlevel2.slug %>/<%= childlevel2.id %>">-
+								<%= childlevel2.name %></a></li>
+						<% }); %>
+					</ul>
+					<% } %>
+					<% }); %>
+					<% } %>
+					<% }); %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% } %>
+</section>
+
+<% include ../templates/shop-footer %>

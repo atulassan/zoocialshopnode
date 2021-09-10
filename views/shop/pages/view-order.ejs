@@ -1,0 +1,289 @@
+<% include ../templates/shop-header %>
+
+<style type="text/css">
+	.fixedHeader {
+		position: inherit!important; 
+		top:inherit; 
+		right: inherit; 
+		left: inherit;
+	 }
+	 #staic-page-banner { margin-top: 0px!important; }
+</style>
+<div class="clear-all"></div>
+<section id="staic-page-banner" class="about-banner topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Bestellungen</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+		          	<div class="col-lg-3 col-md-3">
+					   <div class="left">
+					      <div class="mb-3">
+					         <div class="profile-box  inner-gradient-bg br-6 p-15 ">
+					            <h3><span><img src="/images/svg/profile-user-icon.svg"></span><%= userdata.billing.first_name %> <%= userdata.billing.last_name %></h3>
+					         </div>
+					      </div>
+					      <div class="left-main-menu mb-3 p-15">
+						     <ul>
+						        <li>
+						        	<a href="/mein_ubersicht">
+						        		<span><img src="/images/svg/overview.svg"></span>Meine Übersicht
+						        	</a>
+						        </li>
+						        <li>
+						        	<a href="/benutzerdaten">
+						        		<span><img src="/images/svg/personalData.svg"></span>Meine Benutzerdaten
+						        	</a>
+						        </li>
+						        <li class="active">
+						        	<a href="/meine_bestellungen">
+						        		<span><img src="/images/svg/orderList.svg"></span>Meine Bestellungen
+						        	</a>
+								</li>
+								<li>
+						        	<a href="lieferadressen-verwalten">
+						        		<span><img src="/images/svg/bill.svg"></span>Lieferadressen verwalten
+						        	</a>
+						        </li>
+						        <!-- <li>
+						        	<a href="javascript:void(0);">
+						        		<span><img src="/images/svg/bill.svg"></span>Rechnungen
+						        	</a>
+						        </li> -->
+						     </ul>
+						  </div>
+						  <div class="inner-gradient-bg br-6 mb-3 p-15">
+						     <div class="left-support">
+						        <h4><a id="supportPopupOpen" href="javascript:void(0);">
+						        	<span><img src="/images/svg/customer-service.svg"></span>Support</a>
+						        </h4>
+						     </div>
+						  </div>
+					   </div>
+					</div>
+					<div class="col-lg-9 col-md-9">
+						<% if(status) { %>
+						<div class="main-post-box white-bg br-6 p-15 mb-3">
+							<div class="row">
+								<div class="col-lg-6 col-md-6">
+									<p class="order-success-txt">Bestellung #<%= orderdetails.number %> vom <%= utls.dateFormat(orderdetails.date_created).date %></p>
+								</div>
+								<div class="col-lg-6 col-md-6 text-right mb-3">
+									<a href="/orders/<%= orderdetails.number %>_Rechnung.pdf" class="btn btn-primary btn-green" target="_blank" download><i class="fa fa-file-pdf-o"></i> Rechnung</a>
+									<a href="/meine_bestellungen" class="btn btn-primary btn-green">zurück</a>
+								</div>
+							</div>
+							
+							<div class="order-list">
+								<ul>
+									<li>Lieferart: <span>Priority Versand CHF <%= orderdetails.shipping_total %></span></li>
+									<li>Zahlungsart: <span><%= payment_type %></span></li>
+									<li>Status: <span>
+										<% if(orderdetails.status == "pending") { %>
+											Zahlung offen
+										<% } %>
+										<% if(orderdetails.status == "processing") { %>
+											bezahlt
+										<% } %>
+										<% if(orderdetails.status == "completed") { %>
+											erledigt
+										<% } %>
+										<% if(orderdetails.status == "cancelled") { %>
+											storniert
+										<% } %>
+									</span></li>
+									<li>Lieferadresse: <span><%= orderdetails.shipping.company != "" ? orderdetails.shipping.company + ", " : "" %> <%= orderdetails.shipping.first_name %> <%= orderdetails.shipping.last_name %>, <%= orderdetails.shipping.address_1 %>, 
+										<% if(orderdetails.shipping.address_2 != "") { %>
+											<%= orderdetails.shipping.address_2 %>, 
+										<% } %>
+										<%= orderdetails.shipping.postcode %> <%= orderdetails.shipping.city %>, Schweiz</span></li>
+								</ul>
+							</div>
+							<h5 class="mb-3">Bestellübersicht</h5>
+							<div class=" bestelldetailsTable pb-2">
+								<div class="table-responsive">
+									<table class="table table-bordered mb-0 order-list-table" cellspacing="0">
+										<thead>
+											<tr>
+												<th width="15%" class="product-name">Artikelnr.</th>
+												<th width="35%" class="product-name">Artikelname</th>
+												<th width="15%" class="product-name">VAR</th>
+												<th style="text-align: center" width="10%" class="product-instock">Menge</th>
+												<th style="text-align: center" width="10%" class="product-instock">MwSt</th>
+												<th style="text-align: right" width="15%" class="product-instock">Gesamt</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% if(utls.isEmpty(orderdetails.line_items)) { %>
+											<% orderdetails.line_items.forEach(function(product, el) { %>
+											<tr class="wishlist-item">
+												<td style="vertical-align: middle; "><%= product.sku %></td>
+												<td style="vertical-align: middle;" class="product-name">
+													<%= product.name %>
+												</td>
+												<td style="vertical-align: middle;">
+													<% if(product.hasOwnProperty('meta_data')) { %>
+														<% var remiAvail = false;
+														if(product.meta_data.length > 0) {
+															product.meta_data.forEach((meta, el)=> {
+																if(meta.key == "remi") {
+																	remiAvail = true;
+																	return false;
+																}				
+															}); 
+														} %>
+														<% if(remiAvail) { %>
+															Remi	
+														<% } %>	
+													<% } %>
+												</td>
+												<!-- <td style="vertical-align: middle;">CHF <%= utls.priceFormat(product.price) %></td> -->
+												<td style="vertical-align: middle;" class="product-price" align="center">
+													<span class="chf"></span><%= product.quantity %></span>
+												</td>
+												<td style="vertical-align: middle; text-align: center">
+													<!-- 2.5% -->
+													<% if(product.tax_class == 'mwst-2-5') { %>
+														B	
+													<% } %>
+													<!-- 7.7% -->
+													<% if(product.tax_class == 'mwst-7-7') { %>
+														C
+													<% } %>
+												</td>
+												<td style="vertical-align: middle;" class="product-price" align="right">
+													<!-- <span class="chf">CHF</span> <%= utls.priceFormat(product.subtotal) %> -->
+													<% if(product.hasOwnProperty('meta_data')) { %>
+														<% if(product.meta_data.length > 0) {
+															product.meta_data.forEach((meta, el)=> {
+																if(meta.key == "price") { %>
+																	<span class="chf">CHF</span> <%= utls.priceFormat(meta.value) %>
+																<% }				
+															}); 
+														} %>
+													<% } else { %>
+														<%= utls.priceFormat((product.subtotal + product.subtotal_tax)) %>
+													<% } %>
+												</td>
+											</tr>
+
+											<% }); %>
+											<% } %>
+
+											<tr class="order-list-table">
+												<td colspan="2"></td>
+												<td colspan="2"><b>Zwischensumme</b></td>
+												<td colspan="2" align="right">
+													<b><%= orderdetails.shipping_total > 0 ? utls.priceFormat((orderdetails.total - orderdetails.shipping_total)) : utls.priceFormat(orderdetails.total) %></b>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2"></td>
+												<td colspan="2">Versandkosten in der Schweiz</td>
+												<td align="center">
+													<% if(mwst_7_7 > 0) { %>
+														C
+													<% } else { %>
+														<% if(mwst_2_5 > 0) { %>
+															B
+														<% } %>	
+													<% } %>
+												</td>
+												<td align="right">CHF <%= utls.priceFormat(orderdetails.shipping_total) %></td>
+											</tr>
+											<% if(parseFloat(mwst_2_5) > 0) { %>
+												<tr>
+													<td colspan="2"></td>
+													<td colspan="2">B MwSt 2.5%</td>
+													<td colspan="2" align="right">CHF <%= utls.priceFormat(mwst_2_5) %></td>
+												</tr>
+											<% } %>
+											<% if(parseFloat(mwst_7_7) > 0) { %>
+												<tr>
+													<td colspan="2"></td>
+													<td colspan="2">C MwSt 7.5%</td>
+													<td colspan="2" align="right">CHF <%= utls.priceFormat(mwst_7_7) %></td>
+												</tr>
+											<% } %>
+											<tr>
+												<td colspan="2"></td>
+												<td colspan="2"><b>Gesamtsumme inkl.MwSt.</b></td>
+												<td colspan="2" align="right"><b>CHF <%= utls.priceFormat(orderdetails.total) %></b></td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="order-table-address">
+								<div class="row">
+									<div class="col-lg-6 shipmentdetails">
+											<h6 class="txt-upper mb-3">Rechnungsadresse</h6>
+											<div class="form-group">
+												<% if(orderdetails.billing.company != "") { %>
+													<p><%= orderdetails.billing.company %></p>
+												<% } %>
+												<p><%= orderdetails.billing.first_name %> <%= orderdetails.billing.last_name %></p>
+												<p><%= orderdetails.billing.address_1 %></p>
+												<% if(orderdetails.billing.address_2 != "") { %>
+													<p><%= orderdetails.billing.address_2 %></p>
+												<% } %>
+												<p><%= orderdetails.billing.postcode %> <%= orderdetails.billing.city %></p>
+												<p><%= utls.getCountry(orderdetails.billing.country) %></p>
+												<p><%= orderdetails.billing.email %></p>
+												<p><%= orderdetails.billing.phone %></p>
+											</div>
+									</div>
+									<div class="col-lg-6 paymentdetails">
+											<h6 class="txt-upper mb-3">Lieferadresse</h6>
+											<div class="form-group">
+												<% if(orderdetails.shipping.company != "") { %>
+													<p><%= orderdetails.shipping.company %></p>
+												<% } %>
+												<p><%= orderdetails.shipping.first_name %> <%= orderdetails.shipping.last_name %></p>
+												<p><%= orderdetails.shipping.address_1 %></p>
+												<% if(orderdetails.shipping.address_2 != "") { %>
+													<p><%= orderdetails.shipping.address_2 %></p>
+												<% } %>
+												<p><%= orderdetails.shipping.postcode %> <%= orderdetails.shipping.city %></p>
+												<p><%= utls.getCountry(orderdetails.billing.country) %></p>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<% } else { %>
+							<h1><%= orderdetails.message %></h1>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div id="SupportPopup" class="slide-form">
+	<div class="form-header">
+  		<h4>Nachricht hinterlassen</h4>
+  		<div id="SupportPopupClose" class="slideFormClose">&times;</div>
+	</div>
+	<div class="form-body supportPopupContent">
+	  <p>Bitte hinterlasse uns deine Nachricht und wir werden dich so rasch wie möglich kontaktieren.</p>
+	  <% include ../modules/supportform %>
+	</div>
+</div>
+<% include ../templates/shop-footer %>

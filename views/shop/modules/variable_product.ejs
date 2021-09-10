@@ -1,0 +1,214 @@
+<% 
+  var kilo_price = null, 
+      discount_quantity = null,
+      discount_percentage = null;
+%>
+<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+  <div class="info-panel product-view info_bg">
+    
+
+    <% if(utls.isNotEmpty(variations) && discountAvail == 'yes') { %>
+
+    <h4>Sparpaket</h4>
+    <% variations.forEach(function(variation, el) { %>
+
+    <%
+        variation.meta_data.forEach((metainfo, el)=> {
+        if(metainfo.key == "kilo_price") {
+          kilo_price = metainfo;
+          //console.log(metainfo)
+        }
+        if(metainfo.key == "discount_quantity") {
+          discount_quantity = metainfo;
+          //console.log(metainfo)
+        }
+        if(metainfo.key == "discount_percentage") {
+          discount_percentage = metainfo;
+          //console.log(metainfo)
+        }
+    });
+      %>
+
+    <div class="table-responsive">
+      <table class="table grouped-items-table cart_table" width="100%">
+        <tbody>
+          <tr class="">
+            <td width="40%">
+              <div class="grouped-name"><%= minqty.value > 0 ? parseInt(minqty.value) : 2 %> x
+                <%= variation.attributes[0].name.toString() %> <%= variation.attributes[0].option.toString() %></div>
+              <!--<div class="grouped-tax" style="font-size: 12px;">Kilopreis CHF <%= utls.priceFormat(variation.regular_price/variation.weight) %></div>-->
+              <% if(utls.isEmpty(kilo_price.hasOwnProperty('value')) && parseFloat(kilo_price.value) > 0 ) { %>
+              <div class="grouped-tax" style="font-size: 12px;">Kilopreis <span class="price" style="color:#f48419;">CHF
+                  <%= utls.priceFormat(kilo_price.value) %>
+                </span>
+              </div>
+              <% } %>
+              <span class="auslaufmodelle">Auslaufmodelle - Zoocial</span>
+            </td>
+            <td class="a-right a-right-grouped" width="4%">
+              <div class="price-info-block">
+                <div class="price-box">
+                  <span class="auslaufmodelle">- 60%</span>
+                  <span class="regular-price">
+                    <span class="price">CHF
+                      <%= utls.discountPrice(variation.price, discount_percentage.value) %>
+                    </span>
+                    <% if(utls.isEmpty(variation.regular_price)) { %>
+                    <br />
+                    <span class="price" style="text-decoration:line-through; color: #383838; font-weight: normal;">CHF
+                      <%= utls.priceFormat(variation.regular_price) %>
+                    </span>
+                    <% } %>
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td width="20%">
+              <table>
+                <tr>
+                  <td>
+                    <div class="add-tocart-grouped">
+                      <div class="DropTriangle add-tocart-grouped-arrow">
+                        <select class="shopqty" name="quantity">
+                          <% for(var i=1; i<=40; i++) { %>
+                          <option
+                            value="<%= i * (discount_quantity.value > 0 ? parseInt(discount_quantity.value) : 2) %>">
+                            <%= i %></option>
+                          <% } %>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="add-tocart-grouped">
+                      <a product-qty="2" data-toggle="modal" data-target="#addtocart-add-confirm"
+                        variation-id="<%= variation.id %>" product-id="<%= product.id %>"
+                        class="btn inner-gradient-bg addtocart" href="javascript:;"><i
+                          class="fa fa-shopping-cart "></i></a>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% }); %>
+    <% } %>
+
+    <h2 class="product-title wow fadeInUp mt-4">
+      <% if (product.tags.length > 0) { %>
+      <% product.tags.forEach((tag, el) => { %>
+      <span class="listBrand"><a href="/brand/<%= tag.slug %>/<%= tag.id %>"><%= tag.name %></a></span>
+      <% }); %>
+      <% } %>
+      <%= product.name %> , Description2
+    </h2>
+    <div class="DisplyRating">
+      <% for(var l=1; i<=lk; l++) { %>
+      <i class="fa fa-star"></i>
+      <% } %>
+      <% for(var i=1; i<=dcm; i++) { %>
+      <i class="fa fa-star-o"></i>
+      <% } %>
+      <% if(product.product_rating_count > 0) { %>
+        <a href="javascript:void(0)"> (<%= product.product_rating_count %>)</a>
+      <% } %>
+    </div>
+    <div class="stockAvailable">
+      <p class="instock">In stock</p>
+      <!-- 
+      <p class="orderBooked">Booked</p>
+      <p class="outstock">Out of stock</p> -->
+    </div>
+    <div class="weight">
+        <%- product.short_description.toString() %>
+        <p>Product Description 2</p>
+        <p>additional text</p>
+    </div>
+    <% if(utls.isEmpty(variations)) { %>
+      <% variations.forEach(function(variation, el) { %>
+
+      <div class="table-responsive">
+        <table class="table grouped-items-table cart_table" width="100%">
+          <tbody>
+            <tr class="border">
+              <td width="50%">
+                <div class="grouped-name"><%= variation.attributes[0].name.toString() %>
+                  <%= variation.attributes[0].option.toString() %></div>
+                <!--<div class="grouped-tax" style="font-size: 12px;">Kilopreis CHF <%= utls.priceFormat(variation.regular_price/variation.weight) %></div>-->
+                <% if(utls.isEmpty(variation.regular_price) && variation.regular_price != variation.price) { %>
+                <div class="grouped-tax" style="font-size: 12px;">Discount <span class="price" style="color:#f48419;">CHF
+                    <%= utls.priceFormat(variation.regular_price-variation.price) %>
+                  </span>
+                </div>
+                <% } %>
+
+              </td>
+              <td class="a-right a-right-grouped" width="25%">
+                <div class="price-info-block">
+                  <div class="price-box">
+                    <span class="regular-price">
+                      <span class="price">CHF
+                        <%= utls.priceFormat(variation.price) %>
+                      </span>
+                      <% if(utls.isEmpty(variation.regular_price) && variation.regular_price != variation.price) { %>
+                      <br />
+                      <span class="price" style="text-decoration:line-through; color: #383838; font-weight: normal;">CHF
+                        <%= utls.priceFormat(variation.regular_price) %>
+                      </span>
+                      <% } %>
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td width="25%">
+                <table>
+                  <tr>
+                    <td>
+                      <div class="add-tocart-grouped">
+                        <div class="DropTriangle add-tocart-grouped-arrow">
+                          <select class="shopqty" name="quantity">
+                            <% for(var i=1; i<=40; i++) { %>
+                            <option value="<%= i %>">
+                              <%= i %>
+                            </option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="add-tocart-grouped">
+                        <a product-qty="1" data-toggle="modal" data-target="#addtocart-add-confirm"
+                          variation-id="<%= variation.id %>" product-id="<%= product.id %>"
+                          class="btn inner-gradient-bg addtocart" href="javascript:;"><i
+                            class="fa fa-shopping-cart "></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <% }); %>
+    <% } %>
+  
+    <div class="productTags">
+        <ul>
+          <li><span>Lagerbestand</span> <i>Just in Time</i></li>
+          <li><span>Artikelnummer</span> <i>HE10039</i></li>
+          <li><span>Futtermittelart</span> <i>Alleinfutter</i></li>
+          <li><span>Symptome</span><i></i></li>
+          <li><span>Futterart</span> <i>Trocken</i></li>
+          <li><span>Geschmacksrichtung</span><i></i></li>
+          <li><span>Spezialeigenschaft</span> <i>Getreidefrei</i></li>
+          <li><span>Lebensphase</span> <i>Welpe&Junior</i></li>
+          <li><span>Groesse</span> <i>X-Small (bis 4kg) , Small (bis 10kg) , Medium (11 - 25kg) , Large (26 - 45kg) , X-Large (ab 46kg)</i></li>
+        </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<form role="form" name="supportForm" id="supportForm" method="POST" enctype="multipart/form-data">
+  <div class="row setup-content">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for=""> Dein Name <span class="redStar">*</span></label>
+          <input name="name" id="" data-valcode="!b" title="Dein Name" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.first_name + ' ' + userdata.billing.last_name: "" %>" type="text" required="" class="form-control sup_name" placeholder="">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for=""> E-Mail <span class="redStar">*</span></label>
+          <input name="email" id="" data-valcode="e" title="E-mail" value="<%= userdata.hasOwnProperty('billing') ? userdata.billing.email : "" %>" type="text" required="" class="form-control sup_email" placeholder="">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for=""> Mitteilung <span class="redStar">*</span></label>
+           <textarea name="address" data-valcode="!b" title="Mitteilung" id="sup_description"  required="" class="form-control sup_address" placeholder=""></textarea>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Abteilung <span class="redStar">*</span></label>
+          <select class="form-control sup_devision" placeholder="" name="sup_devision">
+             <option value="4">Verkauf</option>
+             <option value="5">Buchhaltung</option>
+             <option value="6">Fragen/Reklamation</option>
+             <option value="7">Sonstige</option>
+         </select>
+        </div>
+      </div>                     
+      <div class="col-md-12 mt-3 mb-3">
+        <input type="hidden" name="site" value="zoocialshop.ch" class="sup_site" />
+        <div style="display: none; text-align: center;" class="process-loader"><p><span><img src="/images/Spinner-1s-91px.gif" /> </span>Seite wird geladen...</p></div>        
+        <button type="submit" value="" class="btn btn-primary btn-green support_send">senden</button>
+      </div>
+  </div>
+</form>

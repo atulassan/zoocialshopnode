@@ -1,0 +1,38 @@
+<div class="sortSection">
+  <form id="productfilter" action="/productupdate" method="get" name="productfilter">
+    <div class="form-row">
+      <!--<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <h6 class="sortierenTitle artikel-gefunden"><strong>Suchergebnisse für <span>flow</span></strong></h6>
+      </div>-->
+      <div class="col-lg-5 col-md-5 col-sm-6 col-12 my-auto">
+        <h6 class="sortierenTitle artikel-gefunden"><strong>1 - <span class="pcount" data-pcount="<%= products.length %>"><%= products.length %></span> von <%= count %></strong></h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-sm-6 col-12 text-right">
+        <div class="form-row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-5 my-auto">
+            <h6 class="sortierenTitle"><span>Sortieren nach : </span></h6>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-7">
+            <div class="DropTriangle sortieren1 select-arrow sortierenTitle">
+              <select name="s" class="azflt">
+                <option value="rating-desc" selected="selected">Höchste Bewertung</option>
+                <option value="alpha-asc">Name A-Z</option>
+                <option value="alpha-desc">Name Z-A</option>
+                <option value="price-asc">Preis (niedrig bis hoch)</option>
+                <option value="price-desc">Preis (hoch bis niedrig)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="strictval" value="1" class="strictval" />
+    <input type="hidden" name="page" value="<%= qpage %>" class="spage" />
+    <input type="hidden" name="dataload" value="<%= qpage %>" class="dataload" />
+    <input type="hidden" name="cid" value="<%= cIds %>" />
+    <input type="hidden" name="tag_id" value="0" />
+    <input type="hidden" name="search" value="0" />
+    <input type="hidden" name="filters" class="taxomyfilters" value="0" />
+    <input style="opacity: 0; visibility:hidden; height: 0; overflow: hidden; display: none;" type="submit" name="submit" id="filtersubmit" value="submit" />
+  </form>
+</div>

@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="SavedAddressBox">
+			<div class="row">
+				<div class="col-lg-6 my-auto">
+					<a class="ChkNewAddress" href="/lieferadressen-verwalten"><i class="fa fa-plus"></i> Lieferadresse hinzufügen</a>
+				</div>
+				<% if(parseInt(shipaddresses.length) > 1) { %>
+					<div class="col-lg-6 my-auto ">
+						<select id="selectbox" title="SelectSavedAddress" type="text" name="changeaddress" class="form-control custom-select changeaddress">
+							<% shipaddresses.forEach((meta, idx) => { %>
+								<option value="<%= meta.id %>" data-fname="<%= meta.first_name %>" data-lname="<%= meta.last_name %>" data-company="<%= meta.company %>"
+									data-sid="<%= meta.id %>" data-address_1="<%= meta.address_1 %>" data-address_2="<%= meta.address_2 %>" data-city="<%= meta.city %>" 
+									 data-postcode="<%= meta.postcode %>" data-state="<%= utls.getState(meta.state) %>"  data-stateshort="<%= meta.state %>" 
+									 data-country="<%= utls.getCountry(meta.country) %>" data-countryshort="<%= meta.country %>" data-phone="<%= meta.phone %>"
+									 data-mobile="<%= meta.mobile %>" data-active="<%= meta.active %>" <%= parseInt(meta.active) ? 'selected' : '' %> ><%= meta.first_name %> <%= meta.last_name %>, 
+									  <%= meta.address_1 %>, <%= meta.postcode %> <%= meta.city %>, <%= utls.getState(meta.state) %>, <%= utls.getCountry(meta.country) %></option>
+							<% }); %>
+						</select>
+					</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</div>

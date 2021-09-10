@@ -1,0 +1,37 @@
+<% include ../templates/shop-header %>
+<section id="staic-page-banner" class="topCommonPadding">
+	<div class="container">
+		<div class="inner-page-banner-content">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 my-auto">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Warenkorb</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="" class="inner-grey-bg pb-5 pt-4">
+	<div class="container">
+		<div class="form-row" id="cartinfo">
+			<% if(vetsexklusiv) { %>
+				<div class="CartDiatFoodText">
+					<p>Hinweis zur Bestellung von Diätfutter:</p>
+					<p>Therapeutische Diäten sollen nur in Absprache mit einem Tierarzt verfüttert werden.</p>
+					<p>Es wird empfohlen, dass eine regelmässige tierärztliche Kontrolle stattfindet, solange ein Tier mit einer therapeutischen Diät gefüttert wird.</p>
+					<p>Wenn sich der Zustand des Tieres während der Fütterung mit einer therapeutischen Diät verschlechtert, sollte unverzüglich ein Tierarzt aufgesucht werden.</p>
+					<p><strong>Mit der Annahme unserer allgemeinen Geschäftsbedingungen (AGB), bestätigst du, dass du die oben genannten Hinweise gelesen und verstanden hast.</strong></p>
+					<p>Wir bieten dir die Möglichkeit, deine Bestellung von unserem Tierarzt-Team überprüfen zu lassen. Diese Überprüfung ist kostenlos, erfordert aber zusätzliche Angaben zum Tier und dessen Gesundheitszustand. Die Überprüfung kannst du über das Supportformular beantragen.</p>
+				</div>
+			<% } %>
+			<% include ../modules/cartupdate %>
+		</div>
+	</div>
+</section>
+
+<% include ../templates/shop-footer %>

@@ -1,0 +1,86 @@
+<form action="/newshipaddress" method="post" id="newshipaddress" class="newshipaddress">
+	<div class="row" id="opc-billing">
+		<!-- <div class="col-md-12 form-group">
+			<label>Bezeichnung <span class="redStar">*</span></label>
+			<input type="text" class="form-control" name="" value="">
+		</div> -->
+		<div class="col-md-6 form-group">
+			<label>Vorname <span class="redStar">*</span></label>
+			<input type="text" data-valcode="!b" class="form-control" name="first_name" value="">
+		</div>
+		<div class="col-md-6 col-sm-6 form-group">
+			<label>Nachname <span class="redStar">*</span></label>
+			<input type="text" data-valcode="!b" title="Nachname" class="form-control" name="last_name" value="">
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-6 form-group">
+			<label>Firma</label>
+			<input type="text" class="form-control" value="" id="" name="company" placeholder="">
+		</div>
+		<div class="col-md-12 form-group">
+			<label>Adresse <span class="redStar">*</span> <a href="#" data-toggle="tooltip" data-placement="right" data-original-title="Google-Adresse eingeben, PLZ, Ort, Kanton und Land werden automatisch abgefüllt" aria-describedby="tooltip743524"><i class="fa fa-info-circle" aria-hidden="true"></i></a></label>
+			<input type="text" class="form-control" id="billing_address" data-valcode="!b" name="address_1" placeholder="Strasse Nr., PLZ und Ort" value="" />
+		</div>
+		<div class="col-lg-12 form-group">
+			<label>Adresszusatz </label>
+			<span><input title="Adresse 2" data-valcode="" type="text" name="address_2" value="" class="form-control"></span>
+		</div>
+		<div class="col-md-6 form-group">
+			<label>PLZ <span class="redStar">*</span></label>
+			<input type="text" class="form-control greyInput" data-valcode="!b" id="billing_postcode" name="postcode" placeholder="" value="" />
+		</div>
+		<div class="col-md-6 col-sm-6 form-group">
+			<label>Ort <span class="redStar">*</span></label>
+			<input type="text" class="form-control greyInput" data-valcode="!b" id="billing_city" name="city" placeholder="" value="" />
+		</div>
+		<div class="col-lg-6 col-sm-6 form-group">
+			<label>Kanton <span class="redStar">*</span></label>
+			<select title="kanton" type="text" name="stateshort" class="form-control kanton-billing greyInput">
+				<% if(utls.isNotEmpty(chstates)) { %>
+					<% Object.keys(chstates).forEach((key, index) => { %>
+					<option value="<%= key %>"><%= chstates[key] %></option>
+					<% }); %>
+				<% } %>
+			</select>
+			<!--<input title="Kanton" type="text" data-valcode="!b" name="state" value="" id="shipping_state" placeholder="" class="form-control" readonly="">
+			<input title="Kanton" type="hidden" name="stateshort" value="" id="shipping_stateshort" placeholder="" class="form-control">-->
+		</div>
+		<div class="col-md-6 col-sm-6 form-group">
+			<label>Land <span class="redStar">*</span></label>
+			<select title="" type="text" name="countryshort" class="form-control land-billing greyInput">
+				<% if(utls.isNotEmpty(countries)) { %>
+					<% Object.keys(countries).forEach((key, index) => { %>
+					<option value="<%= key %>"><%= countries[key] %></option>
+					<% }); %>
+				<% } %>
+			</select>
+			<!-- <input type="text" class="form-control" data-valcode="!b" id="shipping_country" name="country" value="" placeholder="" readonly="">
+			<input type="hidden" class="form-control" id="shipping_countryshort" name="countryshort" value="" placeholder="" readonly=""> -->
+		</div>
+		<!-- <div class="col-md-12 form-group">
+			<div class="radio form-check-inline" style="padding-left: 10px">
+				<input id="Zuhause" class="" type="radio" name="addresstype" value="zuhause" checked>
+				<label for="Zuhause">Zuhause</label>
+			</div>
+			<div class="radio form-check-inline" style="padding-left: 10px">
+			  	<input id="Arbeit"  class="" type="radio" name="addresstype" value="arbeit">
+				<label for="Arbeit">Arbeit</label>
+			</div>
+		</div> -->
+		<div class="col-lg-6 form-group">
+			<label>Telefon </label>
+			<span><input title="phone" data-valcode="" type="text" name="phone" value="" class="form-control"></span>
+		</div>
+		<div class="col-lg-6 form-group">
+			<label>Mobile </label>
+			<span><input title="mobile" data-valcode="" type="text" name="mobile" value="" class="form-control"></span>
+		</div>
+		<div class="col-md-6 form-group">
+          <p> Die mit <span class="redStar">*</span> gekennzeichneten Felder sind Pflichtfelder</p>
+      	</div>
+		<div class="col-md-12 form-group">
+			<button type="submit" class="btn btn-primary" name="submit" /><img src="/images/loader-white.gif" class="process-loader" style="display: none;" />speichern</button>
+			<input type="hidden" class="form-control" id="active" name="active" value="0" placeholder="" />
+			<a href="javascript:;" class="btn btn-primary addAddressCancel">abbrechen</a>
+		</div>
+	</div>
+</form>
